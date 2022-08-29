@@ -1,5 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Button } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
         >
           Learn React
         </a>
+        <Button color="primary" onClick={() => alert("Fuck Off")}>
+          Click Me!
+        </Button>
       </header>
     </div>
   );
