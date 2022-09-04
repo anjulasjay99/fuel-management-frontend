@@ -8,6 +8,7 @@ import FuelStationCreateAccount from "./components/FuelStation/FuelStationCreate
 import FuelStationRegister from "./components/FuelStation/FuelStationRegister";
 import Settings from "./components/FuelStation/Settings";
 import Addcomplaint from "./components/complaintManagement/addcomplaint";
+import StationLogin from "./components/FuelStation/StationLogin";
 
 function App() {
   return (
@@ -15,15 +16,16 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="fuel-station-create-account"
+            path="/fuel-station-create-account"
             element={<FuelStationCreateAccount />}
           />
           <Route
-            path="fuel-station-register"
+            path="/fuel-station-register"
             element={<FuelStationRegister />}
           />
-          <Route path="fuel-station-settings" element={<Settings />} />
+          <Route path="/fuel-station-settings" element={<Settings />} />
           <Route path="/addcomplaint" element={<Addcomplaint />} exact />
+          <Route path="/fuel-station-login" element={<StationLogin />} />
         </Routes>
       </BrowserRouter>
     </div>

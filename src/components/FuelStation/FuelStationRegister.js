@@ -247,7 +247,12 @@ function FuelStationRegister() {
               </FormGroup>
             </div>
             <div className={styles.btnContainer}>
-              <Button className={common.btnSecondary}>Cancel</Button>
+              <Button
+                className={common.btnSecondary}
+                onClick={() => navigate("/fuel-station-login")}
+              >
+                Cancel
+              </Button>
               <Button type="submit" className={common.btnPrimary}>
                 Register
               </Button>
