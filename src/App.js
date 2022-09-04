@@ -2,12 +2,12 @@ import { React } from "react";
 import { Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Viewcomplaints from "./Components/complaintManagement/viewcomplaints";
-import FuelStationCreateAccount from "./Components/FuelStation/FuelStationCreateAccount"
-import FuelStationRegister from './Components/FuelStation/FuelStationRegister'
-import StationLogin from "./Components/FuelStation/StationLogin"
-import Settings from "./Components/FuelStation/Settings"
-import Addcomplaint from './Components/complaintManagement/addcomplaint.js'
+import Viewcomplaints from "./components/complaintManagement/viewcomplaints";
+import FuelStationCreateAccount from "./components/FuelStation/FuelStationCreateAccount"
+import FuelStationRegister from './components/FuelStation/FuelStationRegister'
+import StationLogin from "./components/FuelStation/StationLogin"
+import Settings from "./components/FuelStation/Settings"
+import Addcomplaint from './components/complaintManagement/addcomplaint.js'
 
 function App() {
   return (
