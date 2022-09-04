@@ -4,9 +4,10 @@ import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 import { Button, Form, FormGroup, Label, Input, Alert, Col } from "reactstrap";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Unregister({ user }) {
+  const navigate = useNavigate();
   const [stationId, setstationId] = useState("");
   const [reason, setreason] = useState("");
   const [password, setpassword] = useState("");
@@ -16,13 +17,13 @@ function Unregister({ user }) {
     if (password === user.password) {
       axios
         .delete("http://localhost:8070/fuelStations", {
-          stationId: user.stationId,
+          data: { stationId: user.stationId },
         })
         .then((res) => {
           alert("Success");
           saveReason();
           sessionStorage.removeItem("fsUser");
-          Navigate("/fuel-station-login");
+          navigate("/fuel-station-login");
         })
         .catch((e) => {
           alert("Error!");
