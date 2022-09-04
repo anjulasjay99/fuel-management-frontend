@@ -1,14 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
 
-function StationSettings() {
+function StationSettings({ user }) {
+  const [stationName, setstationName] = useState("");
+  const [type, settype] = useState("Lanka IOC");
+  const [address, setaddress] = useState("");
+  const [city, setcity] = useState("");
+  const [province, setprovince] = useState("");
+  const [zipCode, setzipCode] = useState(0);
+  const [contactNo, setcontactNo] = useState(0);
+  const [ownerName, setownerName] = useState("");
+  const [ownerNic, setownerNic] = useState("");
+  const [ownerContactNo, setownerContactNo] = useState(0);
+  const [ownerEmail, setownerEmail] = useState("");
+
+  const submit = (e) => {
+    e.preventDefault();
+    const data = {
+      stationId: user.stationId,
+      stationName,
+      type,
+      address,
+      city,
+      province,
+      zipCode,
+      contactNo,
+      ownerName,
+      ownerNic,
+      ownerContactNo,
+      ownerEmail,
+    };
+
+    axios
+      .put("http://localhost:8070/fuelStations/updateInfo", data)
+      .then((res) => {
+        alert(res.data.msg);
+      })
+      .catch((e) => {
+        alert("Error!");
+      });
+  };
+
+  useEffect(() => {
+    console.log(user);
+    if (user != null) {
+      setstationName(user.stationName);
+      settype(user.type);
+      setaddress(user.address);
+      setcity(user.city);
+      setprovince(user.province);
+      setzipCode(user.zipCode);
+      setcontactNo(user.contactNo);
+      setownerName(user.ownerName);
+      setownerNic(user.ownerNic);
+      setownerEmail(user.ownerEmail);
+      setownerContactNo(user.ownerContactNo);
+    }
+  }, []);
+
   return (
     <div className={styles.stationSettingsDiv}>
-      <Form className={styles.form}>
+      <Form className={styles.form} onSubmit={(e) => submit(e)}>
         <div className={styles.section}>
           <Label className={styles.subTitle}>Station Information</Label>
           <FormGroup>
@@ -19,14 +75,22 @@ function StationSettings() {
               name="stationName"
               placeholder="joe mama"
               type="text"
+              value={stationName}
+              onChange={(e) => setstationName(e.target.value)}
               required
             />
           </FormGroup>
           <FormGroup>
             <Label for="type">Type*</Label>
-            <Input id="type" name="type" type="select" value="ioc">
-              <option value="ioc">Lanka IOC</option>
-              <option value="ceypetco">Ceypetco</option>
+            <Input
+              id="type"
+              name="type"
+              type="select"
+              value={type}
+              onChange={(e) => settype(e.target.value)}
+            >
+              <option value="Lanka IOC">Lanka IOC</option>
+              <option value="Ceypetco">Ceypetco</option>
             </Input>
           </FormGroup>
           <FormGroup>
@@ -37,6 +101,8 @@ function StationSettings() {
               name="address"
               placeholder="joe mama"
               type="text"
+              value={address}
+              onChange={(e) => setaddress(e.target.value)}
               required
             />
           </FormGroup>
@@ -55,6 +121,8 @@ function StationSettings() {
                 name="city"
                 placeholder="joe mama"
                 type="text"
+                value={city}
+                onChange={(e) => setcity(e.target.value)}
                 required
               />
             </FormGroup>
@@ -66,6 +134,8 @@ function StationSettings() {
                 name="province"
                 placeholder="joe mama"
                 type="text"
+                value={province}
+                onChange={(e) => setprovince(e.target.value)}
                 required
               />
             </FormGroup>
@@ -77,6 +147,9 @@ function StationSettings() {
                 name="zipcode"
                 placeholder="joe mama"
                 type="text"
+                value={zipCode}
+                onChange={(e) => setzipCode(e.target.value)}
+                pattern="[0-9]+"
                 required
               />
             </FormGroup>
@@ -89,19 +162,10 @@ function StationSettings() {
               name="contactNo"
               placeholder="joe mama"
               type="phone"
+              value={contactNo}
+              onChange={(e) => setcontactNo(e.target.value)}
+              pattern="[0-9]{10}"
               required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="email">Email</Label>
-            <Input
-              id="email"
-              className={styles.input}
-              name="email"
-              placeholder="joe@gmail.com"
-              type="email"
-              required
-              disabled
             />
           </FormGroup>
         </div>
@@ -117,6 +181,8 @@ function StationSettings() {
               name="fullname"
               placeholder="joe@gmail.com"
               type="text"
+              value={ownerName}
+              onChange={(e) => setownerName(e.target.value)}
               required
             />
           </FormGroup>
@@ -128,6 +194,8 @@ function StationSettings() {
               name="nic"
               placeholder="joe@gmail.com"
               type="text"
+              value={ownerNic}
+              onChange={(e) => setownerNic(e.target.value)}
               required
             />
           </FormGroup>
@@ -140,6 +208,9 @@ function StationSettings() {
               name="personalContactNo"
               placeholder="joe@gmail.com"
               type="text"
+              value={ownerContactNo}
+              onChange={(e) => setownerContactNo(e.target.value)}
+              pattern="[0-9]{10}"
               required
             />
           </FormGroup>
@@ -151,13 +222,15 @@ function StationSettings() {
               name="personalEmail"
               placeholder="joe@gmail.com"
               type="email"
+              value={ownerEmail}
+              onChange={(e) => setownerEmail(e.target.value)}
               required
             />
           </FormGroup>
         </div>
         <div className={styles.btnContainer}>
           <Button type="submit" className={common.btnPrimary}>
-            Update
+            Update Station Details
           </Button>
         </div>
       </Form>
