@@ -1,16 +1,13 @@
 import { React } from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import { Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Addcomplaint from "./Components/complaintManagement/addcomplaint";
 import Viewcomplaints from "./Components/complaintManagement/viewcomplaints";
-import FuelStationCreateAccount from "./components/FuelStation/FuelStationCreateAccount";
-import FuelStationRegister from "./components/FuelStation/FuelStationRegister";
-import Settings from "./components/FuelStation/Settings";
-import Addcomplaint from "./components/complaintManagement/addcomplaint";
-import StationLogin from "./components/FuelStation/StationLogin";
+import FuelStationCreateAccount from "./Components/FuelStation/FuelStationCreateAccount"
+import FuelStationRegister from './Components/FuelStation/FuelStationRegister'
+import StationLogin from "./Components/FuelStation/StationLogin"
+import Settings from "./Components/FuelStation/Settings"
+import Addcomplaint from './Components/complaintManagement/addcomplaint.js'
 
 function App() {
   return (
@@ -28,7 +25,6 @@ function App() {
             element={<FuelStationRegister />}
           />
           <Route path="/fuel-station-settings" element={<Settings />} />
-          <Route path="/addcomplaint" element={<Addcomplaint />} exact />
           <Route path="/fuel-station-login" element={<StationLogin />} />
         </Routes>
       </BrowserRouter>
