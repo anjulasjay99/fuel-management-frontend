@@ -29,3 +29,21 @@
 .btnSecondary:hover {
   background-color: #082344;
 }
+
+.btnOutline {
+  border: 1px solid #ff762e !important;
+  color: #ff762e;
+  background-color: transparent;
+}
+
+.btnOutline:hover {
+  background-color: #ff762e;
+  color: #fff;
+}
+
+.table thead {
+  background-color: #082344;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+}

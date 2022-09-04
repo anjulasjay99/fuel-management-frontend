@@ -30,7 +30,7 @@ function StationLogin() {
       <PageTitle pageTitle="Fuel Station Login" />
       <div className={styles.createAccWrapper}>
         <div className={styles.createAccForm}>
-          <h3>Create Account</h3>
+          <h3>Log In</h3>
           <br />
           <Form onSubmit={(e) => submit(e)}>
             <FormGroup>
