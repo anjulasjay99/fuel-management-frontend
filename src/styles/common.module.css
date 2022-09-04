@@ -1,0 +1,31 @@
+.pageTitleDiv {
+  height: 80px;
+  width: 100%;
+  border-bottom: 6px solid #ff762e;
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 100px;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.btnPrimary {
+  background-color: #ff762e;
+  border: none;
+}
+
+.btnPrimary:hover {
+  background-color: #fa884a;
+}
+
+.btnSecondary {
+  background-color: #082344;
+  border: none;
+}
+
+.btnSecondary:hover {
+  background-color: #082344;
+}
