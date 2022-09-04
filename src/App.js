@@ -4,6 +4,8 @@ import "./App.css";
 import { Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Addcomplaint from "./Components/complaintManagement/addcomplaint";
+import Viewcomplaints from "./Components/complaintManagement/viewcomplaints";
 import FuelStationCreateAccount from "./components/FuelStation/FuelStationCreateAccount";
 import FuelStationRegister from "./components/FuelStation/FuelStationRegister";
 import Settings from "./components/FuelStation/Settings";
@@ -15,6 +17,8 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
+          <Route path="/addcomplaint" element = {<Addcomplaint/>} exact/>
+          <Route path="/viewcomplaint" element = {<Viewcomplaints/>} exact/>
           <Route
             path="/fuel-station-create-account"
             element={<FuelStationCreateAccount />}
