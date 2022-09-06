@@ -45,11 +45,26 @@ function FuelStationRegister() {
       .post("http://localhost:8070/fuelStations/register", data)
       .then((res) => {
         console.log(res.data);
+        navigate("/fuel-station-login");
       })
       .catch((e) => {
         console.log(e);
         alert("Error!");
       });
+  };
+
+  const demo = () => {
+    setstationName("Alliance Enterprises");
+    settype("Ceypetco");
+    setaddress("43 Old Negombo Rd, Kanuwana");
+    setcity(" Ja - Ela");
+    setprovince("Western Province");
+    setzipCode(11350);
+    setcontactNo(772665133);
+    setownerName("N. Rathnayake");
+    setownerNic("690531170V");
+    setownerContactNo(772665133);
+    setownerEmail("nishatha99@gmail.com");
   };
 
   useEffect(() => {
@@ -67,6 +82,9 @@ function FuelStationRegister() {
       <div className={styles.regWrapper}>
         <div className={styles.createAccDiv}>
           <h3>Fuel Station Details</h3>
+          <Button color="primary" onClick={demo} outline>
+            Demo
+          </Button>
           <br />
           <Form className={styles.form} onSubmit={(e) => submit(e)}>
             <div className={styles.section}>
@@ -77,7 +95,7 @@ function FuelStationRegister() {
                   id="stationName"
                   className={styles.input}
                   name="stationName"
-                  placeholder="joe mama"
+                  placeholder="Alliance Enterprises"
                   type="text"
                   value={stationName}
                   onChange={(e) => setstationName(e.target.value)}
@@ -103,7 +121,7 @@ function FuelStationRegister() {
                   id="address"
                   className={styles.input}
                   name="address"
-                  placeholder="joe mama"
+                  placeholder="Type station address.."
                   type="text"
                   value={address}
                   onChange={(e) => setaddress(e.target.value)}
@@ -123,7 +141,7 @@ function FuelStationRegister() {
                     id="city"
                     className={styles.inputSm}
                     name="city"
-                    placeholder="joe mama"
+                    placeholder="Colombo"
                     type="text"
                     value={city}
                     onChange={(e) => setcity(e.target.value)}
@@ -136,7 +154,7 @@ function FuelStationRegister() {
                     id="province"
                     className={styles.inputSm}
                     name="province"
-                    placeholder="joe mama"
+                    placeholder="Western"
                     type="text"
                     value={province}
                     onChange={(e) => setprovince(e.target.value)}
@@ -149,7 +167,7 @@ function FuelStationRegister() {
                     id="zipcode"
                     className={styles.inputSm}
                     name="zipcode"
-                    placeholder="joe mama"
+                    placeholder="11000"
                     type="text"
                     value={zipCode}
                     onChange={(e) => setzipCode(e.target.value)}
@@ -164,11 +182,11 @@ function FuelStationRegister() {
                   id="contactNo"
                   className={styles.input}
                   name="contactNo"
-                  placeholder="joe mama"
+                  placeholder="0112236346"
                   type="phone"
                   value={contactNo}
                   onChange={(e) => setcontactNo(e.target.value)}
-                  pattern="[0-9]{10}"
+                  pattern="[0-9]{9,10}"
                   required
                 />
               </FormGroup>
@@ -197,7 +215,7 @@ function FuelStationRegister() {
                   id="fullname"
                   className={styles.input}
                   name="fullname"
-                  placeholder="joe@gmail.com"
+                  placeholder="Joe Smith"
                   type="text"
                   value={ownerName}
                   onChange={(e) => setownerName(e.target.value)}
@@ -210,7 +228,7 @@ function FuelStationRegister() {
                   id="nic"
                   className={styles.input}
                   name="nic"
-                  placeholder="joe@gmail.com"
+                  placeholder="Type owner NIC..."
                   type="text"
                   value={ownerNic}
                   onChange={(e) => setownerNic(e.target.value)}
@@ -224,11 +242,11 @@ function FuelStationRegister() {
                   id="personalContactNo"
                   className={styles.input}
                   name="personalContactNo"
-                  placeholder="joe@gmail.com"
+                  placeholder="0112236346"
                   type="text"
                   value={ownerContactNo}
                   onChange={(e) => setownerContactNo(e.target.value)}
-                  pattern="[0-9]{10}"
+                  pattern="[0-9]{9,10}"
                   required
                 />
               </FormGroup>
