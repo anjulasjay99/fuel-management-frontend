@@ -5,7 +5,7 @@ import common from "../../styles/common.module.css";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
 
-function StationSettings({ user }) {
+function StationSettings({ user, setuser }) {
   const [stationName, setstationName] = useState("");
   const [type, settype] = useState("Lanka IOC");
   const [address, setaddress] = useState("");
@@ -39,6 +39,12 @@ function StationSettings({ user }) {
       .put("http://localhost:8070/fuelStations/updateInfo", data)
       .then((res) => {
         alert(res.data.msg);
+        const usr = {
+          ...user,
+          data,
+        };
+        sessionStorage.setItem("fsUser", JSON.stringify(usr));
+        setuser(usr);
       })
       .catch((e) => {
         alert("Error!");
@@ -68,12 +74,12 @@ function StationSettings({ user }) {
         <div className={styles.section}>
           <Label className={styles.subTitle}>Station Information</Label>
           <FormGroup>
-            <Label for="stationName">Name of the Station*</Label>
+            <Label for="stationName">Name of the Station* </Label>
             <Input
               id="stationName"
               className={styles.input}
               name="stationName"
-              placeholder="joe mama"
+              placeholder="Type station name..."
               type="text"
               value={stationName}
               onChange={(e) => setstationName(e.target.value)}
@@ -99,7 +105,7 @@ function StationSettings({ user }) {
               id="address"
               className={styles.input}
               name="address"
-              placeholder="joe mama"
+              placeholder="Type station address..."
               type="text"
               value={address}
               onChange={(e) => setaddress(e.target.value)}
@@ -119,7 +125,7 @@ function StationSettings({ user }) {
                 id="city"
                 className={styles.inputSm}
                 name="city"
-                placeholder="joe mama"
+                placeholder="Colombo"
                 type="text"
                 value={city}
                 onChange={(e) => setcity(e.target.value)}
@@ -132,7 +138,7 @@ function StationSettings({ user }) {
                 id="province"
                 className={styles.inputSm}
                 name="province"
-                placeholder="joe mama"
+                placeholder="Western"
                 type="text"
                 value={province}
                 onChange={(e) => setprovince(e.target.value)}
@@ -145,7 +151,7 @@ function StationSettings({ user }) {
                 id="zipcode"
                 className={styles.inputSm}
                 name="zipcode"
-                placeholder="joe mama"
+                placeholder="11000"
                 type="text"
                 value={zipCode}
                 onChange={(e) => setzipCode(e.target.value)}
@@ -160,11 +166,11 @@ function StationSettings({ user }) {
               id="contactNo"
               className={styles.input}
               name="contactNo"
-              placeholder="joe mama"
+              placeholder="0112236346"
               type="phone"
               value={contactNo}
               onChange={(e) => setcontactNo(e.target.value)}
-              pattern="[0-9]{10}"
+              pattern="[0-9]{9,10}"
               required
             />
           </FormGroup>
@@ -179,7 +185,7 @@ function StationSettings({ user }) {
               id="fullname"
               className={styles.input}
               name="fullname"
-              placeholder="joe@gmail.com"
+              placeholder="Joe Smith"
               type="text"
               value={ownerName}
               onChange={(e) => setownerName(e.target.value)}
@@ -192,7 +198,7 @@ function StationSettings({ user }) {
               id="nic"
               className={styles.input}
               name="nic"
-              placeholder="joe@gmail.com"
+              placeholder="Type owner NIC..."
               type="text"
               value={ownerNic}
               onChange={(e) => setownerNic(e.target.value)}
@@ -206,11 +212,11 @@ function StationSettings({ user }) {
               id="personalContactNo"
               className={styles.input}
               name="personalContactNo"
-              placeholder="joe@gmail.com"
+              placeholder="0112236346"
               type="text"
               value={ownerContactNo}
               onChange={(e) => setownerContactNo(e.target.value)}
-              pattern="[0-9]{10}"
+              pattern="[0-9]{9,10}"
               required
             />
           </FormGroup>

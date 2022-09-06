@@ -11,6 +11,7 @@ import {
   Toast,
   ToastHeader,
   ToastBody,
+  FormText,
 } from "reactstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -43,12 +44,21 @@ function FuelStationCreateAccount() {
       });
   };
 
+  const demo = () => {
+    setemail("alliance.e@gmail.com");
+    setpassword("abcd1234");
+    setconfPassword("abcd1234");
+  };
+
   return (
     <div>
       <PageTitle pageTitle="Fuel Station Registraion" />
       <div className={styles.createAccWrapper}>
         <div className={styles.createAccForm}>
           <h3>Create Account</h3>
+          <Button color="primary" onClick={demo} outline>
+            Demo
+          </Button>
           <br />
           <Form onSubmit={(e) => submit(e)}>
             <FormGroup>
@@ -77,6 +87,7 @@ function FuelStationCreateAccount() {
                 pattern=".{8,}"
                 required
               />
+              <FormText>Password must contain atleast 8 characters</FormText>
             </FormGroup>
             <FormGroup>
               <Label for="confPassword">Confirm Password</Label>

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import axios from "axios";
 
-function AccountSettings({ user }) {
+function AccountSettings({ user, setuser }) {
   const [editemail, seteditemail] = useState(false);
   const [changepwd, setchangepwd] = useState(false);
   const [email, setemail] = useState("");
@@ -22,6 +22,13 @@ function AccountSettings({ user }) {
       })
       .then((res) => {
         alert(res.data.msg);
+        const usr = {
+          ...user,
+          email,
+        };
+        setuser(usr);
+        sessionStorage.setItem("fsUser", JSON.stringify(usr));
+        seteditemail(false);
       })
       .catch((e) => {
         alert("Error!");
@@ -39,6 +46,13 @@ function AccountSettings({ user }) {
           })
           .then((res) => {
             alert(res.data.msg);
+            const usr = {
+              ...user,
+              password,
+            };
+            setuser(usr);
+            sessionStorage.setItem("fsUser", JSON.stringify(usr));
+            setchangepwd(usr);
           })
           .catch((e) => {
             alert("Error!");
@@ -145,6 +159,7 @@ function AccountSettings({ user }) {
                 pattern=".{8,}"
                 required
               />
+              <FormText>Password must contain atleast 8 characters</FormText>
             </FormGroup>
             <FormGroup>
               <Label for="confPassword">Confirm Password*</Label>
