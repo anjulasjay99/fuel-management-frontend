@@ -47,3 +47,11 @@
   text-transform: uppercase;
   font-weight: 700;
 }
+
+.subTitle {
+  font-size: 20px;
+}
+
+.subTitle2 {
+  color: #999999;
+}
