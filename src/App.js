@@ -9,6 +9,8 @@ import Addcomplaint from "./components/complaintManagement/addcomplaint";
 import StationLogin from "./components/FuelStation/StationLogin";
 import ViewFuelStations from "./components/Admin/ViewFuelStations";
 import Viewcomplaints from "./components/complaintManagement/viewcomplaints";
+import CustomerRegistration from "./components/CustomerManagement/CustomerRegistration";
+import CustomerProfile from "./components/CustomerManagement/CustomerProfile";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path="/fuel-station-settings" element={<Settings />} />
           <Route path="/fuel-station-login" element={<StationLogin />} />
           <Route path="/fuel-stations" element={<ViewFuelStations />} />
+          <Route path="/customer-registration" element={<CustomerRegistration />} />
+          <Route path="/customer-profile" element={<CustomerProfile />} />
         </Routes>
       </BrowserRouter>
     </div>
