@@ -37,6 +37,13 @@ function Addcomplaint(){
       alert("Complaint Added");
     }
 
+    function clear(){
+ 
+        setemail("");
+        setdateofComplaint("");
+        setreason("");
+        setcomplaintDetails("");
+    }
 
     return(
         <>
@@ -57,7 +64,7 @@ function Addcomplaint(){
         <p className="card-text" style={{textAlign: "left"}}>  Please Send us details about the inceident you would like to report. Our Complaint Center will analyze your complaint and take the appropriate measure in order that the reported situation will not oocur at any time the future.</p>
         <hr/> 
         <div>
-        <form onSubmit={submitComplaint}>
+  <form >
   <div class="form-group">
     <label for="exampleFormControlInput1" style={{float:"left"}}>Email </label>
     <input value={email} onChange={(e)=>{setemail(e.target.value)}} type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
@@ -72,8 +79,8 @@ function Addcomplaint(){
     <label for="exampleFormControlSelect1" style={{float:"left"}}>Reason</label>
     <select value={reason} onChange={(e)=>{setreason(e.target.value)}} class="form-control form-select">
     <option>Issue in the shed</option>
-    <option value="1">Issue in the Queue</option>
-    <option value="2">Other</option>
+    <option>Issue in the Queue</option>
+    <option>Other</option>
  </select>
   </div>
   <br></br>
@@ -84,9 +91,9 @@ function Addcomplaint(){
   <br></br>
   <div class="form-group">
     
-  <button style={{width : "100%", backgroundColor: "#ff762e",}} type="submit" className="btn btn-primary  ">Add Complaint</button>
+  <button style={{width : "100%", backgroundColor: "#ff762e",}} type="submit" onClick={(e)=>{submitComplaint(e)}} className="btn btn-primary  ">Add Complaint</button>
   <br/><br/>
-  <button style={{width : "100%", backgroundColor: " #082344",}} type="submit" className="btn btn-primary  ">Clear</button>
+  <button style={{width : "100%", backgroundColor: " #082344",}}  onClick={()=>{clear()}} className="btn btn-primary ">Reset</button>
   </div>
  
 </form>

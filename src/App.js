@@ -8,7 +8,8 @@ import FuelStationRegister from './components/FuelStation/FuelStationRegister'
 import StationLogin from "./components/FuelStation/StationLogin"
 import Settings from "./components/FuelStation/Settings"
 import Addcomplaint from './components/complaintManagement/addcomplaint.js'
-
+import Icon from "react-crud-icons";
+import Updatecomplaints from "./components/complaintManagement/updatecomplaints";
 function App() {
   return (
     <div>
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/addcomplaint" element = {<Addcomplaint/>} exact/>
           <Route path="/viewcomplaint" element = {<Viewcomplaints/>} exact/>
+          <Route path="/updatecomplaint/:id" element = {<Updatecomplaints/>} exact/>
           <Route
             path="/fuel-station-create-account"
             element={<FuelStationCreateAccount />}

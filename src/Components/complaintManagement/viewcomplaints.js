@@ -1,11 +1,16 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Icon from "react-crud-icons";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from "react-router-dom";
+library.add(  faPen);
 
 const Viewcomplaints = () => {
 
   const [coomplaints,setComplaints] = useState([]);
+  const navigate = useNavigate();
   useEffect(()=>{
     axios.get("http://localhost:8070/complaints").then((response)=>{     
         console.log(response.data)
@@ -13,8 +18,24 @@ const Viewcomplaints = () => {
     })
   },[])
 
-  
+  const getData = () => {
+    axios.get(`http://localhost:8070/complaints`)
+        .then((res) => {
+          setComplaints(res.data);
+    })
+  }
+ function updateComplaint(data){
+    console.log(data._id)
+    navigate(`/updatecomplaint/${data._id}`)
+ }
 
+  const deletecomplaint = (data)=>{
+    console.log(data._id)
+    axios.delete(`http://localhost:8070/complaints/delete/${data._id}`).then((data)=>{
+      alert("Complaint deleted");
+      getData();
+    })
+  }
   return (
     
     <>
@@ -41,9 +62,7 @@ const Viewcomplaints = () => {
   </thead>
   <tbody>
   
-  {coomplaints.map((data,index)=>{
-    console.log(data)
-       
+  {coomplaints.map((data,index)=>{    
         return(
           <tr style={{}}>
           <td>{coomplaints.indexOf(data)+1}</td>
@@ -51,7 +70,15 @@ const Viewcomplaints = () => {
           <td>{data.dateofComplaint}</td>
           <td>{data.reason}</td>
           <td>{data.complaintDetails}</td>
-          <td>    
+          <td>     
+          <i onClick = {()=>{
+                                  updateComplaint(data)
+                                }} class="fa fa-pencil-square" aria-hidden="true"></i>
+          <a onClick = {()=>{
+                                  deletecomplaint(data)
+                                }}><i style={{marginLeft:"20px"}}class="fa fa-trash" aria-hidden="true"  
+                                ></i></a>
+          
           </td>
         </tr>
         )
@@ -69,3 +96,6 @@ const Viewcomplaints = () => {
 }
 
 export default Viewcomplaints
+
+{/* <i style={{marginLeft:"20px"}}class="fa fa-trash" aria-hidden="true"  
+          ></i> */}
