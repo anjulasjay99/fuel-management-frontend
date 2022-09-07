@@ -49,11 +49,11 @@ function Settings() {
           </div>
           <div className={styles.tabContent}>
             {tabIndex === 0 ? (
-              <StationSettings user={user} />
+              <StationSettings user={user} setuser={setuser} />
             ) : tabIndex === 1 ? (
-              <AccountSettings user={user} />
+              <AccountSettings user={user} setuser={setuser} />
             ) : (
-              <Unregister user={user} />
+              <Unregister user={user} setuser={setuser} />
             )}
           </div>
         </div>

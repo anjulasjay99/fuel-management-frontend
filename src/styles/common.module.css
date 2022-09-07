@@ -29,3 +29,60 @@
 .btnSecondary:hover {
   background-color: #082344;
 }
+
+.btnOutline {
+  border: 1px solid #ff762e !important;
+  color: #ff762e;
+  background-color: transparent;
+}
+
+.btnOutline:hover {
+  background-color: #ff762e;
+  color: #fff;
+}
+
+.table thead {
+  background-color: #082344;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.subTitle {
+  font-size: 20px;
+}
+
+.subTitle2 {
+  color: #999999;
+}
+
+/* Card Styles */
+
+ .card_icon {
+  transform: scale(8);
+  margin-bottom: 60px;
+}
+
+.card_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.card_div h4 {
+  font-size: 40px;
+}
+
+.card_div:hover {
+  color: white;
+  background-color: #082344;
+} 
+
+/* ==================================== */
