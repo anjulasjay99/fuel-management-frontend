@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PageTitle from "../PageTitle";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
@@ -66,7 +65,7 @@ function StationSettings({ user, setuser }) {
       setownerEmail(user.ownerEmail);
       setownerContactNo(user.ownerContactNo);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={styles.stationSettingsDiv}>

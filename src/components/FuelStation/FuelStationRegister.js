@@ -74,7 +74,7 @@ function FuelStationRegister() {
     } else {
       navigate("/fuel-station-create-account");
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>
