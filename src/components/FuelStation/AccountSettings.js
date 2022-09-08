@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PageTitle from "../PageTitle";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
@@ -69,7 +68,7 @@ function AccountSettings({ user, setuser }) {
     if (user != null) {
       setemail(user.email);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={styles.stationSettingsDiv}>
@@ -83,9 +82,9 @@ function AccountSettings({ user, setuser }) {
             }}
           >
             <Label for="email">Email : {user.email}</Label>
-            <a className={styles.edit} onClick={() => seteditemail(true)}>
+            <label className={styles.edit} onClick={() => seteditemail(true)}>
               Edit
-            </a>
+            </label>
           </div>
         ) : (
           <>
@@ -127,9 +126,9 @@ function AccountSettings({ user, setuser }) {
             }}
           >
             <Label for="email">Password : ***********</Label>
-            <a className={styles.edit} onClick={() => setchangepwd(true)}>
+            <label className={styles.edit} onClick={() => setchangepwd(true)}>
               Edit
-            </a>
+            </label>
           </div>
         ) : (
           <>
