@@ -9,6 +9,10 @@ import "../../Css/Addcomplaint.css"
 import PageTitle from '../PageTitle';
 import ComplaintHeader from './complaintHeader';
 
+import { ToastContainer,toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
+
 function Addcomplaint(){
 
     const [email, setemail] = useState("");
@@ -26,6 +30,9 @@ function Addcomplaint(){
 
 
      function  submitComplaint(e){
+
+        
+       
         e.preventDefault();
         // console.log(complaintDetails.length)
         if(complaintDetails.length>=10){   
@@ -40,13 +47,23 @@ function Addcomplaint(){
                axios
                 .post("http://localhost:8070/complaints", newComplaint)
                 .then((res) => {
+                 
+                  toast.success('Complaint Added!', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
                   console.log(res.data)  
                   setemail("");
                   setdateofComplaint("");
-                  setreason("");
+                  setreason("Issue in the shed");
                   setcomplaintDetails("");
                   setSucessfull(false);
-                  alert("Complaint Added");
+                  
                 })
                 .catch((err) => {
                   alert(err);
@@ -62,7 +79,7 @@ function Addcomplaint(){
  
         setemail("");
         setdateofComplaint("");
-        setreason("");
+        setreason("Issue in the shed");
         setcomplaintDetails("");
         setSucessfull(false)
     }
@@ -122,7 +139,7 @@ function Addcomplaint(){
   <div class="form-group">
     
   <button style={{width : "100%", backgroundColor: "#ff762e",}} type="submit"  className="btn btn-primary  ">Add Complaint</button>
-  
+  <ToastContainer></ToastContainer>
   <button style={{width : "100%", backgroundColor: " #082344",marginTop:"10px"}}  onClick={()=>{clear()}} className="btn btn-primary ">Reset</button>
   </div>
  

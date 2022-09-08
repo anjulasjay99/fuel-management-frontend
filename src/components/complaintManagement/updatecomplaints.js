@@ -8,6 +8,8 @@ import "../../Css/Addcomplaint.css"
 import {useNavigate,useParams} from "react-router-dom"
 import ComplaintHeader from "./complaintHeader";
 import PageTitle from "../PageTitle";
+import { ToastContainer,toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Updatecomplaints = () => {
   const [email, setemail] = useState("");
@@ -48,7 +50,15 @@ const Updatecomplaints = () => {
      axios.post(`http://localhost:8070/complaints/update/${id}`,newupdatedComplaint).then((res)=>{
          console.log(res.status)
          e.target.reset();
-         alert("Complaint updated suceesfully")
+         toast.success('Complaint Updated Successfully!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
      }).catch((err)=>{
       console.log(err)
     })}else{
@@ -58,6 +68,7 @@ const Updatecomplaints = () => {
 
   return (
     <>
+    <ToastContainer></ToastContainer>
     <ComplaintHeader/>
     <PageTitle pageTitle="Update Complaint"/> 
     <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>

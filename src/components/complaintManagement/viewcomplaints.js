@@ -7,12 +7,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from "react-router-dom";
 import ComplaintHeader from './complaintHeader';
 import PageTitle from '../PageTitle';
+import { ToastContainer,toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import {Modal,Button} from 'react-bootstrap'
 library.add(  faPen);
 
   
 const Viewcomplaints = () => {
 
   const [coomplaints,setComplaints] = useState([]);
+  const [show,setshow] = useState(false)
+  const [deletedata,setdeletedata] = useState({})
+
+  const handleClose =()=>{
+    setshow(false)
+  }
+
   const navigate = useNavigate();
   useEffect(()=>{
     axios.get("http://localhost:8070/complaints").then((response)=>{     
@@ -32,16 +42,36 @@ const Viewcomplaints = () => {
     navigate(`/updatecomplaint/${data._id}`)
  }
 
+
+
   const deletecomplaint = (data)=>{
+    setdeletedata(data)
     console.log(data._id)
-    axios.delete(`http://localhost:8070/complaints/delete/${data._id}`).then((data)=>{
-      alert("Complaint deleted");
+    setshow(true)
+    
+  }
+
+  const handleDelete = ()=>{
+    console.log(deletedata)
+    axios.delete(`http://localhost:8070/complaints/delete/${deletedata._id}`).then((data)=>{
+        setshow(false)
+        toast.success('Complaint Deleted!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
       getData();
     })
   }
+
   return (
     
     <>
+     <ToastContainer></ToastContainer>
      <ComplaintHeader/>
      {/* <div className="input-group">
   <div className="form-outline">
@@ -56,6 +86,32 @@ const Viewcomplaints = () => {
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
     <br></br><br></br>
     
+    <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are You Sure You Want To Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>This Action Cannot Be Undone !</Modal.Body>
+        <Modal.Footer>
+          <Button style={{ backgroundColor: "#ff762e"}} variant="secondary" onClick={handleDelete}>
+            Confirm
+          </Button>
+          <Button style={{backgroundColor: " #082344"}}variant="primary" onClick={handleClose}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <div class="panel-heading">
+                        <div class="input-group">
+                            <input type="hidden" name="search_param" value="name" id="search_param"/>
+                            <input style={{maxWidth:"200px",marginLeft:"1130px",border:"1px solid #082344"}} id="searchText"type="text" class="form-control" name="q" placeholder="Search Here"  value=""/>
+                            <span class="input-group-btn">
+                                <a  id="x" class="btn btn-default hide" href="#" title="Clear"><i class="glyphicon glyphicon-remove"></i> </a>
+                                <button style={{backgroundColor: "#082344",maxwidth:"200px",color:"white"}}class="btn btn-info" type="submit">  Search  </button>
+                            </span>
+                        </div>
+                    </div>
+                    <br></br>
     <div className='container-xl' style={{  padding: "2rem 0rem",alignItems:"center",justifyContent:"center",borderradius: '5px 5px 0 0'}}>
     <div className='row'>
     <div className='col-12'>
