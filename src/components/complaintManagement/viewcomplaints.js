@@ -6,6 +6,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from "react-router-dom";
 import ComplaintHeader from './complaintHeader';
+import PageTitle from '../PageTitle';
 library.add(  faPen);
 
   
@@ -51,9 +52,7 @@ const Viewcomplaints = () => {
     <i className="fas fa-search"></i>
   </button>
 </div> */}
-     <div style={{marginTop:"40px"}}>
-        <h2 style={{textAlign: "left"}}>My Complaints</h2>
-        </div>
+        <PageTitle pageTitle="My Complaints"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
     <br></br><br></br>
     
