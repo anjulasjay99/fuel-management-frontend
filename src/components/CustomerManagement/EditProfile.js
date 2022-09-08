@@ -2,8 +2,8 @@ import { useState , useEffect } from "react";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 
-
 import { Button, Form, FormGroup, Label, Input , Row , Col , ButtonGroup  } from "reactstrap";
+import axios from "axios";
 
 function EditProfile(){
 
@@ -12,6 +12,21 @@ function EditProfile(){
     const [surname, setsurname] = useState("");
     const [telNo, setTelNo] = useState("");
 
+    const editClick = (email) =>{
+        const updatedData = {
+            email,
+            name,
+            surname,
+            telNo
+        }
+        axios.put("http://localhost:8070/customers/edit" , updatedData ).then((req,res) =>{
+            // Display Toast Message
+            console.log(res);
+        }).catch((err) =>{
+            // Display Toast Message
+            console.log(err);
+        })
+    }
     return(
         <div>
                     <FormGroup>
@@ -71,7 +86,9 @@ function EditProfile(){
                         />
                     </FormGroup>
                     <ButtonGroup>
-                        <Button className={common.btnSecondary} style={{width:"100%"}}>Edit</Button>
+                        <Button className={common.btnSecondary} style={{width:"100%"}} onClick = {() =>{
+                            editClick(email);
+                        }}>Edit</Button>
                     </ButtonGroup>
         </div>
     );
