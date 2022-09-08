@@ -2,24 +2,13 @@ import React, { useState } from "react";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Toast,
-  ToastHeader,
-  ToastBody,
-  FormText,
-} from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function FuelStationCreateAccount() {
   const navigate = useNavigate();
   const [email, setemail] = useState("");
-  const [showToast, setshowToast] = useState(true);
   const [password, setpassword] = useState("");
   const [confPassword, setconfPassword] = useState("");
   const submit = (e) => {
