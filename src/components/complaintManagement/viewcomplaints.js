@@ -5,8 +5,10 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from "react-router-dom";
+import ComplaintHeader from './complaintHeader';
 library.add(  faPen);
 
+  
 const Viewcomplaints = () => {
 
   const [coomplaints,setComplaints] = useState([]);
@@ -39,13 +41,22 @@ const Viewcomplaints = () => {
   return (
     
     <>
-    <style>
-    
-    </style>
+     <ComplaintHeader/>
+     {/* <div className="input-group">
+  <div className="form-outline">
+    <input type="search" id="form1" class="form-control" />
+    <label className="form-label" for="form1">Search</label>
+  </div>
+  <button type="button" className="btn btn-primary">
+    <i className="fas fa-search"></i>
+  </button>
+</div> */}
      <div style={{marginTop:"40px"}}>
         <h2 style={{textAlign: "left"}}>My Complaints</h2>
         </div>
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
+    <br></br><br></br>
+    
     <div className='container-xl' style={{  padding: "2rem 0rem",alignItems:"center",justifyContent:"center",borderradius: '5px 5px 0 0'}}>
     <div className='row'>
     <div className='col-12'>

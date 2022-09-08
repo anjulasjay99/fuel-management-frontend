@@ -6,6 +6,7 @@ import React from "react";
 // import Form from 'react-bootstrap/Form'
 import "../../Css/Addcomplaint.css"
 import {useNavigate,useParams} from "react-router-dom"
+import ComplaintHeader from "./complaintHeader";
 
 const Updatecomplaints = () => {
   const [email, setemail] = useState("");
@@ -50,7 +51,8 @@ const Updatecomplaints = () => {
 
   return (
     <>
-    <div style={{marginTop:"40px"}}>
+    <ComplaintHeader/>
+    <div style={{marginTop:"30px"}}>
     <h2 style={{textAlign: "left"}}>Update Complaint</h2>
     </div>
     <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
@@ -64,12 +66,11 @@ const Updatecomplaints = () => {
  >
     <div className="card-body">
    
-    <p className="card-text" style={{textAlign: "left",marginTop:"0px"}}>  Edit your complaint details.</p>
-    <hr/> 
+    
     <div>
     <form >
       <div class="form-group">
-      <label for="exampleFormControlInput1" style={{float:"left"}}>Email </label>
+      <label for="exampleFormControlInput1" style={{float:"left"}}>Email </label><br></br>
       <input value={email} onChange={(e)=>{setemail(e.target.value)}} type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
       </div>
       <br></br>
@@ -97,8 +98,8 @@ const Updatecomplaints = () => {
       <button onClick = {(event) =>{
                         UpdateComplaint(event)
                     }}style={{width : "100%", backgroundColor: "#ff762e",}} type="submit" className="btn btn-primary  ">Update Complaint</button>
-      <br/><br/>
-
+      <br/>
+      
       </div>
 
 </form>

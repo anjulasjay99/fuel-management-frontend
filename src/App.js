@@ -2,11 +2,6 @@ import { React } from "react";
 import { Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Viewcomplaints from "./components/complaintManagement/viewcomplaints";
-import FuelStationRegister from './components/FuelStation/FuelStationRegister'
-import StationLogin from "./components/FuelStation/StationLogin"
-import Settings from "./components/FuelStation/Settings"
-import Addcomplaint from './components/complaintManagement/addcomplaint.js'
 import Icon from "react-crud-icons";
 import Updatecomplaints from "./components/complaintManagement/updatecomplaints";
 import FuelStationCreateAccount from "./components/FuelStation/FuelStationCreateAccount";

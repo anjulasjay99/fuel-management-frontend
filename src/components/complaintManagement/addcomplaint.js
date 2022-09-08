@@ -6,6 +6,8 @@ import React from "react";
 // import Card from 'react-bootstrap/Card';
 // import Form from 'react-bootstrap/Form'
 import "../../Css/Addcomplaint.css"
+import PageTitle from '../PageTitle';
+import ComplaintHeader from './complaintHeader';
 
 function Addcomplaint(){
 
@@ -25,8 +27,8 @@ function Addcomplaint(){
 
     function submitComplaint(e){
         e.preventDefault();
-        console.log(complaintDetails.length)
-        if(complaintDetails.length>=10){    
+        // console.log(complaintDetails.length)
+        // if(complaintDetails.length>=10){    
               const newComplaint = {
                 email,
                 dateofComplaint,
@@ -49,7 +51,7 @@ function Addcomplaint(){
                   alert(err);
                 });
               
-        }
+       // }
      }
 
     function clear(){
@@ -63,6 +65,8 @@ function Addcomplaint(){
 
     return(
         <>
+        {/* <PageTitle pageTitle="Addcomplaint"/> */}
+        <ComplaintHeader/>
         <div style={{marginTop:"40px"}}>
         <h2 style={{textAlign: "left", marginLeft:"5px"}}>Add New Complaint</h2>
         </div>
@@ -102,7 +106,7 @@ function Addcomplaint(){
   <br></br>
   <div class="form-group">
     <label for="exampleFormControlTextarea1" style={{float:"left"}}>Complaint Details</label>
-    <textarea value={complaintDetails} onChange={(e)=>{setcomplaintDetails(e.target.value)}} class="form-control" id="exampleFormControlTextarea1"  rows="3" title="please enter more than 10 letters"  required></textarea>
+    <textarea value={complaintDetails} onChange={(e)=>{setcomplaintDetails(e.target.value)}} class="form-control" id="exampleFormControlTextarea1"  rows="3" title="please enter more than 10 letters" minlength="10" required></textarea>
   </div>
       
           
