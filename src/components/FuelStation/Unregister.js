@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
-import PageTitle from "../PageTitle";
+import React, { useState } from "react";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 import { Button, Form, FormGroup, Label, Input, Alert, Col } from "reactstrap";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Unregister({ user }) {
   const navigate = useNavigate();
-  const [stationId, setstationId] = useState("");
   const [reason, setreason] = useState("");
   const [password, setpassword] = useState("");
 
@@ -45,12 +43,6 @@ function Unregister({ user }) {
         console.log("Error!");
       });
   };
-
-  useEffect(() => {
-    if (user != null) {
-      setstationId(user.stationId);
-    }
-  }, []);
 
   return (
     <div className={styles.stationSettingsDiv}>
