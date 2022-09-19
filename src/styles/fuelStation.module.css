@@ -132,3 +132,18 @@
   text-decoration: underline;
   font-weight: bold;
 }
+
+.infoSection {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.infoSection .name {
+  width: 25%;
+  color: #999999;
+} 
+
+.infoSection .value {
+  width: 75%;
+}
