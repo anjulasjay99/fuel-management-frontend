@@ -85,4 +85,14 @@
   background-color: #082344;
 } 
 
+.navLink {
+  text-decoration: none;
+  color: #adadad;
+}
+
+.navLink:hover {
+  text-decoration: none;
+  color: #c7c8c9;
+}
+
 /* ==================================== */

@@ -12,6 +12,9 @@ import ViewFuelStations from "./components/Admin/ViewFuelStations";
 import Viewcomplaints from "./components/complaintManagement/viewcomplaints";
 import CustomerRegistration from "./components/CustomerManagement/CustomerRegistration";
 import CustomerProfile from "./components/CustomerManagement/CustomerProfile";
+import FuelStationHome from "./components/FuelStation/FuelStationHome";
+import FuelOrders from "./components/FuelStation/FuelOrders";
+import PlaceFuelOrder from "./components/FuelStation/PlaceFuelOrder";
 
 function App() {
   return (
@@ -32,6 +35,9 @@ function App() {
           <Route path="/fuel-station-settings" element={<Settings />} />
           <Route path="/fuel-station-login" element={<StationLogin />} />
           <Route path="/fuel-stations" element={<ViewFuelStations />} />
+          <Route path='/fuel-station-home' element = {<FuelStationHome />} />
+          <Route path='fuel-orders' element = {<FuelOrders />} />
+          <Route path='/place-order' element={<PlaceFuelOrder />} />
           <Route
             path="/customer-registration"
             element={<CustomerRegistration />}

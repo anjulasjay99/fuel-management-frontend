@@ -1,7 +1,8 @@
 import React from "react";
 import { BiLogOut } from "react-icons/bi";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import styles from "../../styles/common.module.css";
 function StationHeader() {
   const navigate = useNavigate();
   // function logOut(){
@@ -16,7 +17,7 @@ function StationHeader() {
   return (
     <Navbar sticky="top" bg="dark" expand="lg" variant="dark">
       <Container fluid>
-        <Navbar.Brand href="/home">Home</Navbar.Brand>
+        <Navbar.Brand href="/fuel-station-home">Home</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -24,7 +25,11 @@ function StationHeader() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="#">Fuel Orders</Nav.Link>
+            <Nav.Link>
+              <Link className={styles.navLink} to="/fuel-orders">
+                Fuel Orders
+              </Link>
+            </Nav.Link>
             <Nav.Link href="#">Allocations</Nav.Link>
             <Nav.Link href="#">Report</Nav.Link>
             <Nav.Link href="/fuel-station-settings">Settings</Nav.Link>
