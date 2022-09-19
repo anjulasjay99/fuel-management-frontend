@@ -26,6 +26,8 @@ function Unregister({ user }) {
         .catch((e) => {
           alert("Error!");
         });
+    } else {
+      alert("Incorrect Password!");
     }
   };
 

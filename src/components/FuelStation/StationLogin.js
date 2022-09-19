@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function StationLogin() {
@@ -59,12 +59,16 @@ function StationLogin() {
                 required
               />
             </FormGroup>
-
+            <Label>
+              Don't have an account?{" "}
+              <Link to="/fuel-station-create-account">Create Account</Link>
+            </Label>
+            <br />
             <Button
               className={common.btnPrimary}
               style={{
                 width: "500px",
-                marginTop: "30px",
+                marginTop: "10px",
                 marginBottom: "10px",
               }}
             >

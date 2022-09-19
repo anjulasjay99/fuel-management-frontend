@@ -18,7 +18,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid #bdbdbd;
+  border: 1px solid #ff762e;
   margin: 20px 0px 20px 0px;
   width: fit-content;
   padding: 20px 30px 20px 30px;
@@ -31,18 +31,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid #bdbdbd;
+  border: 1px solid #ff762e;
   margin: 20px 0px 20px 0px;
   width: fit-content;
   padding: 20px 30px 20px 30px;
   border-radius: 20px;
-}
-
-.input {
-}
-
-.inputSm {
-  /*  width: 150px; */
 }
 
 .form {
