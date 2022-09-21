@@ -11,6 +11,7 @@ function FuelOrders() {
   const navigate = useNavigate();
   const [orders, setorders] = useState([]);
   const [user, setuser] = useState();
+  const [stat, setstat] = useState("Canceled");
 
   const getOrders = (id) => {
     axios
@@ -107,7 +108,7 @@ function FuelOrders() {
                 <th>TYPE </th>
                 <th>LITRES</th>
                 <th>TIME OF DELIVERY</th>
-                <th>PAYMENT</th>
+                <th>PAYMENT (LKR)</th>
                 <th>STATUS</th>
               </tr>
             </thead>
@@ -120,8 +121,26 @@ function FuelOrders() {
                     <td>{order.type}</td>
                     <td>{order.amount}</td>
                     <td>{order.timeOfDelivery}</td>
-                    <td>{order.payment}</td>
-                    <td>{order.status}</td>
+                    <td>
+                      {order.payment.toLocaleString("en-US", {
+                        maximumFractionDigits: 2,
+                      })}
+                    </td>
+                    <td>
+                      <span
+                        style={{
+                          background:
+                            order.status === "Completed"
+                              ? "#43a047"
+                              : order.status === "Canceled"
+                              ? "#e53935"
+                              : "#f9a825",
+                        }}
+                        className={styles.status}
+                      >
+                        {order.status}
+                      </span>
+                    </td>
                   </tr>
                 );
               })}
