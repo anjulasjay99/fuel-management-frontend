@@ -18,7 +18,7 @@ function StationLogin() {
       .then((res) => {
         if (res.data.status === true) {
           sessionStorage.setItem("fsUser", JSON.stringify(res.data.userData));
-          navigate("/fuel-station-settings");
+          navigate("/fuel-orders");
         }
       })
       .catch((e) => {

@@ -142,8 +142,13 @@
 .infoSection .name {
   width: 25%;
   color: #999999;
-} 
+}
 
 .infoSection .value {
   width: 75%;
+}
+
+.status {
+  padding: 2px 10px 2px 10px;
+  border-radius: 10px;
 }

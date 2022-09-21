@@ -58,7 +58,7 @@
 
 /* Card Styles */
 
- .card_icon {
+.card_icon {
   transform: scale(8);
   margin-bottom: 60px;
 }
@@ -83,16 +83,20 @@
 .card_div:hover {
   color: white;
   background-color: #082344;
-} 
+}
 
 .navLink {
   text-decoration: none;
-  color: #adadad;
+  color: #5a5a5a;
 }
 
 .navLink:hover {
   text-decoration: none;
-  color: #c7c8c9;
+  color: #ff762e;
+}
+
+.navbar {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 /* ==================================== */
