@@ -45,7 +45,7 @@ function StationHeader() {
               </Link>
             </Nav.Link>
             <Nav.Link href="#">
-              <Link className={styles.navLink} to="/fuel-orders">
+              <Link className={styles.navLink} to="/fuel-allocations">
                 Allocations
               </Link>
             </Nav.Link>
