@@ -17,6 +17,7 @@ import FuelOrders from "./components/FuelStation/FuelOrders";
 import PlaceFuelOrder from "./components/FuelStation/PlaceFuelOrder";
 import AllocateFuel from "./components/FuelStation/AllocateFuel";
 import FuelAllocations from "./components/FuelStation/FuelAllocations";
+import FuelStationReport from "./components/FuelStation/FuelStationReport";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             element={<CustomerRegistration />}
           />
           <Route path="/customer-profile" element={<CustomerProfile />} />
+          <Route path="/fuel-report" element={<FuelStationReport />} />
         </Routes>
       </BrowserRouter>
     </div>
