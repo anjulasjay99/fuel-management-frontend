@@ -138,7 +138,7 @@ function Addcomplaint(){
   <br></br> <br></br>
   <div class="form-group">
     
-  <button style={{width : "100%", backgroundColor: "#ff762e",}} type="submit"  className="btn btn-primary  ">Add Complaint</button>
+  <button style={{width : "100%", backgroundColor: "#ff762e"}} type="submit"  className="btn btn-primary  ">Add Complaint</button>
   <ToastContainer></ToastContainer>
   <button style={{width : "100%", backgroundColor: " #082344",marginTop:"10px"}}  onClick={()=>{clear()}} className="btn btn-primary ">Reset</button>
   </div>

@@ -10,6 +10,7 @@ import PageTitle from '../PageTitle';
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import {Modal,Button} from 'react-bootstrap'
+import PDF from './complaintReport'
 library.add(  faPen);
 
   
@@ -44,7 +45,10 @@ const Viewcomplaints = () => {
     navigate(`/updatecomplaint/${data._id}`)
  }
 
-
+ function exportPdf(data){
+  console.log(data._id);
+  navigate(`/complaintreport/${data._id}`)
+ }
 
   const deletecomplaint = (data)=>{
     setdeletedata(data)
@@ -164,8 +168,9 @@ const Viewcomplaints = () => {
                                 }} class="fa fa-pencil-square" aria-hidden="true"></i>
           <a onClick = {()=>{
                                   deletecomplaint(data)
-                                }}><i style={{marginLeft:"20px"}}class="fa fa-trash" aria-hidden="true"  
+                                }}><i style={{marginLeft:"20px", marginRight:"20px"}} class="fa fa-trash" aria-hidden="true"  
                                 ></i></a>
+          <i onClick={()=>{ exportPdf(data)}}class="fa fa-file-pdf-o"></i>                      
           
           </td>
         </tr>
