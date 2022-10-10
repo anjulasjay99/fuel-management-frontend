@@ -1,11 +1,8 @@
 import { useState,useEffect } from "react";
 import axios from 'axios';
 import React from "react";
-// import Button from 'react-bootstrap/Button';
-// import Card from 'react-bootstrap/Card';
-// import Form from 'react-bootstrap/Form'
 import "../../Css/Addcomplaint.css"
-import {useNavigate,useParams} from "react-router-dom"
+import {useParams} from "react-router-dom"
 import ComplaintHeader from "./complaintHeader";
 import PageTitle from "../PageTitle";
 import { ToastContainer,toast } from 'react-toastify';
@@ -73,7 +70,7 @@ const Updatecomplaints = () => {
     <PageTitle pageTitle="Update Complaint"/> 
     <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
    <center>
-   <div className="card" style={{width: "50rem",padding: '1.5em .5em .5em',borderRadius: "2em",
+   <div className="card" style={{width: "50rem",borderRadius: "2em",
     borderStyle: 'solid',
     borderColor: ' #ff762e',margin:"100px",padding:"50px",
     display: 'flex',
