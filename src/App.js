@@ -16,6 +16,7 @@ import FuelStationHome from "./components/FuelStation/FuelStationHome";
 import FuelOrders from "./components/FuelStation/FuelOrders";
 import PlaceFuelOrder from "./components/FuelStation/PlaceFuelOrder";
 import ComplaintReport from "./components/complaintManagement/complaintReport";
+import ViewAdmincomplaints from "./components/complaintManagement/adminComplaint";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/addcomplaint" element = {<Addcomplaint/>} exact/>
           <Route path="/viewcomplaint" element = {<Viewcomplaints/>} exact/>
+          <Route path="/viewadmincomplaint" element = {<ViewAdmincomplaints/>} exact/>
           <Route path="/updatecomplaint/:id" element = {<Updatecomplaints/>} exact/>
           <Route path="/complaintreport/:id" element = {<ComplaintReport/>} exact/>
           <Route
