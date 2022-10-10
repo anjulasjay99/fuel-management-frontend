@@ -15,6 +15,8 @@ import CustomerProfile from "./components/CustomerManagement/CustomerProfile";
 import FuelStationHome from "./components/FuelStation/FuelStationHome";
 import FuelOrders from "./components/FuelStation/FuelOrders";
 import PlaceFuelOrder from "./components/FuelStation/PlaceFuelOrder";
+import ComplaintReport from "./components/complaintManagement/complaintReport";
+import ViewAdmincomplaints from "./components/complaintManagement/adminComplaint";
 import AllocateFuel from "./components/FuelStation/AllocateFuel";
 import FuelAllocations from "./components/FuelStation/FuelAllocations";
 import FuelStationReport from "./components/FuelStation/FuelStationReport";
@@ -24,13 +26,11 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/addcomplaint" element={<Addcomplaint />} exact />
-          <Route path="/viewcomplaint" element={<Viewcomplaints />} exact />
-          <Route
-            path="/updatecomplaint/:id"
-            element={<Updatecomplaints />}
-            exact
-          />
+          <Route path="/addcomplaint" element = {<Addcomplaint/>} exact/>
+          <Route path="/viewcomplaint" element = {<Viewcomplaints/>} exact/>
+          <Route path="/viewadmincomplaint" element = {<ViewAdmincomplaints/>} exact/>
+          <Route path="/updatecomplaint/:id" element = {<Updatecomplaints/>} exact/>
+          <Route path="/complaintreport/:id" element = {<ComplaintReport/>} exact/>
           <Route
             path="/fuel-station-create-account"
             element={<FuelStationCreateAccount />}

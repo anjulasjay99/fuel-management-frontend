@@ -9,6 +9,10 @@ import "../../Css/Addcomplaint.css"
 import PageTitle from '../PageTitle';
 import ComplaintHeader from './complaintHeader';
 
+import { ToastContainer,toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
+
 function Addcomplaint(){
 
     const [email, setemail] = useState("");
@@ -16,7 +20,7 @@ function Addcomplaint(){
     const [reason, setreason] = useState("Issue in the shed");
     const [complaintDetails, setcomplaintDetails] = useState("");
     // const [handletextarea, sethandletextarea] = useState(false)
-
+    const [sucessfull, setSucessfull] = useState(false);
     // function Validate(complaintDetails){
     //   console.log(complaintDetails.length)
     //   if(complaintDetails.length>=10){
@@ -25,10 +29,14 @@ function Addcomplaint(){
     // }
 
 
-    function submitComplaint(e){
+     function  submitComplaint(e){
+
+        
+       
         e.preventDefault();
         // console.log(complaintDetails.length)
-        // if(complaintDetails.length>=10){    
+        if(complaintDetails.length>=10){   
+              setSucessfull(false) 
               const newComplaint = {
                 email,
                 dateofComplaint,
@@ -36,41 +44,52 @@ function Addcomplaint(){
                 complaintDetails
               };
               console.log(newComplaint)
-              axios
+               axios
                 .post("http://localhost:8070/complaints", newComplaint)
                 .then((res) => {
+                 
+                  toast.success('Complaint Added!', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
                   console.log(res.data)  
                   setemail("");
                   setdateofComplaint("");
-                  setreason("");
+                  setreason("Issue in the shed");
                   setcomplaintDetails("");
-                  //sethandletextarea(false)
-                  alert("Complaint Added");
+                  setSucessfull(false);
+                  
                 })
                 .catch((err) => {
                   alert(err);
                 });
               
-       // }
+        }else{
+          setSucessfull(true)
+          //alert("Please enter more than 10 characters.")
+        }
      }
 
     function clear(){
  
         setemail("");
         setdateofComplaint("");
-        setreason("");
+        setreason("Issue in the shed");
         setcomplaintDetails("");
-        //sethandletextarea(false)
+        setSucessfull(false)
     }
 
     return(
+      
         <>
-        {/* <PageTitle pageTitle="Addcomplaint"/> */}
         <ComplaintHeader/>
-        <div style={{marginTop:"40px"}}>
-        <h2 style={{textAlign: "left", marginLeft:"5px"}}>Add New Complaint</h2>
-        </div>
-        <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
+        <PageTitle pageTitle="Add New Complaint"/> 
+       <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
        <center>
        <div className="card" style={{width: "50rem",padding: '1.5em .5em .5em',borderRadius: "2em",
         borderStyle: 'solid',
@@ -106,17 +125,22 @@ function Addcomplaint(){
   <br></br>
   <div class="form-group">
     <label for="exampleFormControlTextarea1" style={{float:"left"}}>Complaint Details</label>
-    <textarea value={complaintDetails} onChange={(e)=>{setcomplaintDetails(e.target.value)}} class="form-control" id="exampleFormControlTextarea1"  rows="3" title="please enter more than 10 letters" minlength="10" required></textarea>
+    <textarea value={complaintDetails} onChange={(e)=>{setcomplaintDetails(e.target.value)}} class="form-control" id="exampleFormControlTextarea1"  rows="3" placeholder="Please enter your message briefly."  required></textarea>
+    <div>
+              { sucessfull !== false &&
+                  <p style={{color:"red",float:"left"}}>Please enter more than 10 letters</p>
+               }
+      </div>
   </div>
       
           
       
-  <br></br>
+  <br></br> <br></br>
   <div class="form-group">
     
-  <button style={{width : "100%", backgroundColor: "#ff762e",}} type="submit"  className="btn btn-primary  ">Add Complaint</button>
-  <br/><br/>
-  <button style={{width : "100%", backgroundColor: " #082344",}}  onClick={()=>{clear()}} className="btn btn-primary ">Reset</button>
+  <button style={{width : "100%", backgroundColor: "#ff762e"}} type="submit"  className="btn btn-primary  ">Add Complaint</button>
+  <ToastContainer></ToastContainer>
+  <button style={{width : "100%", backgroundColor: " #082344",marginTop:"10px"}}  onClick={()=>{clear()}} className="btn btn-primary ">Reset</button>
   </div>
  
 </form>
