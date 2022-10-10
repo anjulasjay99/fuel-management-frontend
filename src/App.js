@@ -17,6 +17,9 @@ import FuelOrders from "./components/FuelStation/FuelOrders";
 import PlaceFuelOrder from "./components/FuelStation/PlaceFuelOrder";
 import ComplaintReport from "./components/complaintManagement/complaintReport";
 import ViewAdmincomplaints from "./components/complaintManagement/adminComplaint";
+import AllocateFuel from "./components/FuelStation/AllocateFuel";
+import FuelAllocations from "./components/FuelStation/FuelAllocations";
+import FuelStationReport from "./components/FuelStation/FuelStationReport";
 
 function App() {
   return (
@@ -39,14 +42,17 @@ function App() {
           <Route path="/fuel-station-settings" element={<Settings />} />
           <Route path="/fuel-station-login" element={<StationLogin />} />
           <Route path="/fuel-stations" element={<ViewFuelStations />} />
-          <Route path='/fuel-station-home' element = {<FuelStationHome />} />
-          <Route path='fuel-orders' element = {<FuelOrders />} />
-          <Route path='/place-order' element={<PlaceFuelOrder />} />
+          <Route path="/fuel-station-home" element={<FuelStationHome />} />
+          <Route path="fuel-orders" element={<FuelOrders />} />
+          <Route path="/place-order" element={<PlaceFuelOrder />} />
+          <Route path="/allocate-fuel" element={<AllocateFuel />} />
+          <Route path="/fuel-allocations" element={<FuelAllocations />} />
           <Route
             path="/customer-registration"
             element={<CustomerRegistration />}
           />
           <Route path="/customer-profile" element={<CustomerProfile />} />
+          <Route path="/fuel-report" element={<FuelStationReport />} />
         </Routes>
       </BrowserRouter>
     </div>
