@@ -9,9 +9,53 @@ import axios from "axios";
 
 function FuelOrders() {
   const navigate = useNavigate();
-  const [orders, setorders] = useState([]);
+  const [orders, setorders] = useState();
   const [user, setuser] = useState();
   const [stat, setstat] = useState("Canceled");
+  const [refNo, setrefNo] = useState(true);
+  const [type, settype] = useState(false);
+  const [status, setstatus] = useState(false);
+  const [search, setsearch] = useState("");
+
+  const onSearch = (val) => {
+    setsearch(val);
+    let filterArr = [];
+    if (!refNo && !type && !status) {
+      getOrders(user.stationId);
+    } else {
+      if (val === "") {
+        getOrders(user.stationId);
+      } else {
+        if (refNo) {
+          filterArr.push("refNo");
+        }
+        if (type) {
+          filterArr.push("type");
+        }
+        if (status) {
+          filterArr.push("status");
+        }
+        let filterParam = "";
+        filterArr.map((filter) => {
+          filterParam += `&filter=${filter}`;
+        });
+        getSeachResults(val, filterParam);
+      }
+    }
+  };
+
+  const getSeachResults = (val, params) => {
+    axios
+      .get(
+        `http://localhost:8070/fuelOrders/${user.stationId}?val=${val}${params}`
+      )
+      .then((res) => {
+        setorders(res.data.data);
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  };
 
   const getOrders = (id) => {
     axios
@@ -39,8 +83,8 @@ function FuelOrders() {
     }
   }, []);
 
-  if (orders.length === 0) {
-    return <label>Loading...</label>;
+  if (orders === undefined) {
+    return <div>Loading...</div>;
   } else {
     return (
       <div>
@@ -76,18 +120,32 @@ function FuelOrders() {
                 className={common.searchInput}
                 placeholder="Search"
                 type="text"
+                value={search}
+                onChange={(e) => onSearch(e.target.value)}
               />
               <FormGroup check>
-                <Input type="checkbox" />
-                <Label check>Organization</Label>
+                <Input
+                  type="checkbox"
+                  checked={refNo}
+                  onChange={(e) => setrefNo(e.target.value)}
+                />
+                <Label check>Ref. No.</Label>
               </FormGroup>
               <FormGroup check>
-                <Input type="checkbox" />
+                <Input
+                  type="checkbox"
+                  checked={type}
+                  onChange={(e) => settype(e.target.value)}
+                />
                 <Label check>Type</Label>
               </FormGroup>
               <FormGroup check>
-                <Input type="checkbox" />
-                <Label check>Owner</Label>
+                <Input
+                  type="checkbox"
+                  checked={status}
+                  onChange={(e) => setstatus(e.target.value)}
+                />
+                <Label check>Status</Label>
               </FormGroup>
             </div>
             <div>
@@ -113,37 +171,39 @@ function FuelOrders() {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order, index) => {
-                return (
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{order.refNo}</td>
-                    <td>{order.type}</td>
-                    <td>{order.amount}</td>
-                    <td>{order.timeOfDelivery}</td>
-                    <td>
-                      {order.payment.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })}
-                    </td>
-                    <td>
-                      <span
-                        style={{
-                          background:
-                            order.status === "Completed"
-                              ? "#43a047"
-                              : order.status === "Canceled"
-                              ? "#e53935"
-                              : "#f9a825",
-                        }}
-                        className={styles.status}
-                      >
-                        {order.status}
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
+              {orders.length > 0
+                ? orders.map((order, index) => {
+                    return (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{order.refNo}</td>
+                        <td>{order.type}</td>
+                        <td>{order.amount}</td>
+                        <td>{order.timeOfDelivery}</td>
+                        <td>
+                          {order.payment.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                        </td>
+                        <td>
+                          <span
+                            style={{
+                              background:
+                                order.status === "Completed"
+                                  ? "#43a047"
+                                  : order.status === "Canceled"
+                                  ? "#e53935"
+                                  : "#f9a825",
+                            }}
+                            className={styles.status}
+                          >
+                            {order.status}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : "No data available"}
             </tbody>
           </Table>
         </div>
