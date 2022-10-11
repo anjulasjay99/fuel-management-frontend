@@ -12,6 +12,11 @@ import ViewFuelStations from "./components/Admin/ViewFuelStations";
 import Viewcomplaints from "./components/complaintManagement/viewcomplaints";
 import CustomerRegistration from "./components/CustomerManagement/CustomerRegistration";
 import CustomerProfile from "./components/CustomerManagement/CustomerProfile";
+
+import LoginCustomer from "./components/CustomerManagement/LoginCustomer";
+import AddVehicle from "./components/CustomerManagement/CustomerAddVehicle";
+import ViewVehicles from "./components/CustomerManagement/CustomerViewVehicles";
+
 import FuelStationHome from "./components/FuelStation/FuelStationHome";
 import FuelOrders from "./components/FuelStation/FuelOrders";
 import PlaceFuelOrder from "./components/FuelStation/PlaceFuelOrder";
@@ -20,9 +25,8 @@ import ViewAdmincomplaints from "./components/complaintManagement/adminComplaint
 import AllocateFuel from "./components/FuelStation/AllocateFuel";
 import FuelAllocations from "./components/FuelStation/FuelAllocations";
 import FuelStationReport from "./components/FuelStation/FuelStationReport";
-import LoginCustomer from "./components/CustomerManagement/LoginCustomer";
-import AddVehicle from "./components/CustomerManagement/CustomerAddVehicle";
-import ViewVehicles from "./components/CustomerManagement/CustomerViewVehicles";
+
+
 function App() {
   return (
     <div>
@@ -54,11 +58,14 @@ function App() {
             element={<CustomerRegistration />}
           />
           <Route path="/customer-profile" element={<CustomerProfile />} />
+
           <Route path="/customer-login" element={<LoginCustomer />} />
           <Route path="/customer-add-vehicle" element={<AddVehicle />} />
           <Route path="/customer-view-vehicles" element={<ViewVehicles />} />
 
+
           <Route path="/fuel-report" element={<FuelStationReport />} />
+
         </Routes>
       </BrowserRouter>
     </div>
