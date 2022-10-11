@@ -7,12 +7,16 @@ import React from "react";
 import "../../Css/Addcomplaint.css"
 import {useNavigate,useParams} from "react-router-dom"
 import ComplaintHeader from "./complaintHeader";
+import PageTitle from "../PageTitle";
+import { ToastContainer,toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Updatecomplaints = () => {
   const [email, setemail] = useState("");
   const [dateofComplaint, setdateofComplaint] = useState("");
   const [reason, setreason] = useState("Issue in the shed");
   const [complaintDetails, setcomplaintDetails] = useState("");
+  const [sucessfull, setSucessfull] = useState(false);
   const {id} = useParams();
 
   useEffect(()=>{
@@ -34,6 +38,8 @@ const Updatecomplaints = () => {
 
   function UpdateComplaint(e){
     e.preventDefault();
+    if(complaintDetails.length>=10){   
+    setSucessfull(false);
     const newupdatedComplaint = {
         email,
         dateofComplaint,
@@ -44,17 +50,27 @@ const Updatecomplaints = () => {
      axios.post(`http://localhost:8070/complaints/update/${id}`,newupdatedComplaint).then((res)=>{
          console.log(res.status)
          e.target.reset();
+         toast.success('Complaint Updated Successfully!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
      }).catch((err)=>{
       console.log(err)
-    })
+    })}else{
+      setSucessfull(true)
+    }
   }
 
   return (
     <>
+    <ToastContainer></ToastContainer>
     <ComplaintHeader/>
-    <div style={{marginTop:"30px"}}>
-    <h2 style={{textAlign: "left"}}>Update Complaint</h2>
-    </div>
+    <PageTitle pageTitle="Update Complaint"/> 
     <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
    <center>
    <div className="card" style={{width: "50rem",padding: '1.5em .5em .5em',borderRadius: "2em",
@@ -68,20 +84,20 @@ const Updatecomplaints = () => {
    
     
     <div>
-    <form >
+    <form onSubmit={UpdateComplaint}>
       <div class="form-group">
       <label for="exampleFormControlInput1" style={{float:"left"}}>Email </label><br></br>
-      <input value={email} onChange={(e)=>{setemail(e.target.value)}} type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+      <input value={email} onChange={(e)=>{setemail(e.target.value)}} type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$' required="required"/>
       </div>
       <br></br>
       <div class="form-group">
       <label for="exampleFormControlInput1" style={{float:"left"}}>Date Of Complaint</label>
-      <input value={dateofComplaint} onChange={(e)=>{setdateofComplaint(e.target.value)}}  type="date" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+      <input value={dateofComplaint} onChange={(e)=>{setdateofComplaint(e.target.value)}}  type="date" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" required="required"/>
       </div>
       <br></br>
       <div class="form-group">
       <label for="exampleFormControlSelect1" style={{float:"left"}}>Reason</label>
-      <select value={reason} onChange={(e)=>{setreason(e.target.value)}} class="form-control form-select">
+      <select value={reason} onChange={(e)=>{setreason(e.target.value)}} class="form-control form-select" required="required">
       <option>Issue in the shed</option>
       <option>Issue in the Queue</option>
       <option>Other</option>
@@ -90,14 +106,17 @@ const Updatecomplaints = () => {
       <br></br>
       <div class="form-group">
       <label for="exampleFormControlTextarea1" style={{float:"left"}}>Complaint Details</label>
-      <textarea value={complaintDetails} onChange={(e)=>{setcomplaintDetails(e.target.value)}} class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea value={complaintDetails} onChange={(e)=>{setcomplaintDetails(e.target.value)}} class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Please enter your message briefly." required="required"></textarea>
       </div>
-      <br></br>
+      <div>
+              { sucessfull !== false &&
+                  <p style={{color:"red",float:"left"}}>Please enter more than 10 letters</p>
+               }
+      </div>
+      <br></br> <br></br>
       <div class="form-group">
 
-      <button onClick = {(event) =>{
-                        UpdateComplaint(event)
-                    }}style={{width : "100%", backgroundColor: "#ff762e",}} type="submit" className="btn btn-primary  ">Update Complaint</button>
+      <button style={{width : "100%", backgroundColor: "#ff762e",}} type="submit" className="btn btn-primary  ">Update Complaint</button>
       <br/>
       
       </div>

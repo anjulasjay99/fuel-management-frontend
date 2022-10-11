@@ -14,61 +14,36 @@ import PDF from './complaintReport'
 library.add(  faPen);
 
   
-const Viewcomplaints = () => {
+const ViewAdmincomplaints = () => {
 
   const [coomplaints,setComplaints] = useState([]);
-  const [show,setshow] = useState(false)
-  const [deletedata,setdeletedata] = useState({})
+ 
   const [searchVal , setSearchVal] = useState("");
   let {filterData} = useState();
 
-  const handleClose =()=>{
-    setshow(false)
-  }
-
+  
   const navigate = useNavigate();
   useEffect(()=>{
-    axios.get("http://localhost:8070/complaints/get/user/rishithad98@gmail.com").then((response)=>{     
+    axios.get("http://localhost:8070/complaints").then((response)=>{     
         console.log(response.data)
         setComplaints(response.data)
     })
   },[])
 
   const getData = () => {
-    axios.get(`http://localhost:8070/complaints/get/user/rishithad98@gmail.com`)
+    axios.get(`http://localhost:8070/complaints`)
         .then((res) => {
           setComplaints(res.data);
     })
   }
- function updateComplaint(data){
-    console.log(data._id)
-    navigate(`/updatecomplaint/${data._id}`)
+
+
+ function exportPdf(data){
+  console.log(data._id);
+  navigate(`/complaintreport/${data._id}`)
  }
 
-
-  const deletecomplaint = (data)=>{
-    setdeletedata(data)
-    console.log(data._id)
-    setshow(true)
-    
-  }
-
-  const handleDelete = ()=>{
-    console.log(deletedata)
-    axios.delete(`http://localhost:8070/complaints/delete/${deletedata._id}`).then((data)=>{
-        setshow(false)
-        toast.success('Complaint Deleted!', {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
-      getData();
-    })
-  }
+  
 
   const filterComplaints = e =>{
     setSearchVal(e.target.value);
@@ -99,20 +74,7 @@ const Viewcomplaints = () => {
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
     <br></br><br></br>
     
-    <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Are You Sure You Want To Delete</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>This Action Cannot Be Undone !</Modal.Body>
-        <Modal.Footer>
-          <Button style={{ backgroundColor: "#ff762e"}} variant="secondary" onClick={handleDelete}>
-            Confirm
-          </Button>
-          <Button style={{backgroundColor: " #082344"}}variant="primary" onClick={handleClose}>
-            Cancel
-          </Button>
-        </Modal.Footer>
-      </Modal>
+    
 
       <div class="panel-heading">
                         <div class="input-group">
@@ -149,14 +111,8 @@ const Viewcomplaints = () => {
           <td>{data.reason}</td>
           <td>{data.complaintDetails}</td>
           <td>     
-          <i onClick = {()=>{
-                                  updateComplaint(data)
-                                }} class="fa fa-pencil-square" aria-hidden="true"></i>
-          <a onClick = {()=>{
-                                  deletecomplaint(data)
-                                }}><i style={{marginLeft:"20px", marginRight:"20px"}} class="fa fa-trash" aria-hidden="true"  
-                                ></i></a>
-                         
+       
+          <i onClick={()=>{ exportPdf(data)}}class="fa fa-file-pdf-o"></i>                      
           
           </td>
         </tr>
@@ -174,7 +130,7 @@ const Viewcomplaints = () => {
   )
 }
 
-export default Viewcomplaints
+export default ViewAdmincomplaints
 
 {/* <i style={{marginLeft:"20px"}}class="fa fa-trash" aria-hidden="true"  
           ></i> */}
