@@ -3,42 +3,50 @@ import axios from "axios";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 import EditProfile from "./EditProfile";
-
+import { AiFillEdit } from "react-icons/ai";
+import { IoTrashBin } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input , Row , Col , ButtonGroup , Modal , ModalBody , ModalHeader   } from "reactstrap";
 
-function UserInfoForm(){
+function UserInfoForm({user}){
 
     const [modal , setModal] = useState(false);
-    const [email, setemail] = useState("shehan@gmail.com");
-    const [name, setname] = useState("");
-    const [surname, setsurname] = useState("");
-    const [telNo, setTelNo] = useState("");
-
+    const [email, setemail] = useState(user.email);
+    const [name, setname] = useState(user.name);
+    const [surname, setsurname] = useState(user.surname);
+    const [telNo, setTelNo] = useState(user.telNo);
+    const navigate = useNavigate();
 
     useEffect(() =>{
-        console.log(email);
-        axios.get("http://localhost:8070/customers/",  email ).then((res) =>{
+        
+        axios.get(`http://localhost:8070/customers/${email}` ).then((res) =>{
             console.log(res.data);
+         
+             setemail(res.data.email);
+             setname(res.data.name);
+             setsurname(res.data.surname);
+             setTelNo(res.data.telNo);
         }).catch((err) =>{
             console.log(err);
         })
-    })
+    },[])
 
     function toggle(){
         setModal(!modal);
     }
 
-    const unregister = (cusemail) => {
+    const unregister = () => {
         if (
             window.confirm(
                 "Are you sure that you want to unregister ?"
             )
         )
         {
-            const email = { cusemail }
-            axios.delete(`http://localhost:8070/customers/unregister` , email).then((res) =>{
+            console.log(email);
+            axios.delete(`http://localhost:8070/customers/unregister/${email}`).then((res) =>{
                 console.log(res);
                 // Navigate to Reg Page
+                navigate("/customer-registration")
             }).catch((err) =>{
                 console.log(err);
             });
@@ -47,72 +55,72 @@ function UserInfoForm(){
     return(
         <div>
             <FormGroup>
-                        <Label for="name">Name</Label>
+                        <Label for="name"><b>Name</b></Label>
                         <Input
                         id="name"
                         className={styles.input}
                         name="name"
-                        placeholder="Shehan"
                         type="text"
                         value={name}
                         onChange={(e) => setname(e.target.value)}
                         required
+                        disabled
                         />
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="name">Surname</Label>
+                        <Label for="name"> <b>Surname</b></Label>
                         <Input
                         id="surname"
                         className={styles.input}
                         name="name"
-                        placeholder="Silva"
                         type="text"
                         value={surname}
                         onChange={(e) => setsurname(e.target.value)}
                         required
+                        disabled
                         />
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="name">Email</Label>
+                        <Label for="name"><b>Email</b></Label>
                         <Input
                         id="email"
                         className={styles.input}
                         name="email"
-                        placeholder="shehan@gmail.com"
                         type="email"
                         value={email}
                         onChange={(e) => setemail(e.target.value)}
                         required
+                        disabled
                         />
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="telNo">Telephone Number</Label>
+                        <Label for="telNo"><b>Telephone Number</b></Label>
                         <Input
                         id="telNo"
                         className={styles.input}
                         name="telNo"
-                        placeholder="0763545432"
                         type="text"
                         value={telNo}
                         onChange={(e) => setTelNo(e.target.value)}
                         required
+                        disabled
                         />
                     </FormGroup>
-                    <ButtonGroup>
+                    <br />
                         <Button color="danger" onClick={() =>{
-                            unregister(email);
-                        }}>Unregister</Button>
-                        <Button className={common.btnSecondary} onClick={toggle}>Edit</Button>
-                    </ButtonGroup>
+                            unregister();
+                        }}>Unregister <IoTrashBin size={19}/></Button>
+                        <Button className={common.btnSecondary} style={{float:"right" , width : "6rem"}} onClick={toggle} >Edit <AiFillEdit size={19} /> </Button>
+                    
                     <Modal isOpen={modal} toggle={toggle}>
                         <ModalHeader toggle={toggle}>
                             Edit Profile
                         </ModalHeader>
                         <ModalBody>
-                            <EditProfile/>
+                            <EditProfile user = {user}/>
                         </ModalBody>
 
                     </Modal>

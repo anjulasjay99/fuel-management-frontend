@@ -1,0 +1,43 @@
+.loginWrap{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6rem;
+
+}
+
+.loginForm{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.form{
+    width: 30rem;
+}
+.input{
+
+}
+
+.reg{
+    margin: 3rem 0;
+    height: 25%;
+    background: #082344;
+    color: white;
+
+}
+
+.reg h1{
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.TableContainer {
+    margin-top: 3rem;
+    margin-left: 1rem;
+}

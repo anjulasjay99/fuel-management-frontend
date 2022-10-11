@@ -12,7 +12,9 @@ import ViewFuelStations from "./components/Admin/ViewFuelStations";
 import Viewcomplaints from "./components/complaintManagement/viewcomplaints";
 import CustomerRegistration from "./components/CustomerManagement/CustomerRegistration";
 import CustomerProfile from "./components/CustomerManagement/CustomerProfile";
-
+import LoginCustomer from "./components/CustomerManagement/LoginCustomer";
+import AddVehicle from "./components/CustomerManagement/CustomerAddVehicle";
+import ViewVehicles from "./components/CustomerManagement/CustomerViewVehicles";
 function App() {
   return (
     <div>
@@ -37,6 +39,10 @@ function App() {
             element={<CustomerRegistration />}
           />
           <Route path="/customer-profile" element={<CustomerProfile />} />
+          <Route path="/customer-login" element={<LoginCustomer />} />
+          <Route path="/customer-add-vehicle" element={<AddVehicle />} />
+          <Route path="/customer-view-vehicles" element={<ViewVehicles />} />
+
         </Routes>
       </BrowserRouter>
     </div>
