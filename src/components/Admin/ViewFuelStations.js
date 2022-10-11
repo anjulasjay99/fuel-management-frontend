@@ -14,7 +14,9 @@ import {
 } from "reactstrap";
 import common from "../../styles/common.module.css";
 import AdminHeader from "../Common/AdminHeader";
+import { useNavigate } from "react-router-dom";
 function ViewFuelStations() {
+  const navigate = useNavigate();
   const [data, setdata] = useState();
   const [modal, setModal] = useState(false);
   const [selecteStaion, setselecteStaion] = useState();
@@ -23,6 +25,7 @@ function ViewFuelStations() {
   const [filterType, setfilterType] = useState(false);
   const [filterOwner, setfilterOwner] = useState(false);
   const [filteredData, setfilteredData] = useState([]);
+  const [user, setuser] = useState();
 
   const toggle = () => {
     setModal(!modal);
@@ -84,8 +87,14 @@ function ViewFuelStations() {
   };
 
   useEffect(() => {
-    console.log(data);
-    getStations();
+    const userData = JSON.parse(sessionStorage.getItem("adminUser"));
+    if (userData == null || userData === undefined || userData === "") {
+      navigate("/admin-login");
+    } else {
+      setuser(userData);
+      console.log(data);
+      getStations();
+    }
   }, []);
 
   if (data === undefined) {

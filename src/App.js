@@ -15,9 +15,11 @@ import CustomerProfile from "./components/CustomerManagement/CustomerProfile";
 import FuelStationHome from "./components/FuelStation/FuelStationHome";
 import FuelOrders from "./components/FuelStation/FuelOrders";
 import PlaceFuelOrder from "./components/FuelStation/PlaceFuelOrder";
-import AllocateFuel from "./components/FuelStation/AllocateFuel";
-import FuelAllocations from "./components/FuelStation/FuelAllocations";
+import AllocateFuel from "./components/Admin/AllocateFuel";
+import FuelAllocations from "./components/Admin/FuelAllocations";
 import FuelStationReport from "./components/FuelStation/FuelStationReport";
+import FuelUsage from "./components/FuelStation/FuelUsage";
+import AdminLogin from "./components/Admin/AdminLogin";
 
 function App() {
   return (
@@ -53,6 +55,8 @@ function App() {
           />
           <Route path="/customer-profile" element={<CustomerProfile />} />
           <Route path="/fuel-report" element={<FuelStationReport />} />
+          <Route path="/fuel-usages" element={<FuelUsage />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
         </Routes>
       </BrowserRouter>
     </div>
