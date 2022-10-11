@@ -1,22 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import { BiLogOut } from "react-icons/bi";
-import { Navbar, Container } from "react-bootstrap";
-//import { useNavigate } from "react-router-dom";
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
+import styles from "../../styles/common.module.css";
 function AdminHeader() {
-  //const navigate = useNavigate();
-  // function logOut(){
-  //     localStorage.clear();
-  //     navigate('/login');
-  // }
+  const navigate = useNavigate();
+  const [user, setuser] = useState();
 
-  /*  const logout = () => {
-    sessionStorage.removeItem("fsUser");
-    navigate("/fuel-station-login");
-  }; */
+  const logout = () => {
+    sessionStorage.removeItem("adminUser");
+    navigate("/admin-login");
+  };
+
+  useEffect(() => {
+    const userData = JSON.parse(sessionStorage.getItem("adminUser"));
+    if (userData == null || userData === undefined || userData === "") {
+      console.log("ERR");
+    } else {
+      setuser(userData);
+      console.log(userData);
+    }
+  }, []);
+
   return (
-    <Navbar sticky="top" bg="dark" expand="lg" variant="dark">
+    <Navbar
+      sticky="top"
+      bg="light"
+      expand="lg"
+      variant="light"
+      className={styles.navbar}
+    >
       <Container fluid>
-        <Navbar.Brand href="/home">Home</Navbar.Brand>
+        <Navbar.Brand href="/home">Admin</Navbar.Brand>
+        <Navbar.Toggle aria-controls="nav" />
+        <Navbar.Collapse id="nav">
+          <Nav className="me-auto" style={{ maxHeight: "100px" }} navbarScroll>
+            <Nav.Link>
+              <Link className={styles.navLink} to="/fuel-stations">
+                Fuel Stations
+              </Link>
+            </Nav.Link>
+            <Nav.Link href="#">
+              <Link className={styles.navLink} to="/fuel-allocations">
+                Fuel Allocations
+              </Link>
+            </Nav.Link>
+          </Nav>
+          <Nav className="ml-auto">
+            <NavDropdown
+              id="nav-dropdown-light-example"
+              menuVariant="light"
+              title="Account"
+            >
+              <NavDropdown.Item onClick={logout}>Log Out</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

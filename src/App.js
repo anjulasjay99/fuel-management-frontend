@@ -20,11 +20,13 @@ import ViewVehicles from "./components/CustomerManagement/CustomerViewVehicles";
 import FuelStationHome from "./components/FuelStation/FuelStationHome";
 import FuelOrders from "./components/FuelStation/FuelOrders";
 import PlaceFuelOrder from "./components/FuelStation/PlaceFuelOrder";
+import AllocateFuel from "./components/Admin/AllocateFuel";
+import FuelAllocations from "./components/Admin/FuelAllocations";
 import ComplaintReport from "./components/complaintManagement/complaintReport";
 import ViewAdmincomplaints from "./components/complaintManagement/adminComplaint";
-import AllocateFuel from "./components/FuelStation/AllocateFuel";
-import FuelAllocations from "./components/FuelStation/FuelAllocations";
 import FuelStationReport from "./components/FuelStation/FuelStationReport";
+import FuelUsage from "./components/FuelStation/FuelUsage";
+import AdminLogin from "./components/Admin/AdminLogin";
 
 
 function App() {
@@ -65,7 +67,8 @@ function App() {
 
 
           <Route path="/fuel-report" element={<FuelStationReport />} />
-
+          <Route path="/fuel-usages" element={<FuelUsage />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
         </Routes>
       </BrowserRouter>
     </div>
