@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
+import styles from "../../styles/common.module.css";
+import { FaUserAlt } from "react-icons/fa";
 function StationHeader() {
   const navigate = useNavigate();
+  const [user, setuser] = useState({});
   // function logOut(){
   //     localStorage.clear();
   //     navigate('/login');
@@ -13,25 +16,70 @@ function StationHeader() {
     sessionStorage.removeItem("fsUser");
     navigate("/fuel-station-login");
   };
-  return (
-    <Navbar sticky="top" bg="dark" expand="lg" variant="dark">
-      <Container fluid>
-        <Navbar.Brand href="/home">Home</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
-            <Nav.Link href="#">Fuel Orders</Nav.Link>
-            <Nav.Link href="#">Allocations</Nav.Link>
-            <Nav.Link href="#">Report</Nav.Link>
-            <Nav.Link href="/fuel-station-settings">Settings</Nav.Link>
 
-            <Nav.Link onClick={logout}>
-              <BiLogOut />
+  useEffect(() => {
+    const userData = JSON.parse(sessionStorage.getItem("fsUser"));
+    if (userData == null || userData === undefined || userData === "") {
+      console("ERROR");
+    } else {
+      setuser(userData);
+    }
+  }, []);
+
+  return (
+    <Navbar
+      sticky="top"
+      bg="light"
+      expand="lg"
+      variant="light"
+      className={styles.navbar}
+    >
+      <Container fluid>
+        <Navbar.Brand href="#home">FMS</Navbar.Brand>
+        <Navbar.Toggle aria-controls="nav" />
+        <Navbar.Collapse id="nav">
+          <Nav className="me-auto" style={{ maxHeight: "100px" }} navbarScroll>
+            <Nav.Link>
+              <Link className={styles.navLink} to="/fuel-orders">
+                Fuel Orders
+              </Link>
             </Nav.Link>
+            <Nav.Link href="#">
+              <Link className={styles.navLink} to="/fuel-allocations">
+                Allocations
+              </Link>
+            </Nav.Link>
+            <Nav.Link href="#">
+              <Link className={styles.navLink} to="/fuel-report">
+                Report
+              </Link>
+            </Nav.Link>
+          </Nav>
+          <Nav className="ml-auto">
+            <NavDropdown
+              id="nav-dropdown-light-example"
+              title={user.stationName}
+              menuVariant="light"
+            >
+              <NavDropdown.Item disabled>
+                <div>
+                  <FaUserAlt style={{ transform: "scale(1.5)" }} />
+                  &nbsp;
+                  {user.stationName}
+                  <br />
+                  <label style={{ fontSize: "14px", color: "gray" }}>
+                    {user.email}
+                  </label>
+                </div>
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item
+                onClick={() => navigate("/fuel-station-settings")}
+              >
+                Settings
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={logout}>Log Out</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

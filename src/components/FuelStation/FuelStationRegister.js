@@ -45,6 +45,7 @@ function FuelStationRegister() {
       .post("http://localhost:8070/fuelStations/register", data)
       .then((res) => {
         console.log(res.data);
+        alert("Registration Successful!");
         navigate("/fuel-station-login");
       })
       .catch((e) => {
