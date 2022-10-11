@@ -8,11 +8,39 @@ import { FaCar } from "react-icons/fa";
 import UserInfoForm from "./UserInfoForm";
 import VehicleInfoForm from "./VehicleInfoForm";
 import Header from "../Common/Header";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input , Row , Col , ButtonGroup  } from "reactstrap";
+import { ReactSession } from 'react-client-session';
 function CustomerProfile(){
 
-    const [userClick , setUserClick] = useState(true);
-
+    // var email = ReactSession.get("email"); 
+    // console.log(email);
+    // email = "shehan@gmail.com"
+    const navigate = useNavigate();
+    const [userClick , setUserClick] = useState();
+    const [data , setData] = useState();
+    var email;
+    useEffect (() =>{
+        console.log(sessionStorage.getItem("customer"));
+           if(sessionStorage.getItem("customer") == null){
+                navigate("/customer-login");
+           }  
+           email = sessionStorage.getItem("customer");
+           console.log(email);
+   //        setUserClick(true);
+           axios.get(`http://localhost:8070/customers/${email}` ).then((res) =>{
+               console.log(res.data);
+               setData(res.data);
+            //    setemail(res.data.email);
+            //    setname(res.data.name);
+            //    setsurname(res.data.surname);
+            //    setTelNo(res.data.telNo);
+           }).catch((err) =>{
+               console.log(err);
+           })
+       },[])
 
     function ProfileClick() {
         setUserClick(!userClick);
@@ -46,11 +74,8 @@ function CustomerProfile(){
                             </div>
                         </Row>
                     </Col>
-                    <Col>
-                    {/* Detail type to be displayed */}
-                    {/* <UserInfoForm/> */}
-                        {/* <VehicleInfoForm/> */}
-                        {userClick ? <UserInfoForm/> : <VehicleInfoForm/>  }
+                    <Col style={{marginLeft:"2rem" , marginTop : "1rem", borderStyle:"groove" , borderRadius:"10px" , paddingTop:"2rem"}}>
+                        {userClick == true ? <UserInfoForm user = {data}/> : userClick == false ? <VehicleInfoForm user = {data}/> :  console.log("Hi")  }
                     </Col>
                 </Row>
             </div>
