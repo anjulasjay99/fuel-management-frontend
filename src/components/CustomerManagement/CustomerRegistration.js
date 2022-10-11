@@ -5,6 +5,8 @@ import common from "../../styles/common.module.css";
 import { Button, Form, FormGroup, Label, Input , Row , Col , FormText } from "reactstrap";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ReactSession } from 'react-client-session';
+import Header from "../Common/Header";
 function CustomerRegistration() {
 
     const navigate = useNavigate();
@@ -12,47 +14,78 @@ function CustomerRegistration() {
     const [name, setname] = useState("");
     const [surname, setsurname] = useState("");
     const [telNo, setTelNo] = useState("");
-    const [type, settype] = useState("");
-    const [chassis, setchassis] = useState("");
-    const [numplate, setnumplate] = useState("");
+    const [vehicleType, settype] = useState("");
+    const [vehicleChassis, setchassis] = useState("");
+    const [vehicleNumber, setnumplate] = useState("");
     const [password, setpassword] = useState("");
     const [confPassword, setconfPassword] = useState("");
+
+    const demo = () => {
+      setemail("rishitha@gmail.com");
+      setname("Rishitha");
+      setsurname("Dilshan");
+      setTelNo("0765676762");
+      settype("Car");
+      setpassword("rishitha1");
+      setconfPassword("rishitha1");
+      setnumplate("CAR-7878");
+      setchassis("NKE-3421442");
+    };
+
     const submit = (e) => {
       e.preventDefault();
-    //   axios
-    //     .post("http://localhost:8070/fuelStations/checkEmail", {
-    //       email,
-    //     })
-    //     .then((res) => {
-    //       if (res.data.status) {
-    //         alert("An account with the same email exists!");
-    //       } else {
-    //         if (password === confPassword) {
-    //           navigate("/fuel-station-register", { state: { email, password } });
-    //         } else {
-    //           alert("Password does not match!");
-    //         }
-    //       }
-    //     })
-    //     .catch((e) => {
-    //       alert(e);
-    //     });
+
+      const vehicles = [{
+        vehicleType : vehicleType ,
+        vehicleChassis : vehicleChassis ,
+        vehicleNumber : vehicleNumber
+      }]
+      
+      console.log(vehicles);
+      const newCus = {
+        email,
+        name,
+        surname,
+        telNo,
+        vehicles,
+        password
+      }
+      axios
+        .post("http://localhost:8070/customers/checkEmail", {
+          email,
+        })
+        .then((res) => {
+          if (res.data.status) {
+            alert("An account with the same email exists!");
+          } else {
+            if (password === confPassword) {
+              axios.post("http://localhost:8070/customers/register" , newCus ).then(() =>{
+                // Toast
+                e.target.reset();
+                ReactSession.set("email", email);
+                alert("Registration Completed!");
+            //    navigate("/customer-profile");
+              }).catch((err) =>{
+                alert(err);
+              })
+            } else {
+              alert("Password does not match!");
+            }
+          }
+        })
+        .catch((e) => {
+          alert(e);
+        });
     };
   
-    const demo = () => {
-      setemail("alliance.e@gmail.com");
-      setpassword("abcd1234");
-      setconfPassword("abcd1234");
-    };
+
   
     return (
       <div>
+        <Header/>
         <PageTitle pageTitle="Registration" />
-        <div className={styles.createAccWrapper}>
+        <div className={styles.createAccWrapper} style ={{paddingTop:"35rem"}}>
           <div className={styles.createAccForm}>
-            <Button color="primary" onClick={demo} outline>
-              Demo
-            </Button>
             <br />
             <Form onSubmit={(e) => submit(e)}>
               <h4>Personal Information</h4>
@@ -63,7 +96,7 @@ function CustomerRegistration() {
                   id="name"
                   className={styles.input}
                   name="name"
-                  placeholder="Shehan"
+                  placeholder="Enter your name"
                   type="text"
                   value={name}
                   onChange={(e) => setname(e.target.value)}
@@ -77,7 +110,7 @@ function CustomerRegistration() {
                   id="surname"
                   className={styles.input}
                   name="name"
-                  placeholder="Silva"
+                  placeholder="Enter your surname"
                   type="text"
                   value={surname}
                   onChange={(e) => setsurname(e.target.value)}
@@ -91,7 +124,7 @@ function CustomerRegistration() {
                   id="email"
                   className={styles.input}
                   name="email"
-                  placeholder="shehan@gmail.com"
+                  placeholder="Enter your email"
                   type="email"
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
@@ -105,10 +138,11 @@ function CustomerRegistration() {
                   id="telNo"
                   className={styles.input}
                   name="telNo"
-                  placeholder="0763545432"
+                  placeholder="Enter your telephone number"
                   type="text"
                   value={telNo}
                   onChange={(e) => setTelNo(e.target.value)}
+                  pattern="[0-9]{9,10}"
                   required
                 />
               </FormGroup>
@@ -157,9 +191,9 @@ function CustomerRegistration() {
                   id="type"
                   className={styles.input}
                   name="type"
-                  placeholder="Car"
+                  placeholder="Enter vehicle type. Ex : Car"
                   type="text"
-                  value={type}
+                  value={vehicleType}
                   onChange={(e) => settype(e.target.value)}
                   required
                 />
@@ -171,9 +205,9 @@ function CustomerRegistration() {
                   id="chassis"
                   className={styles.input}
                   name="chassis"
-                  placeholder="NKE-232113"
+                  placeholder="Enter Chassis Number"
                   type="text"
-                  value={chassis}
+                  value={vehicleChassis}
                   onChange={(e) => setchassis(e.target.value)}
                   required
                 />
@@ -185,10 +219,11 @@ function CustomerRegistration() {
                   id="numplate"
                   className={styles.input}
                   name="numplate"
-                  placeholder="CAP-3432"
+                  placeholder="Enter Vehicle Number plate. Ex : CAP-3432"
                   type="text"
-                  value={numplate}
+                  value={vehicleNumber}
                   onChange={(e) => setnumplate(e.target.value)}
+                  pattern="^([a-zA-Z]{1,3}|((?!0*-)[0-9]{1,3}))-[0-9]{4}(?<!0{4})"
                   required
                 />
               </FormGroup>
@@ -202,7 +237,11 @@ function CustomerRegistration() {
               >
                 Register
               </Button>
+              <Button color="primary" onClick={demo} outline>
+              Demo
+          </Button>
             </Form>
+            
           </div>
         </div>
       </div>
