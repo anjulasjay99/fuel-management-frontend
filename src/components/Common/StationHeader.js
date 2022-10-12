@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { BiLogOut } from "react-icons/bi";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "../../styles/common.module.css";
@@ -23,6 +22,7 @@ function StationHeader() {
       console("ERROR");
     } else {
       setuser(userData);
+      console.log(userData);
     }
   }, []);
 
@@ -45,8 +45,8 @@ function StationHeader() {
               </Link>
             </Nav.Link>
             <Nav.Link href="#">
-              <Link className={styles.navLink} to="/fuel-allocations">
-                Allocations
+              <Link className={styles.navLink} to="/fuel-usages">
+                Fuel Usages
               </Link>
             </Nav.Link>
             <Nav.Link href="#">

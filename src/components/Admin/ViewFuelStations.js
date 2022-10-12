@@ -14,8 +14,10 @@ import {
 } from "reactstrap";
 import common from "../../styles/common.module.css";
 import AdminHeader from "../Common/AdminHeader";
+import { useNavigate } from "react-router-dom";
 function ViewFuelStations() {
-  const [data, setdata] = useState([]);
+  const navigate = useNavigate();
+  const [data, setdata] = useState();
   const [modal, setModal] = useState(false);
   const [selecteStaion, setselecteStaion] = useState();
   const [search, setsearch] = useState("");
@@ -23,68 +25,53 @@ function ViewFuelStations() {
   const [filterType, setfilterType] = useState(false);
   const [filterOwner, setfilterOwner] = useState(false);
   const [filteredData, setfilteredData] = useState([]);
+  const [user, setuser] = useState();
 
   const toggle = () => {
     setModal(!modal);
   };
-
-  /* const onSearch = (keyword) => {
-    setsearch(keyword);
-    let fData = [];
-    if (keyword !== "") {
-      if (filterName) {
-        fData.push(
-          data.filter((d) => {
-            if (
-              d.stationName
-                .trim()
-                .toLowerCase()
-                .includes(keyword.trim().toLowerCase())
-            ) {
-              return d;
-            }
-          })
-        );
-      }
-      if (filterType) {
-        fData.push(
-          data.filter((d) => {
-            if (
-              d.type.trim().toLowerCase().includes(keyword.trim().toLowerCase())
-            ) {
-              return d;
-            }
-          })
-        );
-      }
-      if (filterOwner) {
-        fData.push(
-          data.filter((d) => {
-            if (
-              d.ownerName
-                .trim()
-                .toLowerCase()
-                .includes(keyword.trim().toLowerCase())
-            ) {
-              return d;
-            }
-          })
-        );
-      }
-
-      console.log(fData);
-
-      setfilteredData(fData);
-    } else {
-      setfilteredData(data);
-    }
-  }; */
-
   const show = (station) => {
     setselecteStaion(station);
     setModal(true);
   };
-  useEffect(() => {}, []);
+
+  const onSearch = (val) => {
+    setsearch(val);
+    let filterArr = [];
+    if (!filterName && !filterType && !filterOwner) {
+      getStations();
+    } else {
+      if (val === "") {
+        getStations();
+      } else {
+        if (filterName) {
+          filterArr.push("stationName");
+        }
+        if (filterType) {
+          filterArr.push("type");
+        }
+        if (filterOwner) {
+          filterArr.push("ownerName");
+        }
+        let filterParam = "";
+        filterArr.map((filter) => {
+          filterParam += `&filter=${filter}`;
+        });
+        getSeachResults(val, filterParam);
+      }
+    }
+  };
+
+  const getSeachResults = (val, params) => {
+    axios
+      .get(`http://localhost:8070/fuelStations?val=${val}${params}`)
+      .then((res) => {
+        setdata(res.data.data);
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  };
 
   const getStations = () => {
     axios
@@ -100,11 +87,18 @@ function ViewFuelStations() {
   };
 
   useEffect(() => {
-    getStations();
+    const userData = JSON.parse(sessionStorage.getItem("adminUser"));
+    if (userData == null || userData === undefined || userData === "") {
+      navigate("/admin-login");
+    } else {
+      setuser(userData);
+      console.log(data);
+      getStations();
+    }
   }, []);
 
-  if (data.length === 0) {
-    return <Label>Loading...</Label>;
+  if (data === undefined) {
+    return <div>Loading...</div>;
   } else {
     return (
       <div>
@@ -135,7 +129,7 @@ function ViewFuelStations() {
                 placeholder="Search"
                 type="text"
                 value={search}
-                onChange={(e) => setsearch(e.target.value)}
+                onChange={(e) => onSearch(e.target.value)}
               />
               <FormGroup check>
                 <Input
@@ -175,74 +169,36 @@ function ViewFuelStations() {
                 </tr>
               </thead>
               <tbody>
-                {filteredData.length > 0 ? (
-                  filteredData
-                    // eslint-disable-next-line array-callback-return
-                    .filter((item) => {
-                      if (search !== "") {
-                        if (filterName) {
-                          if (
-                            item.stationName
-                              .trim()
-                              .toLowerCase()
-                              .includes(search.trim().toLowerCase())
-                          ) {
-                            return item;
-                          }
-                        }
-                        if (filterType) {
-                          if (
-                            item.type
-                              .trim()
-                              .toLowerCase()
-                              .includes(search.trim().toLowerCase())
-                          ) {
-                            return item;
-                          }
-                        }
-                        if (filterOwner) {
-                          if (
-                            item.ownerName
-                              .trim()
-                              .toLowerCase()
-                              .includes(search.trim().toLowerCase())
-                          ) {
-                            return item;
-                          }
-                        }
-                      } else {
-                        return item;
-                      }
-                    })
-                    .map((d, index) => {
-                      return (
-                        <tr key={data.id}>
-                          <th scope="row">{index + 1}</th>
-                          <td>{d.stationId}</td>
-                          <td>{d.stationName}</td>
-                          <td>
-                            {d.address +
-                              ", " +
-                              d.city +
-                              ", " +
-                              d.province +
-                              ", " +
-                              d.zipCode}
-                          </td>
-                          <td>{d.ownerName}</td>
-                          <td>{d.type}</td>
-                          <td>
-                            <Button
-                              className={common.btnOutline}
-                              onClick={() => show(d)}
-                              outline
-                            >
-                              View Details
-                            </Button>
-                          </td>
-                        </tr>
-                      );
-                    })
+                {data.length > 0 ? (
+                  data.map((d, index) => {
+                    return (
+                      <tr key={data.id}>
+                        <th scope="row">{index + 1}</th>
+                        <td>{d.stationId}</td>
+                        <td>{d.stationName}</td>
+                        <td>
+                          {d.address +
+                            ", " +
+                            d.city +
+                            ", " +
+                            d.province +
+                            ", " +
+                            d.zipCode}
+                        </td>
+                        <td>{d.ownerName}</td>
+                        <td>{d.type}</td>
+                        <td>
+                          <Button
+                            className={common.btnOutline}
+                            onClick={() => show(d)}
+                            outline
+                          >
+                            View Details
+                          </Button>
+                        </td>
+                      </tr>
+                    );
+                  })
                 ) : (
                   <label>No data to be displayed.</label>
                 )}

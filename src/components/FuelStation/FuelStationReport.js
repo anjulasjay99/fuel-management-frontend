@@ -242,6 +242,7 @@ function FuelStationReport() {
                     <label style={{ color: "grey" }}>Total No. of Orders</label>
                     <label>{reportData.orderSum.totalOrders}</label>
                   </div>
+
                   <div className={styles.fuelReportSection}>
                     <label style={{ color: "grey" }}>
                       Total Litres of Fuel Ordered
@@ -297,6 +298,14 @@ function FuelStationReport() {
                   </div>
                   <div className={styles.fuelReportSection}>
                     <label style={{ color: "grey" }}>
+                      Total Litres of Fuel Pumped
+                    </label>
+                    <label>
+                      {reportData.consumeSum.totalPumpedAmount.toFixed(2)}
+                    </label>
+                  </div>
+                  <div className={styles.fuelReportSection}>
+                    <label style={{ color: "grey" }}>
                       Total Litres of Fuel Remaining
                     </label>
                     <label>
@@ -308,6 +317,14 @@ function FuelStationReport() {
                       Total No. of Consumers
                     </label>
                     <label>{`${reportData.consumeSum.totalCustomers}`}</label>
+                  </div>
+
+                  <div
+                    className={styles.fuelReportSection}
+                    style={{ marginTop: "40px" }}
+                  >
+                    <label style={{ color: "grey" }}>Date Generated</label>
+                    <label>{`${reportData.dateGenerated}`}</label>
                   </div>
                 </div>
               </div>
