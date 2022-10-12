@@ -7,7 +7,9 @@ import axios from 'axios';
 import ComplaintHeader from './complaintHeader';
 import PageTitle from '../PageTitle';
 import logo from '../../images/ceypetco.png';
+import styles from '../../Css/complaintReport.css'
 const ref = React.createRef();
+
 
 const ComplaintReport = () =>{
   
