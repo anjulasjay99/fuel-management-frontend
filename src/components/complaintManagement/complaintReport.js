@@ -2,14 +2,14 @@ import React from 'react';
 import Pdf from "react-to-pdf";
 import { useState, useEffect } from "react";
 import { Row, Col, Card, Container, Button } from "reactstrap";
-import styles from '../../Css/complaintReport.css'
-import { Link } from 'react-router-dom';
-import {useNavigate,useParams} from "react-router-dom"
+import {useParams} from "react-router-dom"
 import axios from 'axios';
 import ComplaintHeader from './complaintHeader';
 import PageTitle from '../PageTitle';
 import logo from '../../images/ceypetco.png';
+import styles from '../../Css/complaintReport.css'
 const ref = React.createRef();
+
 
 const ComplaintReport = () =>{
   
@@ -18,7 +18,6 @@ const ComplaintReport = () =>{
   const [dateofComplaint, setdateofComplaint] = useState("");
   const [reason, setreason] = useState("Issue in the shed");
   const [complaintDetails, setcomplaintDetails] = useState("");
-  const [sucessfull, setSucessfull] = useState(false);
   const {id} = useParams();
 
   useEffect(() => {

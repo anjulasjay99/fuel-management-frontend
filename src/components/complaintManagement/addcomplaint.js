@@ -2,9 +2,6 @@
 import { useState } from 'react';
 import axios from 'axios';
 import React from "react";
-// import Button from 'react-bootstrap/Button';
-// import Card from 'react-bootstrap/Card';
-// import Form from 'react-bootstrap/Form'
 import "../../Css/Addcomplaint.css"
 import PageTitle from '../PageTitle';
 import ComplaintHeader from './complaintHeader';
@@ -21,13 +18,7 @@ function Addcomplaint(){
     const [complaintDetails, setcomplaintDetails] = useState("");
     // const [handletextarea, sethandletextarea] = useState(false)
     const [sucessfull, setSucessfull] = useState(false);
-    // function Validate(complaintDetails){
-    //   console.log(complaintDetails.length)
-    //   if(complaintDetails.length>=10){
-    //       sethandletextarea(true)
-    //   }
-    // }
-
+  
 
      function  submitComplaint(e){
 
@@ -91,7 +82,7 @@ function Addcomplaint(){
         <PageTitle pageTitle="Add New Complaint"/> 
        <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
        <center>
-       <div className="card" style={{width: "50rem",padding: '1.5em .5em .5em',borderRadius: "2em",
+       <div className="card" style={{width: "50rem",borderRadius: "2em",
         borderStyle: 'solid',
         borderColor: ' #ff762e',margin:"100px",padding:"50px",
         display: 'flex',
