@@ -27,6 +27,8 @@ import ViewAdmincomplaints from "./components/complaintManagement/adminComplaint
 import FuelStationReport from "./components/FuelStation/FuelStationReport";
 import FuelUsage from "./components/FuelStation/FuelUsage";
 import AdminLogin from "./components/Admin/AdminLogin";
+import CreateBooking from "./components/FuelBooking/createBooking";
+import UpateBooking from "./components/FuelBooking/updateBooking";
 
 
 function App() {
@@ -69,6 +71,9 @@ function App() {
           <Route path="/fuel-report" element={<FuelStationReport />} />
           <Route path="/fuel-usages" element={<FuelUsage />} />
           <Route path="/admin-login" element={<AdminLogin />} />
+
+          <Route path="/createBooking" element = {<CreateBooking/>} exact/>
+          <Route path="/updateBooking" element = {<UpateBooking/>} exact/>
         </Routes>
       </BrowserRouter>
     </div>
