@@ -23,16 +23,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function FuelUsage() {
-  const [usages, setusages] = useState();
+  const [usages, setusages] = useState([]);
   const navigate = useNavigate();
-  const [user, setuser] = useState();
+  const [user, setuser] = useState({});
   const [search, setsearch] = useState("");
   const [modal, setmodal] = useState(false);
-  const [selectedVehicle, setselectedVehicle] = useState();
+  const [selectedVehicle, setselectedVehicle] = useState("");
   const [pumpedAmount, setpumpedAmount] = useState(0);
-  const [customers, setcustomers] = useState();
+  const [customers, setcustomers] = useState([]);
   const [selectedCustomer, setselectedCustomer] = useState("");
-  const [fuelAllocations, setfuelAllocations] = useState();
+  const [fuelAllocations, setfuelAllocations] = useState([]);
   const [selectedStartDate, setselectedStartDate] = useState("");
 
   const toggle = () => {
@@ -136,9 +136,9 @@ function FuelUsage() {
   }, []);
 
   if (
-    usages === undefined ||
-    customers === undefined ||
-    fuelAllocations === undefined
+    usages.length === 0 ||
+    customers.length === 0 ||
+    fuelAllocations.length === 0
   ) {
     return <div>Loading...</div>;
   } else {

@@ -7,7 +7,7 @@ import axios from "axios";
 import AdminHeader from "../Common/AdminHeader";
 
 function FuelAllocations() {
-  const [allocations, setallocations] = useState();
+  const [allocations, setallocations] = useState([]);
   const [startDates, setstartDates] = useState([]);
   const [selectedStartDate, setselectedStartDate] = useState("");
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function FuelAllocations() {
   const setStartDates = (data) => {
     let first = true;
     // eslint-disable-next-line array-callback-return
-    data.map((d) => {
+    data.forEach((d) => {
       if (!startDates.includes(d.startDate)) {
         startDates.push(d.startDate);
         if (first) {
@@ -52,8 +52,8 @@ function FuelAllocations() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (allocations === undefined) {
-    <div>Loading...</div>;
+  if (allocations.length === 0) {
+    return <div>Loading...</div>;
   } else {
     return (
       <div>
