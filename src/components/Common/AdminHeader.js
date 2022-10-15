@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 // import { BiLogOut } from "react-icons/bi";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "../../styles/common.module.css";
 function AdminHeader() {
   const navigate = useNavigate();
-  const [user, setuser] = useState();
 
   const logout = () => {
     sessionStorage.removeItem("adminUser");
@@ -17,7 +16,6 @@ function AdminHeader() {
     if (userData == null || userData === undefined || userData === "") {
       console.log("ERR");
     } else {
-      setuser(userData);
       console.log(userData);
     }
   }, []);

@@ -60,26 +60,30 @@ function FuelUsage() {
   };
 
   const addFuelUsage = () => {
-    const cus = getSelectedCustomer();
-    const data = {
-      stationId: user.stationId,
-      customerId: selectedCustomer,
-      customerName: cus.name + " " + cus.surname,
-      vehicleNumber: selectedVehicle,
-      pumpedAmount,
-      startDate: selectedStartDate,
-    };
-    axios
-      .post(`http://localhost:8070/fuelUsage`, data)
-      .then((res) => {
-        alert("Success");
-        getUsage(user.stationId);
-        setmodal(false);
-        setpumpedAmount(0);
-      })
-      .catch((err) => {
-        alert("Error!");
-      });
+    if (pumpedAmount > 0) {
+      const cus = getSelectedCustomer();
+      const data = {
+        stationId: user.stationId,
+        customerId: selectedCustomer,
+        customerName: cus.name + " " + cus.surname,
+        vehicleNumber: selectedVehicle,
+        pumpedAmount,
+        startDate: selectedStartDate,
+      };
+      axios
+        .post(`http://localhost:8070/fuelUsage`, data)
+        .then((res) => {
+          alert("Success");
+          getUsage(user.stationId);
+          setmodal(false);
+          setpumpedAmount(0);
+        })
+        .catch((err) => {
+          alert("Error!");
+        });
+    } else {
+      alert("Amount should be greater than 0");
+    }
   };
 
   const getSelectedCustomer = () => {

@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import PageTitle from "../PageTitle";
 import axios from "axios";
@@ -24,8 +26,6 @@ function ViewFuelStations() {
   const [filterName, setfilterName] = useState(true);
   const [filterType, setfilterType] = useState(false);
   const [filterOwner, setfilterOwner] = useState(false);
-  const [filteredData, setfilteredData] = useState([]);
-  const [user, setuser] = useState();
 
   const toggle = () => {
     setModal(!modal);
@@ -78,7 +78,6 @@ function ViewFuelStations() {
       .get("http://localhost:8070/fuelStations")
       .then((res) => {
         setdata(res.data.data);
-        setfilteredData(res.data.data);
         setselecteStaion(res.data.data[0]);
       })
       .catch((e) => {
@@ -91,7 +90,6 @@ function ViewFuelStations() {
     if (userData == null || userData === undefined || userData === "") {
       navigate("/admin-login");
     } else {
-      setuser(userData);
       console.log(data);
       getStations();
     }

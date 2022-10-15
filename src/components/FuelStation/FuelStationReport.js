@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState, useRef } from "react";
 import StationHeader from "../Common/StationHeader";
 import PageTitle from "../PageTitle";
@@ -274,6 +276,7 @@ function FuelStationReport() {
                           hidden
                         />
                         <img
+                          alt="orderChart"
                           src={ordersPieChartImg}
                           className={styles.pieImage}
                         />

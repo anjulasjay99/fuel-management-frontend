@@ -33,12 +33,6 @@ function FuelStationCreateAccount() {
       });
   };
 
-  const demo = () => {
-    setemail("alliance.e@gmail.com");
-    setpassword("abcd1234");
-    setconfPassword("abcd1234");
-  };
-
   return (
     <div>
       <PageTitle pageTitle="Fuel Station Registraion" />
