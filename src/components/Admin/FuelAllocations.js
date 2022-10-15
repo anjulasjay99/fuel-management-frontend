@@ -1,36 +1,15 @@
 import React, { useEffect, useState } from "react";
-import StationHeader from "../Common/StationHeader";
 import PageTitle from "../PageTitle";
-import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
-import {
-  FormGroup,
-  Button,
-  Form,
-  Label,
-  Input,
-  Table,
-  Row,
-  Col,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  InputGroupText,
-  InputGroup,
-} from "reactstrap";
+import { Button, Label, Input, Table, Row, Col } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AdminHeader from "../Common/AdminHeader";
 
 function FuelAllocations() {
   const [allocations, setallocations] = useState();
-  const [user, setuser] = useState();
   const [startDates, setstartDates] = useState([]);
   const [selectedStartDate, setselectedStartDate] = useState("");
-  const [modal, setModal] = useState(false);
-  const [selectedVehicle, setselectedVehicle] = useState();
-  const [pumpedAmount, setpumpedAmount] = useState(0);
   const navigate = useNavigate();
 
   const navigateToNewAllocation = () => {
@@ -39,6 +18,7 @@ function FuelAllocations() {
 
   const setStartDates = (data) => {
     let first = true;
+    // eslint-disable-next-line array-callback-return
     data.map((d) => {
       if (!startDates.includes(d.startDate)) {
         startDates.push(d.startDate);
@@ -55,38 +35,10 @@ function FuelAllocations() {
       .get(`http://localhost:8070/fuelAllocations`)
       .then((res) => {
         setallocations(res.data.data);
-        setselectedVehicle(res.data.data[0]);
         setStartDates(res.data.data);
       })
       .catch((err) => {
         alert("Something went wrong");
-      });
-  };
-
-  const toggle = () => {
-    setModal(!modal);
-  };
-  const show = (vehicle) => {
-    setselectedVehicle(vehicle);
-    setModal(true);
-  };
-
-  const reduceQuota = () => {
-    const data = {
-      customerId: selectedVehicle.customerId,
-      vehicleNumber: selectedVehicle.vehicleNumber,
-      pumpedAmount,
-    };
-    axios
-      .post("http://localhost:8070/fuelAllocations/reduceQuota", data)
-      .then((res) => {
-        alert("success");
-        getAllocations();
-        setModal(false);
-        setpumpedAmount(0);
-      })
-      .catch((err) => {
-        alert("Error!");
       });
   };
 
@@ -95,9 +47,9 @@ function FuelAllocations() {
     if (userData == null || userData === undefined || userData === "") {
       navigate("/admin-login");
     } else {
-      setuser(userData);
       getAllocations();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (allocations === undefined) {
@@ -180,6 +132,7 @@ function FuelAllocations() {
             <tbody>
               {allocations.length > 0 ? (
                 allocations
+                  // eslint-disable-next-line array-callback-return
                   .filter((data) => {
                     if (data.startDate === selectedStartDate) {
                       return data;

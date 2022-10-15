@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import StationHeader from "../Common/StationHeader";
 import PageTitle from "../PageTitle";
@@ -11,7 +13,6 @@ function FuelOrders() {
   const navigate = useNavigate();
   const [orders, setorders] = useState();
   const [user, setuser] = useState();
-  const [stat, setstat] = useState("Canceled");
   const [refNo, setrefNo] = useState(true);
   const [type, settype] = useState(false);
   const [status, setstatus] = useState(false);

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import StationHeader from "../Common/StationHeader";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Form,
@@ -12,7 +11,6 @@ import {
   Input,
   InputGroupText,
   InputGroup,
-  Table,
 } from "reactstrap";
 import axios from "axios";
 import { Col, Row } from "react-bootstrap";
@@ -21,7 +19,6 @@ import AdminHeader from "../Common/AdminHeader";
 
 function AllocateFuel() {
   const navigate = useNavigate();
-  const [user, setuser] = useState();
   const [allocatedAmount, setallocatedAmount] = useState(0);
   const [startDate, setstartDate] = useState("");
   const [endDate, setendDate] = useState("");
@@ -81,11 +78,15 @@ function AllocateFuel() {
 
   const getSelectedCustomer = () => {
     let cus = null;
-    for (let i = 0; i < customers.length; i++) {
-      if (customers[i]._id === selectedCustomer) {
-        cus = customers[i];
-        break;
+    try {
+      for (let i = 0; i < customers.length; i++) {
+        if (customers[i]._id === selectedCustomer) {
+          cus = customers[i];
+          break;
+        }
       }
+    } catch (err) {
+      console.log(err);
     }
 
     return cus;
@@ -109,7 +110,6 @@ function AllocateFuel() {
     if (userData == null || userData === undefined || userData === "") {
       navigate("/admin-login");
     } else {
-      setuser(userData);
       getCustomers();
       const d = new Date();
       d.setDate(d.getDate() + ((((7 - d.getDay()) % 7) + 1) % 7));
@@ -118,6 +118,7 @@ function AllocateFuel() {
       setstartDate(d.toISOString().split("T")[0]);
       setendDate(d2.toISOString().split("T")[0]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (customers === undefined) {
     return <div>Loading...</div>;
