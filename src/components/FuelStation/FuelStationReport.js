@@ -20,7 +20,7 @@ function FuelStationReport() {
   const [reportType, setreportType] = useState("monthly");
   const [date, setdate] = useState("");
   const [reportData, setreportData] = useState(null);
-  const [user, setuser] = useState();
+  const [user, setuser] = useState({});
   const [orderPieChart, setorderPieChart] = useState(null);
   const [ordersPieChartImg, setordersPieChartImg] = useState("");
   const [year, setyear] = useState("2022");

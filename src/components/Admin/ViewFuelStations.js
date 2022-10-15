@@ -19,9 +19,9 @@ import AdminHeader from "../Common/AdminHeader";
 import { useNavigate } from "react-router-dom";
 function ViewFuelStations() {
   const navigate = useNavigate();
-  const [data, setdata] = useState();
+  const [data, setdata] = useState([]);
   const [modal, setModal] = useState(false);
-  const [selecteStaion, setselecteStaion] = useState();
+  const [selecteStaion, setselecteStaion] = useState({});
   const [search, setsearch] = useState("");
   const [filterName, setfilterName] = useState(true);
   const [filterType, setfilterType] = useState(false);
@@ -54,7 +54,7 @@ function ViewFuelStations() {
           filterArr.push("ownerName");
         }
         let filterParam = "";
-        filterArr.map((filter) => {
+        filterArr.forEach((filter) => {
           filterParam += `&filter=${filter}`;
         });
         getSeachResults(val, filterParam);
@@ -95,7 +95,7 @@ function ViewFuelStations() {
     }
   }, []);
 
-  if (data === undefined) {
+  if (data.length === 0) {
     return <div>Loading...</div>;
   } else {
     return (

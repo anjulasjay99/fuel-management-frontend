@@ -22,7 +22,7 @@ function AllocateFuel() {
   const [allocatedAmount, setallocatedAmount] = useState(0);
   const [startDate, setstartDate] = useState("");
   const [endDate, setendDate] = useState("");
-  const [customers, setcustomers] = useState();
+  const [customers, setcustomers] = useState([]);
   const [selectedCustomer, setselectedCustomer] = useState("");
   const [selectedVehicle, setselectedVehicle] = useState("");
 
@@ -120,7 +120,7 @@ function AllocateFuel() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (customers === undefined) {
+  if (customers.length === 0) {
     return <div>Loading...</div>;
   } else {
     return (
