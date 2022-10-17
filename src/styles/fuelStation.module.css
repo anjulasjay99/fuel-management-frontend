@@ -215,3 +215,41 @@
   width: 100px;
   height: 100px;
 }
+
+.card {
+  cursor: pointer;
+  width: 250px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 20px;
+  transition: border 0.15s ease-in;
+  transition: color 0.15s ease-in;
+}
+
+.card:hover {
+  border: 1px solid #ff762e;
+  color: #ff762e;
+}
+
+.homeContent {
+  padding-left: 100px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  column-gap: 10px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #ff762e;
+}

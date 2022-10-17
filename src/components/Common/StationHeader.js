@@ -40,6 +40,11 @@ function StationHeader() {
         <Navbar.Collapse id="nav">
           <Nav className="me-auto" style={{ maxHeight: "100px" }} navbarScroll>
             <Nav.Link>
+              <Link className={styles.navLink} to="/fuel-station-home">
+                Home
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
               <Link className={styles.navLink} to="/fuel-orders">
                 Fuel Orders
               </Link>
