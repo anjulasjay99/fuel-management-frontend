@@ -16,6 +16,7 @@ import CustomerProfile from "./components/CustomerManagement/CustomerProfile";
 import LoginCustomer from "./components/CustomerManagement/LoginCustomer";
 import AddVehicle from "./components/CustomerManagement/CustomerAddVehicle";
 import ViewVehicles from "./components/CustomerManagement/CustomerViewVehicles";
+import CustomerReport from "./components/CustomerManagement/CustomerReport";
 
 import FuelStationHome from "./components/FuelStation/FuelStationHome";
 import FuelOrders from "./components/FuelStation/FuelOrders";
@@ -26,7 +27,8 @@ import AllocateFuel from "./components/FuelStation/AllocateFuel";
 import FuelAllocations from "./components/FuelStation/FuelAllocations";
 import FuelStationReport from "./components/FuelStation/FuelStationReport";
 
-
+import SideMenu from "./components/Common/Sidebar";
+import NavBar from "./components/Common/navbar";
 function App() {
   return (
     <div>
@@ -62,10 +64,12 @@ function App() {
           <Route path="/customer-login" element={<LoginCustomer />} />
           <Route path="/customer-add-vehicle" element={<AddVehicle />} />
           <Route path="/customer-view-vehicles" element={<ViewVehicles />} />
-
+          <Route path="/customer-report" element={<CustomerReport />} />
 
           <Route path="/fuel-report" element={<FuelStationReport />} />
+          <Route path="/sidebar" element={<SideMenu />} />
 
+          <Route path="/navbar" element={<NavBar />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -6,14 +6,18 @@ import axios from "axios";
 import Header from "../Common/Header";
 import PageTitle from "../PageTitle";
 import { Button, Form, FormGroup, Label, Input , Row , Col , FormText  } from "reactstrap";
-function AddVehicle(){
+import { ToastContainer,toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
+function AddVehicle({user}){
 
     const [vehicleType, settype] = useState("");
     const [vehicleChassis, setchassis] = useState("");
     const [vehicleNumber, setnumplate] = useState("");
-
-    const email = "shehan@gmail.com"
-    function submit(){
+    const [email, setemail] = useState(user.email);
+    
+    function submit(e){
+        e.preventDefault();
         const Newvehicle = {
           vehicleType,
           vehicleChassis,
@@ -21,7 +25,16 @@ function AddVehicle(){
         }
         axios.post(`http://localhost:8070/customers/addVehicle/${email}`, Newvehicle).then((res) =>{
           console.log(res);
-          // Add Toast
+          toast.success('Vehicle Added!', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+            e.target.reset();
         }).catch((err) =>{
           console.log(err);
         });
@@ -30,14 +43,12 @@ function AddVehicle(){
 
     return(
         <div>
-          <Header/>
-          <PageTitle pageTitle="Add Vehicle" />
-            <div className={styles2.loginWrap}>
+          <Form onSubmit={(e) => submit(e)}> 
             <FormGroup>
                 <Label for="type">Type</Label>
                 <Input
                   style={{
-                        width: "500px",
+                        width: "max",
                         marginBottom: "10px",
                         }}
                   id="type"
@@ -55,7 +66,7 @@ function AddVehicle(){
                 <Label for="chassis">Chassis No.</Label>
                 <Input
                                   style={{
-                                    width: "500px",
+                                    width: "max",
                                     marginBottom: "10px",
                                     }}
                   id="chassis"
@@ -73,7 +84,7 @@ function AddVehicle(){
                 <Label for="numplate">Vehicle Number Plate</Label>
                 <Input
                                   style={{
-                                    width: "500px",
+                                    width: "max",
                                     marginBottom: "10px",
                                     }}
                   id="numplate"
@@ -89,17 +100,16 @@ function AddVehicle(){
               </FormGroup>
               <Button
                 className={common.btnPrimary}
-                onClick={submit}
                 style={{
-                  width: "500px",
+                  width: "100%",
                   marginTop: "30px",
                   marginBottom: "10px",
                 }}
               >
                 Add Vehicle
               </Button>
-            </div>
-
+        </Form>      
+          <ToastContainer></ToastContainer>
         </div>
     )
 }

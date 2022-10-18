@@ -4,9 +4,12 @@ import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 import { Button, Form, FormGroup, Label, Input , Row , Col , FormText } from "reactstrap";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ReactSession } from 'react-client-session';
+import { useNavigate } from "react-router-dom";
+
 import Header from "../Common/Header";
+import { ToastContainer,toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 function CustomerRegistration() {
 
     const navigate = useNavigate();
@@ -60,11 +63,21 @@ function CustomerRegistration() {
           } else {
             if (password === confPassword) {
               axios.post("http://localhost:8070/customers/register" , newCus ).then(() =>{
-                // Toast
-                e.target.reset();
-                ReactSession.set("email", email);
-                alert("Registration Completed!");
-            //    navigate("/customer-profile");
+                
+                toast.success('Registration Succesful!', {
+                  position: "bottom-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  });
+                setTimeout(() =>{
+                  e.target.reset();
+                  navigate("/customer-login");
+                } , 4000)
+                
               }).catch((err) =>{
                 alert(err);
               })
@@ -85,7 +98,7 @@ function CustomerRegistration() {
         <Header/>
         <PageTitle pageTitle="Registration" />
         <div className={styles.createAccWrapper} style ={{paddingTop:"35rem"}}>
-          <div className={styles.createAccForm}>
+          <div className={styles.createAccForm} style = {{boxShadow:"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" , borderColor:"black" , borderStyle:"groove" , padding: "3rem" , marginBottom:"5rem"}}>
             <br />
             <Form onSubmit={(e) => submit(e)}>
               <h4>Personal Information</h4>
@@ -230,20 +243,19 @@ function CustomerRegistration() {
               <Button
                 className={common.btnPrimary}
                 style={{
-                  width: "500px",
+                  width: "max",
                   marginTop: "30px",
                   marginBottom: "10px",
                 }}
               >
                 Register
               </Button>
-              <Button color="primary" onClick={demo} outline>
-              Demo
-          </Button>
+
             </Form>
             
           </div>
         </div>
+        <ToastContainer></ToastContainer>
       </div>
     );
 }
