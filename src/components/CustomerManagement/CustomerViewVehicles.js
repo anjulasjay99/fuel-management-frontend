@@ -4,8 +4,40 @@ import PageTitle from "../PageTitle";
 import common from "../../styles/common.module.css";
 import styles from "../../styles/customer.module.css";
 import { Button } from "react-bootstrap";
-
+import axios from "axios";
 function ViewVehicles() {
+
+    const [ vehicles , setVehicles ] = useState([]);
+    var email = sessionStorage.getItem("customer");
+
+    function DeleteVehicle(id){
+        console.log(id);
+        if(
+            window.confirm(
+                    "Are you sure you want to remove the selected vehicle ?"
+                )
+        )
+
+        {
+            const vid = {
+                id
+            }
+            console.log(vid);
+            console.log(email);
+            axios.delete(`http://localhost:8070/customers/removeVehicle/${email}` , vid ).then((res) =>{
+                console.log("Deletion Successful");
+            }).catch((err) =>{
+                console.log(err);
+            });
+        }
+
+    }
+    useEffect(() =>{
+        axios.get(`http://localhost:8070/customers/getVehicles/${email}`).then((res) =>{
+            setVehicles(res.data.vehicles);
+            console.log(res.data.vehicles);
+        })
+    },[])
     return(
         <div>
           <Header/>
@@ -13,7 +45,7 @@ function ViewVehicles() {
           <div className={styles.TableContainer}>
 
           <table class="table table-hover">
-            <thead>
+            <thead style={{backgroundColor: '#082344',color: 'white',textalign: 'left',fontweight: 'bold'}}>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Type</th>
@@ -24,14 +56,21 @@ function ViewVehicles() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Car</td>
-                    <td>NKE23432</td>
-                    <td>CAP-5656</td>
-                    <td>10 L</td>
-                    <Button>Delete</Button>
-                </tr>
+                {vehicles.map((vehicle , index) =>{
+                    return(
+                    <tr>
+                        <th scope="row">{vehicles.indexOf(vehicle)+1}</th>
+                        <td>{vehicle.vehicleType}</td>
+                        <td>{vehicle.vehicleChassis}</td>
+                        <td>{vehicle.vehicleNumber}</td>
+                        <td>10 L</td>
+                        <td><i onClick = {()=>
+                            { DeleteVehicle(vehicle.vehicleId)}} 
+                            class="fa fa-trash" aria-hidden="true"></i></td>
+                    </tr>
+                    )
+                })}
+                
             </tbody>
           </table>
 

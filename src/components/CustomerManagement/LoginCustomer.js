@@ -21,13 +21,21 @@ function LoginCustomer(){
             if(res.data.status === true){
             
                 sessionStorage.setItem("customer" , email );
-                alert("Login Succesful");
+                console.log(res.data.userData);
+                console.log(res.data.msg);
+                sessionStorage.setItem("CusId" , res.data.userData._id );
                 navigate("/dashboard");
             }
-            else{
+            else if(res.data.status === false){
+                console.log(res.data.msg);
                 alert("Check Credentials");
-                
             }
+            else{
+                console.log("err");
+            }
+        }).catch((err) =>{
+            console.log(err);
+           
         })
     }
     return(
@@ -76,6 +84,11 @@ function LoginCustomer(){
                 Sign In
               </Button>
               </Form>
+              <br />
+              <div style={{float:"left"}}>
+              New user ? <a href="/customer-registration">Register New Account</a>
+              </div>
+             
             </div>
             
             </div>
