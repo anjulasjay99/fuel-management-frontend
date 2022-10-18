@@ -3,14 +3,11 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from "react-router-dom";
 import ComplaintHeader from './complaintHeader';
 import PageTitle from '../PageTitle';
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import {Modal,Button} from 'react-bootstrap'
-import PDF from './complaintReport'
 library.add(  faPen);
 
   

@@ -1,47 +1,39 @@
 import React, { useState } from "react";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function FuelStationCreateAccount() {
+function AdminLogin() {
   const navigate = useNavigate();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [confPassword, setconfPassword] = useState("");
+
   const submit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8070/fuelStations/checkEmail", {
-        email,
-      })
+      .post("http://localhost:8070/admin/login", { email, password })
       .then((res) => {
-        if (res.data.status) {
-          alert("An account with the same email exists!");
-        } else {
-          if (password === confPassword) {
-            navigate("/fuel-station-register", { state: { email, password } });
-          } else {
-            alert("Password does not match!");
-          }
+        if (res.data.status === true) {
+          sessionStorage.setItem(
+            "adminUser",
+            JSON.stringify(res.data.userData)
+          );
+          navigate("/fuel-stations");
         }
       })
       .catch((e) => {
-        alert(e);
+        alert("Incorrect Credentials!");
       });
   };
-
   return (
     <div>
-      <PageTitle pageTitle="Fuel Station Registraion" />
+      <PageTitle pageTitle="Admin Login" />
       <div className={styles.createAccWrapper}>
         <div className={styles.createAccForm}>
-          <h3>Create Account</h3>
-          {/* <Button color="primary" onClick={demo} outline>
-            Demo
-          </Button> */}
+          <h3>Log In</h3>
           <br />
           <Form onSubmit={(e) => submit(e)}>
             <FormGroup>
@@ -67,22 +59,6 @@ function FuelStationCreateAccount() {
                 type="password"
                 value={password}
                 onChange={(e) => setpassword(e.target.value)}
-                pattern=".{8,}"
-                required
-              />
-              <FormText>Password must contain atleast 8 characters</FormText>
-            </FormGroup>
-            <FormGroup>
-              <Label for="confPassword">Confirm Password</Label>
-              <Input
-                id="confPassword"
-                className={styles.input}
-                name="password"
-                placeholder="Re-enter your passowrd"
-                type="password"
-                value={confPassword}
-                onChange={(e) => setconfPassword(e.target.value)}
-                pattern=".{8,}"
                 required
               />
             </FormGroup>
@@ -90,11 +66,11 @@ function FuelStationCreateAccount() {
               className={common.btnPrimary}
               style={{
                 width: "500px",
-                marginTop: "30px",
+                marginTop: "10px",
                 marginBottom: "10px",
               }}
             >
-              Confirm & Continue
+              Log In
             </Button>
           </Form>
         </div>
@@ -103,4 +79,4 @@ function FuelStationCreateAccount() {
   );
 }
 
-export default FuelStationCreateAccount;
+export default AdminLogin;

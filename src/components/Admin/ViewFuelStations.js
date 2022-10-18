@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import PageTitle from "../PageTitle";
 import axios from "axios";
@@ -14,15 +16,16 @@ import {
 } from "reactstrap";
 import common from "../../styles/common.module.css";
 import AdminHeader from "../Common/AdminHeader";
+import { useNavigate } from "react-router-dom";
 function ViewFuelStations() {
-  const [data, setdata] = useState();
+  const navigate = useNavigate();
+  const [data, setdata] = useState([]);
   const [modal, setModal] = useState(false);
-  const [selecteStaion, setselecteStaion] = useState();
+  const [selecteStaion, setselecteStaion] = useState({});
   const [search, setsearch] = useState("");
   const [filterName, setfilterName] = useState(true);
   const [filterType, setfilterType] = useState(false);
   const [filterOwner, setfilterOwner] = useState(false);
-  const [filteredData, setfilteredData] = useState([]);
 
   const toggle = () => {
     setModal(!modal);
@@ -51,7 +54,7 @@ function ViewFuelStations() {
           filterArr.push("ownerName");
         }
         let filterParam = "";
-        filterArr.map((filter) => {
+        filterArr.forEach((filter) => {
           filterParam += `&filter=${filter}`;
         });
         getSeachResults(val, filterParam);
@@ -75,7 +78,6 @@ function ViewFuelStations() {
       .get("http://localhost:8070/fuelStations")
       .then((res) => {
         setdata(res.data.data);
-        setfilteredData(res.data.data);
         setselecteStaion(res.data.data[0]);
       })
       .catch((e) => {
@@ -84,11 +86,16 @@ function ViewFuelStations() {
   };
 
   useEffect(() => {
-    console.log(data);
-    getStations();
+    const userData = JSON.parse(sessionStorage.getItem("adminUser"));
+    if (userData == null || userData === undefined || userData === "") {
+      navigate("/admin-login");
+    } else {
+      console.log(data);
+      getStations();
+    }
   }, []);
 
-  if (data === undefined) {
+  if (data.length === 0) {
     return <div>Loading...</div>;
   } else {
     return (

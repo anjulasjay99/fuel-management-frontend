@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState, useRef } from "react";
 import StationHeader from "../Common/StationHeader";
 import PageTitle from "../PageTitle";
@@ -18,7 +20,7 @@ function FuelStationReport() {
   const [reportType, setreportType] = useState("monthly");
   const [date, setdate] = useState("");
   const [reportData, setreportData] = useState(null);
-  const [user, setuser] = useState();
+  const [user, setuser] = useState({});
   const [orderPieChart, setorderPieChart] = useState(null);
   const [ordersPieChartImg, setordersPieChartImg] = useState("");
   const [year, setyear] = useState("2022");
@@ -242,6 +244,7 @@ function FuelStationReport() {
                     <label style={{ color: "grey" }}>Total No. of Orders</label>
                     <label>{reportData.orderSum.totalOrders}</label>
                   </div>
+
                   <div className={styles.fuelReportSection}>
                     <label style={{ color: "grey" }}>
                       Total Litres of Fuel Ordered
@@ -273,6 +276,7 @@ function FuelStationReport() {
                           hidden
                         />
                         <img
+                          alt="orderChart"
                           src={ordersPieChartImg}
                           className={styles.pieImage}
                         />
@@ -297,6 +301,14 @@ function FuelStationReport() {
                   </div>
                   <div className={styles.fuelReportSection}>
                     <label style={{ color: "grey" }}>
+                      Total Litres of Fuel Pumped
+                    </label>
+                    <label>
+                      {reportData.consumeSum.totalPumpedAmount.toFixed(2)}
+                    </label>
+                  </div>
+                  <div className={styles.fuelReportSection}>
+                    <label style={{ color: "grey" }}>
                       Total Litres of Fuel Remaining
                     </label>
                     <label>
@@ -308,6 +320,14 @@ function FuelStationReport() {
                       Total No. of Consumers
                     </label>
                     <label>{`${reportData.consumeSum.totalCustomers}`}</label>
+                  </div>
+
+                  <div
+                    className={styles.fuelReportSection}
+                    style={{ marginTop: "40px" }}
+                  >
+                    <label style={{ color: "grey" }}>Date Generated</label>
+                    <label>{`${reportData.dateGenerated}`}</label>
                   </div>
                 </div>
               </div>

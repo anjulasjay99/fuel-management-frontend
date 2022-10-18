@@ -1,14 +1,11 @@
 import React from "react";
 import { BiLogOut } from "react-icons/bi";
-import { Navbar , Container , Nav , NavDropdown } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Navbar , Container , Nav  } from "react-bootstrap";
+
 function ComplaintHeader(){
 
-    const navigate = useNavigate();
-    // function logOut(){
-    //     localStorage.clear();
-    //     navigate('/login');
-    // }
+    
+ 
     return(
         
             <Navbar sticky = "top" bg="dark" expand="lg" variant = "dark">

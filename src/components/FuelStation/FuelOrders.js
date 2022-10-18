@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import StationHeader from "../Common/StationHeader";
 import PageTitle from "../PageTitle";
@@ -9,9 +11,8 @@ import axios from "axios";
 
 function FuelOrders() {
   const navigate = useNavigate();
-  const [orders, setorders] = useState();
-  const [user, setuser] = useState();
-  const [stat, setstat] = useState("Canceled");
+  const [orders, setorders] = useState([]);
+  const [user, setuser] = useState({});
   const [refNo, setrefNo] = useState(true);
   const [type, settype] = useState(false);
   const [status, setstatus] = useState(false);
@@ -36,7 +37,7 @@ function FuelOrders() {
           filterArr.push("status");
         }
         let filterParam = "";
-        filterArr.map((filter) => {
+        filterArr.forEach((filter) => {
           filterParam += `&filter=${filter}`;
         });
         getSeachResults(val, filterParam);
@@ -83,7 +84,7 @@ function FuelOrders() {
     }
   }, []);
 
-  if (orders === undefined) {
+  if (orders.length === 0) {
     return <div>Loading...</div>;
   } else {
     return (

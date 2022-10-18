@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import StationHeader from "../Common/StationHeader";
 import PageTitle from "../PageTitle";
@@ -17,7 +18,7 @@ import axios from "axios";
 
 function PlaceFuelOrder() {
   const navigate = useNavigate();
-  const [user, setuser] = useState();
+  const [user, setuser] = useState({});
   const [type, settype] = useState("Petrol (92 Octane)");
   const [amount, setamount] = useState(0);
   const [timeOfDelivery, settimeOfDelivery] = useState("");
