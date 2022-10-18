@@ -29,6 +29,8 @@ import FuelUsage from "./components/FuelStation/FuelUsage";
 import AdminLogin from "./components/Admin/AdminLogin";
 import CreateBooking from "./components/FuelBooking/createBooking";
 import UpateBooking from "./components/FuelBooking/updateBooking";
+import Dashboard from "./components/Common/Dashboard";
+import AdminDashboard from "./components/Common/AdminDashboard";
 
 
 function App() {
@@ -74,6 +76,8 @@ function App() {
 
           <Route path="/createBooking" element = {<CreateBooking/>} exact/>
           <Route path="/updateBooking" element = {<UpateBooking/>} exact/>
+          <Route path="/dashboard" element = {<Dashboard/>} exact/>
+          <Route path="/admin-dashboard" element = {<AdminDashboard/>} exact/>
         </Routes>
       </BrowserRouter>
     </div>

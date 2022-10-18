@@ -22,7 +22,7 @@ function LoginCustomer(){
             
                 sessionStorage.setItem("customer" , email );
                 alert("Login Succesful");
-                navigate("/customer-profile");
+                navigate("/dashboard");
             }
             else{
                 alert("Check Credentials");

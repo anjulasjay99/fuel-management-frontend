@@ -8,6 +8,7 @@ import ComplaintHeader from './complaintHeader';
 import PageTitle from '../PageTitle';
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import AdminHeader from '../Common/AdminHeader';
 library.add(  faPen);
 
   
@@ -66,7 +67,7 @@ const ViewAdmincomplaints = () => {
     
     <>
      <ToastContainer></ToastContainer>
-     <ComplaintHeader/>
+     <AdminHeader/>
      <PageTitle pageTitle="My Complaints"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
     <br></br><br></br>

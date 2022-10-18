@@ -43,6 +43,11 @@ function AdminHeader() {
                 Fuel Allocations
               </Link>
             </Nav.Link>
+            <Nav.Link href="#">
+              <Link className={styles.navLink} to="/viewadmincomplaint">
+                Complaints
+              </Link>
+            </Nav.Link>
           </Nav>
           <Nav className="ml-auto">
             <NavDropdown

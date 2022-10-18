@@ -1,5 +1,6 @@
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import React from "react";
 import "../../Css/Addcomplaint.css"
@@ -12,17 +13,30 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Addcomplaint(){
 
-    const [email, setemail] = useState("");
+    
     const [dateofComplaint, setdateofComplaint] = useState("");
     const [reason, setreason] = useState("Issue in the shed");
     const [complaintDetails, setcomplaintDetails] = useState("");
     // const [handletextarea, sethandletextarea] = useState(false)
     const [sucessfull, setSucessfull] = useState(false);
-  
+    var navigate = useNavigate();
+    var [email, setemail] = useState("");
 
+    useEffect (() =>{
+      console.log(sessionStorage.getItem("customer"));
+         if(sessionStorage.getItem("customer") == null){
+              navigate("/customer-login");
+         }  
+         var emailStorage = sessionStorage.getItem("customer");
+         setemail(emailStorage)
+         console.log(email);
+     },[])
+
+     
+     console.log(email);
      function  submitComplaint(e){
 
-        
+     
        
         e.preventDefault();
         // console.log(complaintDetails.length)
@@ -49,7 +63,6 @@ function Addcomplaint(){
                     progress: undefined,
                     });
                   console.log(res.data)  
-                  setemail("");
                   setdateofComplaint("");
                   setreason("Issue in the shed");
                   setcomplaintDetails("");
@@ -68,7 +81,7 @@ function Addcomplaint(){
 
     function clear(){
  
-        setemail("");
+        
         setdateofComplaint("");
         setreason("Issue in the shed");
         setcomplaintDetails("");
@@ -77,6 +90,7 @@ function Addcomplaint(){
 
     return(
       
+    
         <>
         <ComplaintHeader/>
         <PageTitle pageTitle="Add New Complaint"/> 
@@ -97,7 +111,7 @@ function Addcomplaint(){
   <form onSubmit={submitComplaint} >
   <div class="form-group">
     <label for="exampleFormControlInput1" style={{float:"left"}}>Email </label>
-    <input  value={email} onChange={(e)=>{setemail(e.target.value)}} type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" title="follow requested format Ex:([name@example.com])" pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$' required="required" />
+    <input  value={email} type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" title="follow requested format Ex:([name@example.com])"  required="required" />
   </div>
   <br></br>
   <div class="form-group">
