@@ -27,7 +27,6 @@ import AllocateFuel from "./components/FuelStation/AllocateFuel";
 import FuelAllocations from "./components/FuelStation/FuelAllocations";
 import FuelStationReport from "./components/FuelStation/FuelStationReport";
 
-import SideMenu from "./components/Common/Sidebar";
 import NavBar from "./components/Common/navbar";
 function App() {
   return (
@@ -67,7 +66,6 @@ function App() {
           <Route path="/customer-report" element={<CustomerReport />} />
 
           <Route path="/fuel-report" element={<FuelStationReport />} />
-          <Route path="/sidebar" element={<SideMenu />} />
 
           <Route path="/navbar" element={<NavBar />} />
         </Routes>
