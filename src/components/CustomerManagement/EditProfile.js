@@ -1,7 +1,8 @@
 import { useState , useEffect } from "react";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
-import { toast } from "react-toastify";
+import { ToastContainer,toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { Button, Form, FormGroup, Label, Input , Row , Col , ButtonGroup  } from "reactstrap";
 import axios from "axios";
 
@@ -16,7 +17,8 @@ function EditProfile({user}){
     const [surname, setsurname] = useState(user.surname);
     const [telNo, setTelNo] = useState(user.telNo);
 
-    const editClick = (email) =>{
+    const editClick = (e) =>{
+        e.preventDefault();
         const updatedData = {
             email,
             name,
@@ -34,17 +36,18 @@ function EditProfile({user}){
                 progress: undefined,
                 });
             console.log(res);
-            // setTimeout(() => {
-            //     window.location.reload();
-            //   }, 6000);
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+              }, 5000);
         }).catch((err) =>{
-            // Display Toast Message
             console.log(err);
         })
     }
     return(
         <div>
+            <Form onSubmit={(e) => editClick(e)}>
+
+            
                     <FormGroup>
                         <Label for="name">Name</Label>
                         <Input
@@ -102,11 +105,10 @@ function EditProfile({user}){
                         required
                         />
                     </FormGroup>
-                    <ButtonGroup>
-                        <Button className={common.btnSecondary} style={{width:"100%"}} onClick = {() =>{
-                            editClick(email);
-                        }}>Edit</Button>
-                    </ButtonGroup>
+                        <Button className={common.btnSecondary} style={{width:"100%" , marginTop:"1rem"}} >Edit</Button>
+                    
+                    <ToastContainer></ToastContainer>
+            </Form>
         </div>
     );
 }

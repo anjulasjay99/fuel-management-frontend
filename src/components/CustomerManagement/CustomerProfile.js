@@ -12,15 +12,14 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input , Row , Col , ButtonGroup  } from "reactstrap";
-import { ReactSession } from 'react-client-session';
+import NavBar from "../Common/navbar";
 function CustomerProfile(){
 
-    // var email = ReactSession.get("email"); 
-    // console.log(email);
-    // email = "shehan@gmail.com"
+
     const navigate = useNavigate();
     const [userClick , setUserClick] = useState();
     const [data , setData] = useState();
+    const [quota , setQuota ] = useState();
     var email;
     useEffect (() =>{
         console.log(sessionStorage.getItem("customer"));
@@ -29,17 +28,25 @@ function CustomerProfile(){
            }  
            email = sessionStorage.getItem("customer");
            console.log(email);
-   //        setUserClick(true);
+
+           // Get customer Details
            axios.get(`http://localhost:8070/customers/${email}` ).then((res) =>{
-               console.log(res.data);
+               console.log(res.data._id);
                setData(res.data);
-            //    setemail(res.data.email);
-            //    setname(res.data.name);
-            //    setsurname(res.data.surname);
-            //    setTelNo(res.data.telNo);
+
+               // Get Fuel Quota
+               axios.get(`http://localhost:8070/customers/getFuel/${res.data._id}`).then((r) =>{
+                console.log(r.data[0].availableAmount);
+                setQuota(r.data[0].availableAmount);
+               }).catch((e) =>{
+                console.log(e);
+               })
            }).catch((err) =>{
                console.log(err);
            })
+
+           
+           
        },[])
 
     function ProfileClick() {
@@ -47,9 +54,11 @@ function CustomerProfile(){
     }
     return(
         <div>
+            
             <Header/>
+           
             <PageTitle pageTitle="MY PROFILE" />
-            <div className="container" style={{marginTop : "5rem" , height : "100%"}}>
+            <div className="container" style={{marginTop : "5rem" , height : "100%" }}>
                 <Row>
                     <Col md= {6}>
                         <Row md = {6}>
@@ -75,14 +84,15 @@ function CustomerProfile(){
                         </Row>
                     </Col>
                     <Col style={{marginLeft:"2rem" , marginTop : "1rem", borderStyle:"groove" , borderRadius:"10px" , paddingTop:"2rem"}}>
-                        {userClick == true ? <UserInfoForm user = {data}/> : userClick == false ? <VehicleInfoForm user = {data}/> :  console.log("Hi")  }
+                        {userClick === true ? <UserInfoForm user = {data}/> : userClick === false ? <VehicleInfoForm user = {data}/> :  console.log("Hi")  }
                     </Col>
                 </Row>
             </div>
 
             <div className={styles2.fuel_container}>
-                <h1>Available Fuel Quota : 20 l</h1>
+                <h1>Total Available Fuel Quota : {quota} l</h1>
             </div>
+            
         </div>
     );
 

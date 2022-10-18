@@ -16,6 +16,7 @@ import CustomerProfile from "./components/CustomerManagement/CustomerProfile";
 import LoginCustomer from "./components/CustomerManagement/LoginCustomer";
 import AddVehicle from "./components/CustomerManagement/CustomerAddVehicle";
 import ViewVehicles from "./components/CustomerManagement/CustomerViewVehicles";
+import CustomerReport from "./components/CustomerManagement/CustomerReport";
 
 import FuelStationHome from "./components/FuelStation/FuelStationHome";
 import FuelOrders from "./components/FuelStation/FuelOrders";
@@ -25,6 +26,8 @@ import FuelAllocations from "./components/Admin/FuelAllocations";
 import ComplaintReport from "./components/complaintManagement/complaintReport";
 import ViewAdmincomplaints from "./components/complaintManagement/adminComplaint";
 import FuelStationReport from "./components/FuelStation/FuelStationReport";
+
+import NavBar from "./components/Common/navbar";
 import FuelUsage from "./components/FuelStation/FuelUsage";
 import AdminLogin from "./components/Admin/AdminLogin";
 import CreateBooking from "./components/FuelBooking/createBooking";
@@ -77,11 +80,13 @@ function App() {
           <Route path="/customer-login" element={<LoginCustomer />} />
           <Route path="/customer-add-vehicle" element={<AddVehicle />} />
           <Route path="/customer-view-vehicles" element={<ViewVehicles />} />
+          <Route path="/customer-report" element={<CustomerReport />} />
 
           <Route path="/fuel-report" element={<FuelStationReport />} />
           <Route path="/fuel-usages" element={<FuelUsage />} />
           <Route path="/admin-login" element={<AdminLogin />} />
 
+          <Route path="/navbar" element={<NavBar />} />
           <Route path="/createBooking" element={<CreateBooking />} exact />
           <Route path="/updateBooking" element={<UpateBooking />} exact />
           <Route path="/fuel-station-home" element={<FuelStationHome />} />

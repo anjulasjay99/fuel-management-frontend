@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 function Header(){
 
     const navigate = useNavigate();
-    // function logOut(){
-    //     localStorage.clear();
-    //     navigate('/login');
-    // }
+     function logOut(){
+         sessionStorage.clear();
+         navigate('/customer-login');
+     }
     return(
         
             <Navbar sticky = "top" bg="dark" expand="lg" variant = "dark">
@@ -36,8 +36,7 @@ function Header(){
                         </Nav.Link>
 
                         <Nav.Link onClick={() =>{
-                            // logOut();
-                            console.log("Hi");
+                            logOut();
                         }}  ><BiLogOut/></Nav.Link>
                       
                     </Nav>

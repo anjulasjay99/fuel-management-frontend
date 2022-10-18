@@ -1,20 +1,25 @@
 import { useState , useEffect } from "react";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
+import { useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input ,  Modal , ModalBody , ModalHeader  } from "reactstrap";
 import AddVehicle from "./CustomerAddVehicle";
+
+
 const QRCode = require('qrcode')
-
-
 function VehicleInfoForm({user}){
 
     const [code, setcode] = useState("");
     const [vehicles , setVehicles] = useState(user.vehicles[0]);
     const [modal , setModal] = useState(false);
 
+    const navigate = useNavigate();
+
     function toggle(){
         setModal(!modal);
     }
+
+
 
     useEffect(() =>{
         QRCode.toDataURL(user.email).then((data) =>{
@@ -77,13 +82,16 @@ function VehicleInfoForm({user}){
                         />
                     </FormGroup>
                     <br />
-                        <button className={common.btnPrimary} style={{float:"right"}} onClick={toggle}>Add Vehicle</button>
+                        <Button className={common.btnPrimary} onClick={()=>{
+                            navigate("/customer-view-vehicles");
+                        }}>View Vehicles</Button>
+                        <Button className={common.btnPrimary} style={{float:"right"}} onClick={toggle}>Add Vehicle</Button>
                     <Modal isOpen={modal} toggle={toggle}>
                         <ModalHeader toggle={toggle}>
                             Add Vehicle
                         </ModalHeader>
                         <ModalBody>
-                            <AddVehicle />
+                            <AddVehicle user = {user} />
                         </ModalBody>
                     </Modal>    
            

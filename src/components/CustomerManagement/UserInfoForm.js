@@ -6,6 +6,7 @@ import EditProfile from "./EditProfile";
 import { AiFillEdit } from "react-icons/ai";
 import { IoTrashBin } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import CustomerUnreg from "./CustomerUnreg";
 import { Button, Form, FormGroup, Label, Input , Row , Col , ButtonGroup , Modal , ModalBody , ModalHeader   } from "reactstrap";
 
 function UserInfoForm({user}){
@@ -15,8 +16,13 @@ function UserInfoForm({user}){
     const [name, setname] = useState(user.name);
     const [surname, setsurname] = useState(user.surname);
     const [telNo, setTelNo] = useState(user.telNo);
+    const [unregModal , setunregModal ] = useState(false);
+
     const navigate = useNavigate();
 
+    function unregToggle(){
+        setunregModal(!unregModal);
+    }
     useEffect(() =>{
         
         axios.get(`http://localhost:8070/customers/${email}` ).then((res) =>{
@@ -110,9 +116,13 @@ function UserInfoForm({user}){
                         />
                     </FormGroup>
                     <br />
-                        <Button color="danger" onClick={() =>{
-                            unregister();
-                        }}>Unregister <IoTrashBin size={19}/></Button>
+                        <Button color="danger" 
+                        // onClick={() =>{
+                        //     // unregister();
+
+                        // }}
+                        onClick={unregToggle}
+                        >Unregister <IoTrashBin size={19}/></Button>
                         <Button className={common.btnSecondary} style={{float:"right" , width : "6rem"}} onClick={toggle} >Edit <AiFillEdit size={19} /> </Button>
                     
                     <Modal isOpen={modal} toggle={toggle}>
@@ -121,6 +131,16 @@ function UserInfoForm({user}){
                         </ModalHeader>
                         <ModalBody>
                             <EditProfile user = {user}/>
+                        </ModalBody>
+
+                    </Modal>
+
+                    <Modal isOpen={unregModal} toggle={unregToggle}>
+                        <ModalHeader toggle={unregToggle}>
+                            Unregister
+                        </ModalHeader>
+                        <ModalBody>
+                           <CustomerUnreg  email = {email}/>
                         </ModalBody>
 
                     </Modal>
