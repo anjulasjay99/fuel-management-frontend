@@ -13,7 +13,7 @@ function Header(){
         
             <Navbar sticky = "top" bg="dark" expand="lg" variant = "dark">
                 <Container fluid>
-                    <Navbar.Brand href="/home">Home</Navbar.Brand>
+                    <Navbar.Brand href="/dashboard">Home</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse   id="navbarScroll">
                     <Nav
@@ -28,7 +28,7 @@ function Header(){
                         <Nav.Link href="#" >
                             Report
                         </Nav.Link>
-                        <Nav.Link href="#" >
+                        <Nav.Link href="/addcomplaint" >
                             Complaints
                         </Nav.Link>
                         <Nav.Link href="/customer-profile" >
