@@ -7,7 +7,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { IoTrashBin } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import CustomerUnreg from "./CustomerUnreg";
-import { Button, Form, FormGroup, Label, Input , Row , Col , ButtonGroup , Modal , ModalBody , ModalHeader   } from "reactstrap";
+import { Button,  FormGroup, Label, Input ,  Modal , ModalBody , ModalHeader   } from "reactstrap";
 
 function UserInfoForm({user}){
 
@@ -39,24 +39,6 @@ function UserInfoForm({user}){
 
     function toggle(){
         setModal(!modal);
-    }
-
-    const unregister = () => {
-        if (
-            window.confirm(
-                "Are you sure that you want to unregister ?"
-            )
-        )
-        {
-            console.log(email);
-            axios.delete(`http://localhost:8070/customers/unregister/${email}`).then((res) =>{
-                console.log(res);
-                // Navigate to Reg Page
-                navigate("/customer-registration")
-            }).catch((err) =>{
-                console.log(err);
-            });
-        }
     }
     return(
         <div>
@@ -117,10 +99,6 @@ function UserInfoForm({user}){
                     </FormGroup>
                     <br />
                         <Button color="danger" 
-                        // onClick={() =>{
-                        //     // unregister();
-
-                        // }}
                         onClick={unregToggle}
                         >Unregister <IoTrashBin size={19}/></Button>
                         <Button className={common.btnSecondary} style={{float:"right" , width : "6rem"}} onClick={toggle} >Edit <AiFillEdit size={19} /> </Button>

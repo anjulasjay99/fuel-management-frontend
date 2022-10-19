@@ -1,4 +1,4 @@
-import { useState , useEffect } from "react";
+import { useState  } from "react";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";

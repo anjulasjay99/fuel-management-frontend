@@ -1,14 +1,12 @@
 import { useState , useEffect } from "react";
 import Header from "../Common/Header";
 import PageTitle from "../PageTitle";
-import common from "../../styles/common.module.css";
 import styles from "../../styles/customer.module.css";
-import { Button } from "react-bootstrap";
 import axios from "axios";
 function ViewVehicles() {
 
     const [ vehicles , setVehicles ] = useState([]);
-    var email = sessionStorage.getItem("customer");
+    let email = sessionStorage.getItem("customer");
 
     function DeleteVehicle(id){
         console.log(id);

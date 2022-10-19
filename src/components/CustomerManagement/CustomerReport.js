@@ -1,5 +1,4 @@
-import { useState , useEffect } from "react";
-import React from 'react';
+import { useState , useEffect , React } from "react";
 import Pdf from "react-to-pdf";
 import Header from "../Common/Header";
 import PageTitle from "../PageTitle";
@@ -7,7 +6,7 @@ import common from "../../styles/common.module.css";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/customer.module.css";
 import axios from "axios";
-import { Button,FormGroup, Label, Input , Row , Col , } from "reactstrap";
+import { Button,FormGroup, Label, Input  } from "reactstrap";
 
 
 const ref = React.createRef();
