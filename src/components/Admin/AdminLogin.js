@@ -21,7 +21,7 @@ function AdminLogin() {
             "adminUser",
             JSON.stringify(res.data.userData)
           );
-          navigate("/fuel-stations");
+          navigate("/admin-dashboard");
         }
       })
       .catch((e) => {

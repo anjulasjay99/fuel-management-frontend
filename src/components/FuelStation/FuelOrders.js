@@ -85,7 +85,12 @@ function FuelOrders() {
   }, []);
 
   if (orders.length === 0) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <StationHeader />
+        <PageTitle pageTitle={"Fuel Orders"} />
+      </div>
+    );
   } else {
     return (
       <div>

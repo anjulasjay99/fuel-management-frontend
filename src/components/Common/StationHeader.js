@@ -35,7 +35,7 @@ function StationHeader() {
       className={styles.navbar}
     >
       <Container fluid>
-        <Navbar.Brand href="#home">FMS</Navbar.Brand>
+        <Navbar.Brand href="/fuel-station-home">FMS</Navbar.Brand>
         <Navbar.Toggle aria-controls="nav" />
         <Navbar.Collapse id="nav">
           <Nav className="me-auto" style={{ maxHeight: "100px" }} navbarScroll>

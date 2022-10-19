@@ -53,7 +53,20 @@ function FuelAllocations() {
   }, []);
 
   if (allocations.length === 0) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <AdminHeader />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: " center",
+          }}
+        >
+          <PageTitle pageTitle="Fuel Allocations" />
+        </div>
+      </div>
+    );
   } else {
     return (
       <div>

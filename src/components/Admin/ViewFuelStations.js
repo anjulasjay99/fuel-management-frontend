@@ -96,7 +96,20 @@ function ViewFuelStations() {
   }, []);
 
   if (data.length === 0) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <AdminHeader />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: " center",
+          }}
+        >
+          <PageTitle pageTitle="Fuel Stations" />
+        </div>
+      </div>
+    );
   } else {
     return (
       <div>
