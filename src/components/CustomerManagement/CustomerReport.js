@@ -1,4 +1,5 @@
-import { useState , useEffect , React } from "react";
+import { useState , useEffect  } from "react";
+import React from "react";
 import Pdf from "react-to-pdf";
 import Header from "../Common/Header";
 import PageTitle from "../PageTitle";
@@ -31,8 +32,11 @@ function CustomerReport(){
             toDate,
             fromDate
         }
-        axios.get(`http://localhost:8070/fuelAllocations/byCus/${cusid}` , dates).then((res) =>{
+        axios.post(`http://localhost:8070/fuelAllocations/byCus/${cusid}` , dates).then((res) =>{
+            console.log("Fuel Allocation");
+            console.log(dates);
             setAllocations(res.data);
+            console.log(res.data);
         }).catch((err) =>{
             console.log(err);
         });
@@ -43,7 +47,9 @@ function CustomerReport(){
             toDate,
             fromDate
         }
-        axios.get(`http://localhost:8070/fuelUsage/getPumpings/${cusid}` , dates).then((res)=>{
+        axios.post(`http://localhost:8070/fuelUsage/getPumpings/${cusid}` , dates).then((res)=>{
+            console.log("Fuel Pumping");
+            console.log(dates);
             setPumbings(res.data);
         }).catch((err) =>{
             console.log(err);
@@ -56,7 +62,7 @@ function CustomerReport(){
         cusid = (sessionStorage.getItem("CusId"));
         let today = new Date().toISOString().slice(0, 10);
         setdate(today);
-    }, []);
+    }, );
 
     useEffect(() =>{
         getFuelAllocations();
@@ -123,7 +129,7 @@ function CustomerReport(){
             <div className={styles.TableContainer} ref = {ref}>
             
             <h2>Fuel Allocations</h2>     
-            <table class="table table-hover">
+            <table className="table table-hover">
                         <thead style={{backgroundColor: '#082344',color: 'white',textalign: 'left',fontweight: 'bold'}}>
                             <tr>
                                 <th scope="col">Date</th>
@@ -146,7 +152,7 @@ function CustomerReport(){
                         </tbody>
             </table>   
             <h2>Fuel Pumpings</h2>
-                <table class="table table-hover">
+                <table className="table table-hover">
                         <thead style={{backgroundColor: '#082344',color: 'white',textalign: 'left',fontweight: 'bold'}}>
                             <tr>
                                 <th scope="col">Date</th>
