@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
 import StationHeader from "../Common/StationHeader";
 import PageTitle from "../PageTitle";
-import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 import {
   FormGroup,
@@ -10,8 +11,6 @@ import {
   Label,
   Input,
   Table,
-  Row,
-  Col,
   Modal,
   ModalHeader,
   ModalBody,
@@ -26,7 +25,6 @@ function FuelUsage() {
   const [usages, setusages] = useState([]);
   const navigate = useNavigate();
   const [user, setuser] = useState({});
-  const [search, setsearch] = useState("");
   const [modal, setmodal] = useState(false);
   const [selectedVehicle, setselectedVehicle] = useState("");
   const [pumpedAmount, setpumpedAmount] = useState(0);
@@ -34,13 +32,10 @@ function FuelUsage() {
   const [selectedCustomer, setselectedCustomer] = useState("");
   const [fuelAllocations, setfuelAllocations] = useState([]);
   const [selectedStartDate, setselectedStartDate] = useState("");
+  const [searchText, setsearchText] = useState("");
 
   const toggle = () => {
     setmodal(!modal);
-  };
-  const show = (vehicle) => {
-    setselectedVehicle(vehicle);
-    setmodal(true);
   };
 
   const getUsage = (id) => {
@@ -124,6 +119,10 @@ function FuelUsage() {
       });
   };
 
+  const onSearch = (val) => {
+    setsearchText(val);
+  };
+
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("fsUser"));
     if (userData == null || userData === undefined || userData === "") {
@@ -140,7 +139,12 @@ function FuelUsage() {
     customers.length === 0 ||
     fuelAllocations.length === 0
   ) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <StationHeader />
+        <PageTitle pageTitle={"Fuel Usage"} />
+      </div>
+    );
   } else {
     return (
       <div>
@@ -176,7 +180,8 @@ function FuelUsage() {
                 className={common.searchInput}
                 placeholder="Search"
                 type="text"
-                value={search}
+                value={searchText}
+                onChange={(e) => onSearch(e.target.value)}
               />
             </div>
             <div>
@@ -198,17 +203,32 @@ function FuelUsage() {
             </thead>
             <tbody>
               {usages.length > 0
-                ? usages.map((usg, index) => {
-                    return (
-                      <tr>
-                        <td>{index + 1}</td>
-                        <td>{usg.customerName}</td>
-                        <td>{usg.vehicleNumber}</td>
-                        <td>{usg.pumpedAmount}</td>
-                        <td>{usg.date}</td>
-                      </tr>
-                    );
-                  })
+                ? usages
+                    .filter((data) => {
+                      if (searchText !== "") {
+                        if (
+                          data.customerName
+                            .trim()
+                            .toLowerCase()
+                            .includes(searchText.trim().toLowerCase())
+                        ) {
+                          return data;
+                        }
+                      } else {
+                        return data;
+                      }
+                    })
+                    .map((usg, index) => {
+                      return (
+                        <tr>
+                          <td>{index + 1}</td>
+                          <td>{usg.customerName}</td>
+                          <td>{usg.vehicleNumber}</td>
+                          <td>{usg.pumpedAmount}</td>
+                          <td>{usg.date}</td>
+                        </tr>
+                      );
+                    })
                 : "No data available"}
             </tbody>
           </Table>

@@ -22,7 +22,7 @@ function LoginCustomer(){
                 console.log(res.data.userData);
                 console.log(res.data.msg);
                 sessionStorage.setItem("CusId" , res.data.userData._id );
-                navigate("/customer-profile");
+                navigate("/dashboard");
             }
             else if(res.data.status === false){
                 console.log(res.data.msg);

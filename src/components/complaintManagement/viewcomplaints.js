@@ -19,6 +19,7 @@ const Viewcomplaints = () => {
   const [deletedata,setdeletedata] = useState({})
   const [searchVal , setSearchVal] = useState("");
   let {filterData} = useState();
+  let email = sessionStorage.getItem("customer");
 
   const handleClose =()=>{
     setshow(false)
@@ -26,14 +27,23 @@ const Viewcomplaints = () => {
 
   const navigate = useNavigate();
   useEffect(()=>{
-    axios.get("http://localhost:8070/complaints/get/user/rishithad98@gmail.com").then((response)=>{     
+    console.log(sessionStorage.getItem("customer"));
+         if(sessionStorage.getItem("customer") == null){
+              navigate("/customer-login");
+         }  
+    
+    console.log(email)
+
+    axios.get(`http://localhost:8070/complaints/get/user/${email}`).then((response)=>{     
         console.log(response.data)
         setComplaints(response.data)
     })
   },[])
 
   const getData = () => {
-    axios.get(`http://localhost:8070/complaints/get/user/rishithad98@gmail.com`)
+    console.log("aaa")
+    console.log(email)
+    axios.get(`http://localhost:8070/complaints/get/user/${email}`)
         .then((res) => {
           setComplaints(res.data);
     })
@@ -76,7 +86,9 @@ const Viewcomplaints = () => {
   }
 
   const globalSearch = () =>{
+ 
     filterData = coomplaints.filter((value)=>{
+      
       return(
         value.email.toLowerCase().includes(searchVal.toLowerCase()) || 
         value.dateofComplaint.toLowerCase().includes(searchVal.toLowerCase()) ||
@@ -84,7 +96,9 @@ const Viewcomplaints = () => {
         value.reason.toLowerCase().includes(searchVal.toLowerCase())   
       )     
     })
+    console.log(filterData)
     setComplaints(filterData)
+   
   }
 
 

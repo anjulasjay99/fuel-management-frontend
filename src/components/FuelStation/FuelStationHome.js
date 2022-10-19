@@ -34,25 +34,31 @@ function FuelStationHome() {
           <h3>Navigate</h3>
         </div>
 
-        <div className={styles.homeContent}>
+        <div className={styles.homeContentCards}>
           <div className={styles.card} onClick={() => navigate("/fuel-orders")}>
             <BsDropletHalf />
-            Fuel Orders
+            <h4>Fuel Orders</h4>
+            <label>Place and view fuel orders.</label>
           </div>
           <div className={styles.card} onClick={() => navigate("/fuel-usages")}>
             <GiGasPump />
-            Fuel Usage
+            <h4>Fuel Usage</h4>
+            <label>Manage fuel usage.</label>
           </div>
           <div className={styles.card} onClick={() => navigate("/fuel-report")}>
             <BsGraphUp />
-            Reports
+            <h4>Reports</h4>
+            <label>
+              Generate reports based on the fuel station activities.
+            </label>
           </div>
           <div
             className={styles.card}
             onClick={() => navigate("/fuel-station-settings")}
           >
             <VscAccount />
-            Account
+            <h4>Account</h4>
+            <label>Manage your account.</label>
           </div>
         </div>
 

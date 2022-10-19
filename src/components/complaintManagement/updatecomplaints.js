@@ -84,7 +84,7 @@ const Updatecomplaints = () => {
     <form onSubmit={UpdateComplaint}>
       <div class="form-group">
       <label for="exampleFormControlInput1" style={{float:"left"}}>Email </label><br></br>
-      <input value={email} onChange={(e)=>{setemail(e.target.value)}} type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$' required="required"/>
+      <input value={email}  type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"  required="required"/>
       </div>
       <br></br>
       <div class="form-group">
