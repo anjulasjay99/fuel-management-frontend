@@ -19,49 +19,50 @@ import PageTitle from "../PageTitle";
 import { ReactSession } from "react-client-session";
 import AdminHeader from "./AdminHeader";
 
-
-
-
-
-
 function AdminDashboard() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   document.documentElement.classList.remove("nav-open");
 
- 
-  const clickBookingManagemnt = () => {
-    navigate("");
+  const clickFuelStations = () => {
+    navigate("/fuel-stations");
   };
   const clickAdminComplaints = () => {
     navigate("/viewadmincomplaint");
   };
-  const clickFuelStationManagemnt = () => {
-    navigate("");
+  const clickFuelAllocations = () => {
+    navigate("/fuel-allocations");
   };
 
-//   useEffect(() => {
-//     ReactSession.setStoreType("localStorage");
-//     if (ReactSession.get("user") != null) {
-//       document.body.classList.add("index");
-//       document.getElementById("card1").classList.remove("card");
-//       document.getElementById("card2").classList.remove("card");
-//       document.getElementById("card3").classList.remove("card");
-//       document.getElementById("card4").classList.remove("card");
+  //   useEffect(() => {
+  //     ReactSession.setStoreType("localStorage");
+  //     if (ReactSession.get("user") != null) {
+  //       document.body.classList.add("index");
+  //       document.getElementById("card1").classList.remove("card");
+  //       document.getElementById("card2").classList.remove("card");
+  //       document.getElementById("card3").classList.remove("card");
+  //       document.getElementById("card4").classList.remove("card");
 
-//       return function cleanup() {
-//         document.body.classList.remove("index");
-//       };
-//     } else {
-//         navigate("");
-//     }
-//   }, []);
+  //       return function cleanup() {
+  //         document.body.classList.remove("index");
+  //       };
+  //     } else {
+  //         navigate("");
+  //     }
+  //   }, []);
+
+  useEffect(() => {
+    const userData = JSON.parse(sessionStorage.getItem("adminUser"));
+    if (userData == null || userData === undefined || userData === "") {
+      navigate("/admin-login");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      
       <AdminHeader></AdminHeader>
-            <PageTitle pageTitle="Dashboard" />
+      <PageTitle pageTitle="Dashboard" />
       <div className="main">
         <div className="edit-booking-content">
           <br></br>
@@ -71,11 +72,23 @@ function AdminDashboard() {
                 <Card
                   className="dashboard-card"
                   id="card1"
-                  onClick={clickBookingManagemnt}
+                  onClick={clickFuelStations}
                 >
-                  Booking Managemnt
+                  Fuel Stations
                   <label className="dashboard-card-subtitle">
-                    View all the tour itineraries we offer.
+                    View & search all the registered fuel stations.
+                  </label>
+                </Card>
+              </Col>
+              <Col>
+                <Card
+                  className="dashboard-card"
+                  id="card1"
+                  onClick={clickFuelAllocations}
+                >
+                  Fuel Allocations
+                  <label className="dashboard-card-subtitle">
+                    Allocate fuel to customers.
                   </label>
                 </Card>
               </Col>
@@ -85,31 +98,17 @@ function AdminDashboard() {
                   id="card2"
                   onClick={clickAdminComplaints}
                 >
-                 Complaints
+                  Complaints
                   <label className="dashboard-card-subtitle">
-                     Generate complaint reports
-                  </label>
-                </Card>
-              </Col>
-              <Col>
-                <Card
-                  className="dashboard-card"
-                  id="card1"
-                  onClick={clickFuelStationManagemnt}
-                >
-                  Fuel Station Managemnt
-                  <label className="dashboard-card-subtitle">
-                    View all the tour itineraries we offer.
+                    Generate complaint reports
                   </label>
                 </Card>
               </Col>
             </Row>
             <br></br>
             <br></br>
-            
           </div>
         </div>
-     
       </div>
     </>
   );
