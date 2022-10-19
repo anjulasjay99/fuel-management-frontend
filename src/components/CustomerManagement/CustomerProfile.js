@@ -1,6 +1,5 @@
 import { useState , useEffect } from "react";
 import PageTitle from "../PageTitle";
-import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 import styles2 from "../../styles/cusprofile.module.css";
 import { ImProfile } from "react-icons/im";
@@ -9,10 +8,8 @@ import UserInfoForm from "./UserInfoForm";
 import VehicleInfoForm from "./VehicleInfoForm";
 import Header from "../Common/Header";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Button, Form, FormGroup, Label, Input , Row , Col , ButtonGroup  } from "reactstrap";
-import NavBar from "../Common/navbar";
+import { Row , Col   } from "reactstrap";
 function CustomerProfile(){
 
 
@@ -20,7 +17,7 @@ function CustomerProfile(){
     const [userClick , setUserClick] = useState();
     const [data , setData] = useState();
     const [quota , setQuota ] = useState();
-    var email;
+    let email;
     useEffect (() =>{
         console.log(sessionStorage.getItem("customer"));
            if(sessionStorage.getItem("customer") == null){
