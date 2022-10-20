@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# My Fuel - Fuel Management App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An app to manage fuel usage of customers (according to limitations) and station owners.
 
-## Available Scripts
+This multi functional app has seperate functions for customers and station owners which lets them manage their fuel for their vehicle or their station.
 
-In the project directory, you can run:
+## Customer Management (Customer side)
 
-### `npm start`
+Customers can register to the system providing vehicle information from which a QR code gets generated. Customers also have the ability to add vehicles , view vehicles and their respective available fuel for each vehicle and all vehicles.
+A pdf report can be generated to view fuel allocations and pumpings for a user defined range of dates.
+Vehicles can be removed as well , the user could also unregister from the system providing password confirmation.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Shed management (Shed owner side)
 
-### `npm test`
+Shed owners can add their sheds to the system and view their relevant fuel quota , they also can place fuel orders through the app.
+A fuel station report indicating expenditure from fuel can be generated through the system.
+Fuel can be allocated to a specific user.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Complaint management (Customer / Admin side)
 
-### `npm run build`
+Customers can raise complaints about fuel to the relevant authorities through the app which can be viewed by admins.
+A report can be generated for complaints made.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Booking Management (Customer / shed side)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Customers have the facility to book a fuel pump appointment providing a certain date and time.
+These appointments can be accepted/declined by the shed.
+A report can be generated for fuel bookings.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
