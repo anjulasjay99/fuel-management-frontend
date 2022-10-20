@@ -51,32 +51,25 @@ function UpdateBooking() {
             vehicleType,
             vehicleNo,
             bkgDate,
-            email,
             litres,
             fuelType,
             stationName,
             stationCity,
          }
-         console.log(updatedBkg)
-         axios.post(`http://localhost:8070/fuelBookings/update/${id}`,updatedBkg).then((res)=>{
+         console.log(updatedBkg);
+         axios.put(`http://localhost:8070/fuelBookings/update/${id}`,updatedBkg).then((res)=>{
             console.log(res.data)
             alert("Booking Successfully Updated");
          }).catch((err)=>{
-          console.log(err)
+          console.log(err);
+          alert(err);
         })
       };
 
     useEffect(() => {
-        // var userData = sessionStorage.getItem("customer");
-        // if (userData == null) {
-        //     navigate("/customer-login");
-        // }
-        // setuser(userData);
-        // setemail(userData);
 
         axios.get(`http://localhost:8070/fuelBookings/get/${id}`).then((res) => {
             console.log(res.data);
-            // setemail(res.data.email)
             setvehicleType(res.data.vehicleType);
             setbookedDate(res.data.bkgDate);
             setvehicleNo(res.data.vehicleNo);

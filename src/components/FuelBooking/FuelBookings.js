@@ -36,7 +36,17 @@ function FuelBookings() {
     navigate(`/updateBooking/${booking._id}`)
  }
 
-
+  const deleteBkg = (booking) => {
+    console.log(booking)
+    axios.delete(`http://localhost:8070/fuelBookings/delete/${booking._id}`).then((data) => {
+      console.log(data);
+      window.location.reload();
+      alert("Booking Successfully Deleted");
+    }).catch((err) => {
+      console.log(err);
+      alert(err);
+    })
+  }
 
   const getBkgSeach = (val) => {
     axios
@@ -127,7 +137,7 @@ function FuelBookings() {
               <Button
                 className={common.btnPrimary}
                 onClick={createNewBkg} >
-                New Booking
+                Create Booking
               </Button>
             </div>
           </div>
@@ -160,9 +170,9 @@ function FuelBookings() {
                         <span
                           style={{
                             background:
-                            booking.status === "Completed"
+                            booking.status === "Approved"
                                 ? "#43a047"
-                                : booking.status === "Canceled"
+                                : booking.status === "Rejected"
                                   ? "#e53935"
                                   : "#f9a825",
                           }}
@@ -174,13 +184,12 @@ function FuelBookings() {
                       <td>
                         <i onClick={() => {
                           updateBkg(booking)
-                        }} class="fa fa-pencil-square" aria-hidden="true"></i>
+                        }} class="fa fa-pencil-square" aria-hidden="true" style={{ marginRight: "5px", size: "70px" }}
+                        disabled={booking.status === "Approved" || booking.status === "Rejected"}></i>
                         <a onClick={() => {
-                          // deleteBkg(booking)
-                        }}><i style={{ marginLeft: "20px", marginRight: "0px" }} class="fa fa-trash" aria-hidden="true"
+                          deleteBkg(booking)
+                        }}><i style={{ marginLeft: "20px" }} class="fa fa-trash" aria-hidden="true"
                         ></i></a>
-
-
                       </td>
                     </tr>
                   );
