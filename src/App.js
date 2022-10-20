@@ -34,6 +34,7 @@ import CreateBooking from "./components/FuelBooking/createBooking";
 import UpateBooking from "./components/FuelBooking/updateBooking";
 import Dashboard from "./components/Common/Dashboard";
 import AdminDashboard from "./components/Common/AdminDashboard";
+import FuelBookings from "./components/FuelBooking/FuelBookings";
 
 function App() {
   return (
@@ -93,7 +94,8 @@ function App() {
           <Route path="/admin-dashboard" element = {<AdminDashboard/>} exact/>
           <Route path="/navbar" element={<NavBar />} />
           <Route path="/createBooking" element={<CreateBooking />} exact />
-          <Route path="/updateBooking" element={<UpateBooking />} exact />
+          <Route path="/updateBooking/:id" element={<UpateBooking />} exact />
+          <Route path="/fuelBookings" element={<FuelBookings />} exact />
           <Route path="/fuel-station-home" element={<FuelStationHome />} />
         </Routes>
       </BrowserRouter>
