@@ -37,7 +37,7 @@ function Dashboard() {
   };
 
   const clickBookingManagement = () => {
-    navigate("/createBooking");
+    navigate("/fuelBookings");
   };
 
 
