@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -8,11 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-// import Button from 'react-bootstrap/Button';
-// import Card from 'react-bootstrap/Card';
-// import Form from 'react-bootstrap/Form'
 import "../../Css/Addcomplaint.css"
-import { width } from '@mui/system';
 import axios from 'axios';
 import Header from '../Common/Header';
 
@@ -91,9 +87,9 @@ function CreateBooking() {
             <div style={{ backgroundColor: '#ff762e', textalign: 'left', width: '100%', height: '6px' }}></div>
             <center>
                 <div className="card" style={{
-                    width: "50rem", padding: '1.5em .5em .5em', borderRadius: "2em",
+                    width: "50rem", borderRadius: "2em",
                     borderStyle: 'solid',
-                    borderColor: ' #ff762e', margin: "100px", padding: "50px", marginTop: "50px",
+                    borderColor: ' #ff762e', margin: "100px", marginTop: "50px",
                     display: 'flex',
                     justifyContent: 'center',
                 }} >
