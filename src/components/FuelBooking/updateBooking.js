@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -11,12 +11,10 @@ import MenuItem from '@mui/material/MenuItem';
 import "../../Css/Addcomplaint.css"
 import axios from 'axios';
 import Header from '../Common/Header';
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function UpdateBooking() {
     const navigate = useNavigate();
-    const [user, setuser] = useState({});
-
     const [vehicleType, setvehicleType] = useState("");
     const [bkgDate, setbookedDate] = useState("");
     const [vehicleNo, setvehicleNo] = useState("");
@@ -24,8 +22,7 @@ function UpdateBooking() {
     const [fuelType, setfuelTypes] = useState("");
     const [stationName, setstationName] = useState("");
     const [stationCity, setstationCity] = useState("");
-    var [email, setemail] = useState("");
-    const {id} = useParams();
+    const { id } = useParams();
 
     const vehicleTypes = [{ value: 'Bike', label: 'Bike', }, { value: 'Car', label: 'Car', }, { value: 'Van', label: 'Van', }, { value: 'Lorry', label: 'Lorry', },];
     const Cities = [{ value: 'Ja - Ela', label: 'Ja - Ela', }, { value: 'Moratuwa', label: 'Moratuwa', }, { value: 'Malabe', label: 'Malabe', },
@@ -45,8 +42,8 @@ function UpdateBooking() {
         setstationName(event.target.value);
     };
 
-    function UpdateBkg(e){
-        e.preventDefault();  
+    function UpdateBkg(e) {
+        e.preventDefault();
         const updatedBkg = {
             vehicleType,
             vehicleNo,
@@ -55,16 +52,16 @@ function UpdateBooking() {
             fuelType,
             stationName,
             stationCity,
-         }
-         console.log(updatedBkg);
-         axios.put(`http://localhost:8070/fuelBookings/update/${id}`,updatedBkg).then((res)=>{
+        }
+        console.log(updatedBkg);
+        axios.put(`http://localhost:8070/fuelBookings/update/${id}`, updatedBkg).then((res) => {
             console.log(res.data)
             alert("Booking Successfully Updated");
-         }).catch((err)=>{
-          console.log(err);
-          alert(err);
+        }).catch((err) => {
+            console.log(err);
+            alert(err);
         })
-      };
+    };
 
     useEffect(() => {
 
@@ -92,7 +89,7 @@ function UpdateBooking() {
             <div style={{ backgroundColor: '#ff762e', textalign: 'left', width: '100%', height: '6px' }}></div>
             <center>
                 <div className="card" style={{
-                    width: "50rem", padding: '1.5em .5em .5em', borderRadius: "2em",
+                    width: "50rem", borderRadius: "2em",
                     borderStyle: 'solid',
                     borderColor: ' #ff762e', margin: "100px", padding: "50px", marginTop: "50px",
                     display: 'flex',

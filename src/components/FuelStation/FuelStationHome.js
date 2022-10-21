@@ -45,6 +45,11 @@ function FuelStationHome() {
             <h4>Fuel Usage</h4>
             <label>Manage fuel usage.</label>
           </div>
+          <div className={styles.card} onClick={() => navigate("/fuelBookingRequests")}>
+            <GiGasPump />
+            <h4>Fuel Bookings</h4>
+            <label>Approve or reject customer fuel reservations.</label>
+          </div>
           <div className={styles.card} onClick={() => navigate("/fuel-report")}>
             <BsGraphUp />
             <h4>Reports</h4>
