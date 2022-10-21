@@ -8,6 +8,7 @@ import ComplaintHeader from './complaintHeader';
 import PageTitle from '../PageTitle';
 import logo from '../../images/ceypetco.png';
 import styles from '../../Css/complaintReport.css'
+import AdminHeader from '../Common/AdminHeader';
 const ref = React.createRef();
 
 
@@ -49,13 +50,9 @@ const ComplaintReport = () =>{
     return(
         <>
        
-       <ComplaintHeader/>
+       <AdminHeader/>
        <PageTitle pageTitle="Complaint Report"/> 
         <div className="my-tour-content">
-       
-          
-           
-         
           <br></br>
           <Row>
             <Col>
@@ -71,9 +68,9 @@ const ComplaintReport = () =>{
                     </Col>
                   </Row>
                   <Row>
-                  <Col style={{float: "left"}}>
+                  <Col style={{float: "left" }}>
                   {" "}
-                      <img  className="report-logo"
+                      <img style={{width:"100px",height:"100px"}} className="report-logo"
                         src={
                             logo
                         }
@@ -81,7 +78,7 @@ const ComplaintReport = () =>{
                   </Col>         
 
                     <Col>
-                      <p className="report-contact">
+                      <p style={{textAlign:"right",fontSize:"13px"}}className="report-contact">
                         Tel No. : +94 77 614 0895<br></br><br></br>
                         Fax : +94 1154555400<br></br><br></br>
                         Email: secreatrialceypetco.gov.lk
