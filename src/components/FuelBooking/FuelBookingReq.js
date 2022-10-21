@@ -63,28 +63,18 @@ function FuelBookingReqs() {
             });
     };
 
-    // const downloadAsPDF = () => {
-    //     report = new jsPDF("l", "px", [500, 2000]);
-    //     const source = document.getElementById("fuelBkgReport");
-    //     report.html(source, {
-    //       callback: function (pdf) {
-    //         pdf.save("bkg_report.pdf");
-    //       },
-    //     });
-    //   };
-
-      const printDocument = () => {
+    const printDocument = () => {
         const input = document.getElementById('fuelBkgReport');
         html2canvas(input)
-          .then((canvas) => {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF("l", "px", [300, 750]);
-            pdf.addImage(imgData, 'JPEG', 0, 0);
-            // pdf.output('dataurlnewwindow');
-            pdf.save("bkg_report.pdf");
-          })
-        ;
-      }
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF("l", "px", [300, 750]);
+                pdf.addImage(imgData, 'JPEG', 0, 0);
+                // pdf.output('dataurlnewwindow');
+                pdf.save("bkg_report.pdf");
+            })
+            ;
+    }
 
     // const getBkgSeach = (val) => {
     //     axios
@@ -164,10 +154,8 @@ function FuelBookingReqs() {
                                 type="text"
                                 value={search}
                             // onChange={(e) => bkgSearch(e.target.value)}
-                            />
-                            <BsArrowRepeat size={40} onClick={reloadPage} />
+                            />   <BsArrowRepeat size={40} onClick={reloadPage} />
                         </div>
-
                     </div>
 
                     <Table bordered striped className={common.table} id="fuelBkgReport">
@@ -204,8 +192,7 @@ function FuelBookingReqs() {
                                                                     ? "#e53935"
                                                                     : "#f9a825",
                                                     }}
-                                                    className={styles.status}
-                                                >
+                                                    className={styles.status} >
                                                     {booking.status}
                                                 </span>
                                             </td>

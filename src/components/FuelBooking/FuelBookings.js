@@ -22,7 +22,6 @@ function FuelBookings() {
     } else {
       getBkgSeach(val);
     }
-
   };
 
   function updateBkg(booking) {
