@@ -6,7 +6,10 @@ import common from "../../styles/common.module.css";
 import { Input, Table } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { BsArrowCounterclockwise, BsCheckSquareFill, BsFileExcelFill, BsArrowRepeat } from "react-icons/bs";
+import { BsArrowCounterclockwise, BsCheckSquareFill, BsFileExcelFill, BsArrowRepeat, BsFileEarmarkPdf } from "react-icons/bs";
+import { jsPDF } from "jspdf";
+import html2canvas from 'html2canvas';
+
 
 function FuelBookingReqs() {
     const navigate = useNavigate();
@@ -17,7 +20,7 @@ function FuelBookingReqs() {
     const [type, settype] = useState(false);
     const [status, setstatus] = useState(false);
     const [search, setsearch] = useState("");
-
+    let report;
     // const bkgSearch = (val) => {
     //     setsearch(val);
 
@@ -59,6 +62,29 @@ function FuelBookingReqs() {
                 alert(err);
             });
     };
+
+    // const downloadAsPDF = () => {
+    //     report = new jsPDF("l", "px", [500, 2000]);
+    //     const source = document.getElementById("fuelBkgReport");
+    //     report.html(source, {
+    //       callback: function (pdf) {
+    //         pdf.save("bkg_report.pdf");
+    //       },
+    //     });
+    //   };
+
+      const printDocument = () => {
+        const input = document.getElementById('fuelBkgReport');
+        html2canvas(input)
+          .then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF("l", "px", [300, 750]);
+            pdf.addImage(imgData, 'JPEG', 0, 0);
+            // pdf.output('dataurlnewwindow');
+            pdf.save("bkg_report.pdf");
+          })
+        ;
+      }
 
     // const getBkgSeach = (val) => {
     //     axios
@@ -144,7 +170,7 @@ function FuelBookingReqs() {
 
                     </div>
 
-                    <Table bordered striped className={common.table}>
+                    <Table bordered striped className={common.table} id="fuelBkgReport">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -196,6 +222,7 @@ function FuelBookingReqs() {
                                 : "No data available"}
                         </tbody>
                     </Table>
+                    <div style={{ fontSize: "20px", }} onClick={printDocument}>Download as a pdf <BsFileEarmarkPdf size={40} /></div>
                 </div>
             </div>
         );
