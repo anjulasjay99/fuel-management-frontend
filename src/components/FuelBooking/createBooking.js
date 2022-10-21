@@ -1,7 +1,6 @@
 
-import { useState } from 'react';
-import axios from 'axios';
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate} from "react-router-dom";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,92 +8,93 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-// import Button from 'react-bootstrap/Button';
-// import Card from 'react-bootstrap/Card';
-// import Form from 'react-bootstrap/Form'
 import "../../Css/Addcomplaint.css"
-import { width } from '@mui/system';
+import axios from 'axios';
+import Header from '../Common/Header';
 
-function CreateBooking(){
+function CreateBooking() {
+    const navigate = useNavigate();
+    const [user, setuser] = useState({});
 
     const [vehicleType, setvehicleType] = useState("");
-    const [bookedDate, setbookedDate] = useState("");
+    const [bkgDate, setbookedDate] = useState("");
     const [vehicleNo, setvehicleNo] = useState("");
     const [litres, setlitres] = useState("");
     const [fuelType, setfuelTypes] = useState("");
     const [stationName, setstationName] = useState("");
     const [stationCity, setstationCity] = useState("");
+    var [email, setemail] = useState("");
 
-    const vehicleTypes = [
-        {
-          value: 'Bike',
-          label: 'Bike',
-        },
-        {
-          value: 'Car',
-          label: 'Car',
-        },
-        {
-          value: 'Van',
-          label: 'Van',
-        },
-        {
-          value: 'Lorry',
-          label: 'Lorry',
-        },
-      ];
+    const vehicleTypes = [{ value: 'Bike', label: 'Bike', }, { value: 'Car', label: 'Car', }, { value: 'Van', label: 'Van', }, { value: 'Lorry', label: 'Lorry', },];
+    const Cities = [{ value: 'Ja - Ela', label: 'Ja - Ela', }, { value: 'Moratuwa', label: 'Moratuwa', }, { value: 'Malabe', label: 'Malabe', },
+    { value: 'Dehiwala', label: 'Dehiwala', },];
+    const Stations = [{ value: 'Eheliyagoda Associates', label: 'Eheliyagoda Associates', }, { value: 'Ss Kotalawala P Ltd', label: 'Ss Kotalawala P Ltd', },
+    { value: 'Alliance Enterprises', label: 'Alliance Enterprises', }, { value: 'Ben Hewa Associates(pvt)ltd', label: 'Ben Hewa Associates(pvt)ltd', },];
 
     const handleChange = (event) => {
         setvehicleType(event.target.value);
+    };
+
+    const handleCityChange = (event) => {
+        setstationCity(event.target.value);
+    };
+
+    const handleStationChange = (event) => {
+        setstationName(event.target.value);
     };
 
     function submitBooking(e) {
         e.preventDefault();
         const newFuelBooking = {
             vehicleType,
-            bookedDate,
             vehicleNo,
+            bkgDate,
+            email,
             litres,
             fuelType,
             stationName,
-            stationCity
+            stationCity,
         };
 
         axios
             .post("http://localhost:8070/fuelBookings", newFuelBooking)
             .then((res) => {
                 console.log(res.data)
-                setvehicleType("");
-                setbookedDate("");
-                setvehicleNo("");
-                setlitres("");
-                setfuelTypes("");
-                setstationName("");
-                setstationCity("");
+                alert("Booking Successfully Created");
             })
             .catch((err) => {
                 alert(err);
             });
-        alert("Booking Successfully Created");
-    }
+    };
 
-    return(
+    useEffect(() => {
+        var userData = sessionStorage.getItem("customer");
+        if (userData == null) {
+            navigate("/customer-login");
+        }
+        setuser(userData);
+        setemail(userData);
+        console.log(user);
+    }, []);
+
+    return (
         <>
+            <Header />
             <div style={{ marginTop: "40px" }}>
                 <h2 style={{ textAlign: "center", fontWeight: "bold" }}>CREATE ONLINE FUEL BOOKING</h2>
             </div>
             <div style={{ backgroundColor: '#ff762e', textalign: 'left', width: '100%', height: '6px' }}></div>
             <center>
                 <div className="card" style={{
-                    width: "50rem", padding: '1.5em .5em .5em', borderRadius: "2em",
+                    width: "50rem", borderRadius: "2em",
                     borderStyle: 'solid',
-                    borderColor: ' #ff762e', margin: "100px", padding: "50px", marginTop: "50px",
+                    borderColor: ' #ff762e', margin: "100px", marginTop: "50px",
                     display: 'flex',
                     justifyContent: 'center',
                 }} >
                     <div className="card-body">
                         <div>
-                            <form onSubmit={submitBooking}>
+                            <form onSubmit={submitBooking} >
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1" style={{ float: "left", fontWeight: "bold" }}>Vehicle Type</label><br />
 
@@ -128,10 +128,9 @@ function CreateBooking(){
 
                                 </div>
                                 <br /> <br />  <br />
-
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1" style={{ float: "left", fontWeight: "bold" }}>Date</label>
-                                    <input required value={bookedDate} onChange={(e) => { setbookedDate(e.target.value) }}
+                                    <input required value={bkgDate} onChange={(e) => { setbookedDate(e.target.value) }}
                                         type="date" class="form-control" id="exampleFormControlInput1" />
                                 </div>
                                 <br></br>
@@ -149,10 +148,8 @@ function CreateBooking(){
                                         <FormControlLabel value="diesel" control={<Radio />} label="Diesel" />
                                     </RadioGroup>
                                 </FormControl>
-
                                 <br /><br /><br />
                                 <div class="form-group">
-
                                     <label for="exampleFormControlTextarea1" style={{ float: "left", fontWeight: "bold" }}>Litres</label><br />
                                     <TextField required
                                         id="standard-number"
@@ -162,8 +159,7 @@ function CreateBooking(){
                                             shrink: true,
                                         }}
                                         variant="standard" value={litres} onChange={(e) => { setlitres(e.target.value) }}
-                                        style={{ float: "left" }} color="warning" fullWidth
-                                    />
+                                        style={{ float: "left" }} color="warning" fullWidth />
                                 </div>
                                 <br /><br /><br />
                                 <div class="form-group">
@@ -171,40 +167,49 @@ function CreateBooking(){
                                         id="standard-select-currency"
                                         select
                                         label="City"
-                                        value={stationCity} onChange={(e) => { setstationCity(e.target.value) }}
-                                        helperText="Please select the city"
-                                        variant="standard" style={{ float: "left", width: "50%", textAlign: "left" }} color="warning"
-                                    >
-                                        <option>Ja - Ela</option>
-                                        <option value="1">Moratuwa</option>
-                                        <option value="2">Maharagama</option>
+                                        value={stationCity}
+                                        onChange={handleCityChange}
+                                        helperText="Please select the city" fullWidth
+                                        variant="standard" style={{ float: "left", width: "50%", textAlign: "left" }} color="warning" >
+                                        {Cities.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
                                     </TextField>
 
                                     <TextField required
                                         id="standard-select-currency"
                                         select
-                                        label="Filling Station Name"
-                                        value={stationName} onChange={(e) => { setstationName(e.target.value) }}
-                                        helperText="Please select the filling station" color="warning"
-                                        variant="standard" style={{ marginLeft: "10px", width: "48%", float: "left", textAlign: "left" }}
-                                    >
-                                        <option>Ben Hewa Associates(pvt)ltd</option>
-                                        <option value="1">Abeysekara Filling Station</option>
-                                        <option value="2">Eheliyagoda Associates</option>
+                                        label="Filling Station"
+                                        value={stationName}
+                                        onChange={handleStationChange}
+                                        helperText="Please select the filling station" fullWidth
+                                        variant="standard" style={{ marginLeft: "10px", width: "48%", float: "left", textAlign: "left" }} color="warning">
+                                        {Stations.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
                                     </TextField>
                                 </div> <br /><br /><br /><br /><br />
-
                                 <div class="form-group">
-                                    <button style={{ width: "100%", height: "60px", backgroundColor: "#ff762e", }} type="submit" className="btn btn-primary  ">CREATE BOOKING</button>
+                                    <button style={{ width: "100%", height: "60px", backgroundColor: "#ff762e" }}
+                                        type="submit" className="btn btn-primary" >
+                                        CREATE BOOKING
+                                    </button>
                                     <br />
-                                    <button style={{ width: "100%", height: "60px", marginTop: "10px", backgroundColor: " #082344", }} type="submit" className="btn btn-primary  ">CLEAR</button>
+                                    <button style={{ width: "100%", height: "60px", marginTop: "10px", backgroundColor: " #082344", }}
+                                        type="submit" className="btn btn-primary" onClick={() => navigate("/FuelBookings")}>
+                                        CANCEL
+                                    </button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </center>
-        </>     
+        </>
     );
 }
 

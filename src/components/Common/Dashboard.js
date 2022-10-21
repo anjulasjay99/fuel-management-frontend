@@ -36,6 +36,10 @@ function Dashboard() {
     navigate("");
   };
 
+  const clickBookingManagement = () => {
+    navigate("/fuelBookings");
+  };
+
 
 //   useEffect(() => {
 //     ReactSession.setStoreType("localStorage");
@@ -82,6 +86,18 @@ useEffect (() =>{
                   Customer Management
                   <label className="dashboard-card-subtitle">
                     View all the tour itineraries we offer.
+                  </label>
+                </Card>
+              </Col>
+              <Col>
+                <Card
+                  className="dashboard-card"
+                  id="card1"
+                  onClick={clickBookingManagement}
+                >
+                  Fuel Booking Management
+                  <label className="dashboard-card-subtitle">
+                    place bookings and view your bookings.
                   </label>
                 </Card>
               </Col>
