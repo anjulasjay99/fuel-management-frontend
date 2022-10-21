@@ -13,8 +13,6 @@ function LoginCustomer(){
     const navigate = useNavigate();
     const [email , setemail] = useState("");
     const [password , setpassword] = useState("");
-    const [user , setUser] = useState("");
-    const [status , setStatus] = useState(true);
 
     function login() {
         axios.post("http://localhost:8070/customers/login" , {email,password}).then((res) =>{

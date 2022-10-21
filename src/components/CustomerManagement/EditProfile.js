@@ -1,9 +1,9 @@
-import { useState , useEffect } from "react";
+import { useState  } from "react";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { Button, Form, FormGroup, Label, Input , Row , Col , ButtonGroup  } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input  } from "reactstrap";
 import axios from "axios";
 
 

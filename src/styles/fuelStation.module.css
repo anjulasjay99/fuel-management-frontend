@@ -218,23 +218,34 @@
 
 .card {
   cursor: pointer;
-  width: 250px;
-  height: 100px;
+  width: 24%;
+  min-width: 400px;
+  height: 400px;
   border: 1px solid #ccc;
   border-radius: 10px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   column-gap: 10px;
+  row-gap: 10px;
   font-size: 20px;
-  transition: border 0.15s ease-in;
-  transition: color 0.15s ease-in;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  transition: color 0.15s ease-in-out, border 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 
 .card:hover {
   border: 1px solid #ff762e;
   color: #ff762e;
+  box-shadow: rgba(216, 160, 96, 0.932) 0px 1px 3px 0px,
+    rgba(216, 160, 96, 0.932) 0px 1px 2px 0px;
+}
+
+.card label {
+  text-align: center;
+  font-size: 18px;
 }
 
 .homeContent {
@@ -244,6 +255,17 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   column-gap: 10px;
+}
+
+.homeContentCards {
+  padding-left: 100px;
+  padding-right: 100px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 400px));
+  column-gap: 10px;
+  row-gap: 10px;
 }
 
 .link {

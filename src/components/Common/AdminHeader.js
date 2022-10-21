@@ -29,7 +29,7 @@ function AdminHeader() {
       className={styles.navbar}
     >
       <Container fluid>
-        <Navbar.Brand href="/home">Admin</Navbar.Brand>
+        <Navbar.Brand href="/admin-dashboard">Admin</Navbar.Brand>
         <Navbar.Toggle aria-controls="nav" />
         <Navbar.Collapse id="nav">
           <Nav className="me-auto" style={{ maxHeight: "100px" }} navbarScroll>
