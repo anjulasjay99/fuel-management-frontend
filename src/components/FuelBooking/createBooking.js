@@ -65,7 +65,6 @@ function CreateBooking() {
             .catch((err) => {
                 alert(err);
             });
-
     };
 
     useEffect(() => {
@@ -129,7 +128,6 @@ function CreateBooking() {
 
                                 </div>
                                 <br /> <br />  <br />
-
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1" style={{ float: "left", fontWeight: "bold" }}>Date</label>
                                     <input required value={bkgDate} onChange={(e) => { setbookedDate(e.target.value) }}
@@ -150,10 +148,8 @@ function CreateBooking() {
                                         <FormControlLabel value="diesel" control={<Radio />} label="Diesel" />
                                     </RadioGroup>
                                 </FormControl>
-
                                 <br /><br /><br />
                                 <div class="form-group">
-
                                     <label for="exampleFormControlTextarea1" style={{ float: "left", fontWeight: "bold" }}>Litres</label><br />
                                     <TextField required
                                         id="standard-number"
@@ -163,8 +159,7 @@ function CreateBooking() {
                                             shrink: true,
                                         }}
                                         variant="standard" value={litres} onChange={(e) => { setlitres(e.target.value) }}
-                                        style={{ float: "left" }} color="warning" fullWidth
-                                    />
+                                        style={{ float: "left" }} color="warning" fullWidth />
                                 </div>
                                 <br /><br /><br />
                                 <div class="form-group">
@@ -175,8 +170,7 @@ function CreateBooking() {
                                         value={stationCity}
                                         onChange={handleCityChange}
                                         helperText="Please select the city" fullWidth
-                                        variant="standard" style={{ float: "left", width: "50%", textAlign: "left" }} color="warning"
-                                    >
+                                        variant="standard" style={{ float: "left", width: "50%", textAlign: "left" }} color="warning" >
                                         {Cities.map((option) => (
                                             <MenuItem key={option.value} value={option.value}>
                                                 {option.label}
@@ -191,8 +185,7 @@ function CreateBooking() {
                                         value={stationName}
                                         onChange={handleStationChange}
                                         helperText="Please select the filling station" fullWidth
-                                        variant="standard" style={{ marginLeft: "10px", width: "48%", float: "left", textAlign: "left" }} color="warning"
-                                    >
+                                        variant="standard" style={{ marginLeft: "10px", width: "48%", float: "left", textAlign: "left" }} color="warning">
                                         {Stations.map((option) => (
                                             <MenuItem key={option.value} value={option.value}>
                                                 {option.label}
@@ -200,7 +193,6 @@ function CreateBooking() {
                                         ))}
                                     </TextField>
                                 </div> <br /><br /><br /><br /><br />
-
                                 <div class="form-group">
                                     <button style={{ width: "100%", height: "60px", backgroundColor: "#ff762e" }}
                                         type="submit" className="btn btn-primary" >
