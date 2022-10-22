@@ -3,7 +3,7 @@ import StationHeader from "../Common/StationHeader";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/fuelStation.module.css";
 import common from "../../styles/common.module.css";
-import { Input, Table } from "reactstrap";
+import { Input, Table, Label, FormGroup } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsArrowCounterclockwise, BsCheckSquareFill, BsFileExcelFill, BsArrowRepeat, BsFileEarmarkPdf } from "react-icons/bs";
@@ -16,20 +16,20 @@ function FuelBookingReqs() {
     const [bookings, setBookings] = useState([]);
     const [user, setuser] = useState({});
     var [email, setemail] = useState("");
-    const [refNo, setrefNo] = useState(true);
-    const [type, settype] = useState(false);
+    const [bookingId, setBookingId] = useState(true);
+    const [vehicleNo, setvehicleNo] = useState(false);
     const [status, setstatus] = useState(false);
     const [search, setsearch] = useState("");
-    let report;
-    // const bkgSearch = (val) => {
-    //     setsearch(val);
+    
+    const bkgSearch = (val) => {
+        setsearch(val);
 
-    //     if (val === "") {
-    //         getOrders(email);
-    //     } else {
-    //         getBkgSeach(val);
-    //     }
-    // };
+        if (val === "") {
+            getBookings(email);
+        } else {
+            getBkgSearch(val);
+        }
+    };
 
     function reloadPage() {
         window.location.reload();
@@ -76,18 +76,18 @@ function FuelBookingReqs() {
             ;
     }
 
-    // const getBkgSeach = (val) => {
-    //     axios
-    //         .get(
-    //             `http://localhost:8070/fuelBookings/${email}?val=${val}`
-    //         )
-    //         .then((res) => {
-    //             setBookings(res.data.data);
-    //         })
-    //         .catch((e) => {
-    //             alert(e);
-    //         });
-    // };
+    const getBkgSearch = (val) => {
+        axios
+            .get(
+                `http://localhost:8070/fuelBookings/${email}?val=${val}`
+            )
+            .then((res) => {
+                setBookings(res.data.data);
+            })
+            .catch((e) => {
+                alert(e);
+            });
+    };
 
     useEffect(() => {
         const userData = JSON.parse(sessionStorage.getItem("fsUser"));
@@ -153,8 +153,32 @@ function FuelBookingReqs() {
                                 placeholder="Search"
                                 type="text"
                                 value={search}
-                            // onChange={(e) => bkgSearch(e.target.value)}
+                                onChange={(e) => bkgSearch(e.target.value)}
                             />   <BsArrowRepeat size={40} onClick={reloadPage} />
+                            <FormGroup check>
+                                <Input
+                                    type="checkbox"
+                                    checked={bookingId}
+                                    onChange={(e) => setBookingId(e.target.value)}
+                                />
+                                <Label check>Booking Ref.</Label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <Input
+                                    type="checkbox"
+                                    checked={vehicleNo}
+                                    onChange={(e) => setvehicleNo(e.target.value)}
+                                />
+                                <Label check>Vehicle No.</Label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <Input
+                                    type="checkbox"
+                                    checked={status}
+                                    onChange={(e) => setstatus(e.target.value)}
+                                />
+                                <Label check>Status</Label>
+                            </FormGroup>
                         </div>
                     </div>
 
