@@ -133,7 +133,7 @@ function FuelOrders() {
                 <Input
                   type="checkbox"
                   checked={refNo}
-                  onChange={(e) => setrefNo(e.target.value)}
+                  onChange={(e) => setrefNo(!refNo)}
                 />
                 <Label check>Ref. No.</Label>
               </FormGroup>
@@ -141,7 +141,7 @@ function FuelOrders() {
                 <Input
                   type="checkbox"
                   checked={type}
-                  onChange={(e) => settype(e.target.value)}
+                  onChange={(e) => settype(!type)}
                 />
                 <Label check>Type</Label>
               </FormGroup>
@@ -149,7 +149,7 @@ function FuelOrders() {
                 <Input
                   type="checkbox"
                   checked={status}
-                  onChange={(e) => setstatus(e.target.value)}
+                  onChange={(e) => setstatus(!status)}
                 />
                 <Label check>Status</Label>
               </FormGroup>
