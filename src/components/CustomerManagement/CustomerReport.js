@@ -65,8 +65,16 @@ function CustomerReport(){
     }, );
 
     useEffect(() =>{
-        getFuelAllocations();
-        getFuelPumpings();
+        let td = new Date(toDate);
+        let fd = new Date(fromDate);
+        if(td <= fd){
+            alert("To Date should be greater than From Date");
+        }
+        else{
+            getFuelAllocations();
+            getFuelPumpings();
+        }
+
     },[isGenerate]);
 
     const options = {
