@@ -22,7 +22,7 @@ function Header(){
                         navbarScroll
                     >   
                        
-                       <Nav.Link href="#" >
+                       <Nav.Link href="/FuelBookings" >
                             Bookings
                         </Nav.Link>
                         <Nav.Link href="/customer-report" >

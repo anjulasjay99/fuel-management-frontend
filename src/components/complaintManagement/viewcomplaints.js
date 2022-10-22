@@ -100,10 +100,7 @@ const Viewcomplaints = () => {
     setComplaints(filterData)
    
   }
-
-
   return (
-    
     <>
      <ToastContainer></ToastContainer>
      <ComplaintHeader/>
@@ -125,7 +122,6 @@ const Viewcomplaints = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
       <div class="panel-heading">
                         <div class="input-group">
                             <input style={{maxWidth:"200px",marginLeft:"1130px",border:"1px solid #082344"}} id="searchText"type="text" class="form-control" name="q" placeholder="Search Here" onChange = {filterComplaints} allowClear value={searchVal}/>
@@ -136,23 +132,23 @@ const Viewcomplaints = () => {
                         </div>
                     </div>
                     <br></br>
-    <div className='container-xl' style={{  padding: "2rem 0rem",alignItems:"center",justifyContent:"center",borderradius: '5px 5px 0 0'}}>
-    <div className='row'>
-    <div className='col-12'>
-    <table className="table" style={ {minwidth: "100px",}}>
-  <thead  style={{backgroundColor: '#082344',color: 'white',textalign: 'left',fontweight: 'bold'}}>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Email</th>
-      <th scope="col">Date Of Complaint</th>
-      <th scope="col">Reason</th>
-      <th scope="col">Complaint Details</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
+        <div className='container-xl' style={{  padding: "2rem 0rem",alignItems:"center",justifyContent:"center",borderradius: '5px 5px 0 0'}}>
+        <div className='row'>
+        <div className='col-12'>
+        <table className="table" style={ {minwidth: "100px",}}>
+        <thead  style={{backgroundColor: '#082344',color: 'white',textalign: 'left',fontweight: 'bold'}}>
+          <tr>
+          <th scope="col">#</th>
+          <th scope="col">Email</th>
+          <th scope="col">Date Of Complaint</th>
+          <th scope="col">Reason</th>
+          <th scope="col">Complaint Details</th>
+          <th scope="col">Action</th>
+         </tr>
+        </thead>
+        <tbody>
   
-  {coomplaints.map((data,index)=>{    
+        {coomplaints.map((data,index)=>{    
         return(
           <tr style={{}}>
           <td>{coomplaints.indexOf(data)+1}</td>
@@ -168,18 +164,15 @@ const Viewcomplaints = () => {
                                   deletecomplaint(data)
                                 }}><i style={{marginLeft:"20px", marginRight:"20px"}} class="fa fa-trash" aria-hidden="true"  
                                 ></i></a>
-                         
-          
           </td>
         </tr>
         )
-      })}
-  </tbody>
-</table>
-    </div>
-    </div>  
-    
-  </div>
+        })}
+      </tbody>
+      </table>
+      </div>
+      </div>    
+      </div>
      </>
     
         
@@ -188,5 +181,3 @@ const Viewcomplaints = () => {
 
 export default Viewcomplaints
 
-{/* <i style={{marginLeft:"20px"}}class="fa fa-trash" aria-hidden="true"  
-          ></i> */}

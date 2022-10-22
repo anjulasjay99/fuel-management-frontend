@@ -78,8 +78,6 @@ const Updatecomplaints = () => {
     }} 
  >
     <div className="card-body">
-   
-    
     <div>
     <form onSubmit={UpdateComplaint}>
       <div class="form-group">
@@ -106,28 +104,20 @@ const Updatecomplaints = () => {
       <textarea value={complaintDetails} onChange={(e)=>{setcomplaintDetails(e.target.value)}} class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Please enter your message briefly." required="required"></textarea>
       </div>
       <div>
-              { sucessfull !== false &&
-                  <p style={{color:"red",float:"left"}}>Please enter more than 10 letters</p>
-               }
+      { sucessfull !== false &&
+      <p style={{color:"red",float:"left"}}>Please enter more than 10 letters</p>
+      }
       </div>
       <br></br> <br></br>
       <div class="form-group">
-
       <button style={{width : "100%", backgroundColor: "#ff762e",}} type="submit" className="btn btn-primary  ">Update Complaint</button>
       <br/>
-      
       </div>
-
-</form>
-
+    </form>
     </div>
-   </div>
-   
-   </div>
-
-   </center>
-        
-       
+    </div> 
+    </div>
+   </center>   
    </>     
   )
 }
