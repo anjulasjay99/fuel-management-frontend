@@ -34,6 +34,7 @@ function CustomerProfile(){
                // Get Fuel Quota
                axios.get(`http://localhost:8070/customers/getFuel/${res.data._id}`).then((r) =>{
                 console.log(r.data[0].availableAmount);
+        
                 setQuota(r.data[0].availableAmount);
                }).catch((e) =>{
                 console.log(e);

@@ -80,7 +80,7 @@ function CustomerReport(){
     const options = {
         orientation: 'landscape',
         unit: 'in',
-        format: [6,6]
+        format: [12,6]
     };
     return(
         <div>
@@ -180,15 +180,15 @@ function CustomerReport(){
                             ))}
                         </tbody>
                     </table>
-
+           </div>                    
             <div>
                 <Pdf targetRef={ref} filename="fuel-report.pdf" options={options} >
                 {({ toPdf }) => 
-                <button className="btn btn-primary" style={{width : "100%", backgroundColor: "#ff762e"}} onClick={toPdf}
+                <button className="btn btn-primary" style={{width : "100%", backgroundColor: "#ff762e" , marginTop:"2rem" , marginBottom:"2rem"}} onClick={toPdf}
             > Capture as Pdf</button>}
                 </Pdf>
-                </div>
             </div>
+            
 
         </div>
     )

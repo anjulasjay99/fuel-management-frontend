@@ -243,7 +243,7 @@ function CustomerRegistration() {
               <Button
                 className={common.btnPrimary}
                 style={{
-                  width: "max",
+                  width: "100%",
                   marginTop: "30px",
                   marginBottom: "10px",
                 }}

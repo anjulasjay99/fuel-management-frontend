@@ -9,11 +9,31 @@ function ViewVehicles() {
 
     const [ vehicles , setVehicles ] = useState([]);
     let email = sessionStorage.getItem("customer");
-
+    let {filterData} = useState();
+    const [searchVal , setSearchVal] = useState("");
+    
     useEffect(() =>{
         getVehicles();
     },[])
 
+    const filterComplaints = e =>{
+        setSearchVal(e.target.value);
+        if(e.target.value === ""){
+            getVehicles();
+        }
+      }
+
+    function globalSearch() {
+     
+        filterData = vehicles.filter((value)=>{
+            return(
+                value.vehicleType.toLowerCase().includes(searchVal.toLowerCase()) ||
+                value.vehicleChassis.toLowerCase().includes(searchVal.toLowerCase()) || 
+                value.vehicleNumber.toLowerCase().includes(searchVal.toLowerCase())  
+            )
+        })
+        setVehicles(filterData);
+    }
     function DeleteVehicle(vehicleNumber){
         console.log(vehicleNumber);
         if(
@@ -57,12 +77,21 @@ function ViewVehicles() {
         })
     }
 
+
+
     return(
         <div>
           <Header/>
           <PageTitle pageTitle="View Vehicles" />
           <div className={styles.TableContainer}>
-
+          <div class="input-group">
+                            <input style={{maxWidth:"200px",marginLeft:"1130px",border:"1px solid #082344"}} id="searchText"type="text" class="form-control" name="q" placeholder="Search Here" onChange = {filterComplaints} allowClear value={searchVal}/>
+                            <span class="input-group-btn">
+                                <a  id="x" class="btn btn-default hide" href="#" title="Clear"><i class="glyphicon glyphicon-remove"></i> </a>
+                                <button onClick={globalSearch}style={{backgroundColor: "#082344",maxwidth:"200px",color:"white"}}class="btn btn-info" type="submit" >  Search  </button>
+                            </span>
+                        </div>
+                        <br />
           <table class="table table-hover">
             <thead style={{backgroundColor: '#082344',color: 'white',textalign: 'left',fontweight: 'bold'}}>
                 <tr>
@@ -70,7 +99,6 @@ function ViewVehicles() {
                     <th scope="col">Type</th>
                     <th scope="col">Chassis Number</th>
                     <th scope="col">Number Plate</th>
-                    <th scope="col">Fuel Quota</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -81,8 +109,7 @@ function ViewVehicles() {
                         <th scope="row">{vehicles.indexOf(vehicle)+1}</th>
                         <td>{vehicle.vehicleType}</td>
                         <td>{vehicle.vehicleChassis}</td>
-                        <td>{vehicle.vehicleNumber}</td>
-                        <td>10 L</td>
+                        <td>{vehicle.vehicleNumber}</td>      
                         <td><i onClick = {()=>
                             { DeleteVehicle(vehicle.vehicleNumber)}} 
                             class="fa fa-trash" aria-hidden="true"></i></td>
