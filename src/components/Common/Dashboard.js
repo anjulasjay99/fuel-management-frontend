@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import styles from "../../Css/styles-ttrm.css";
+import styles from "../../styles/fuelStation.module.css";
 
 import {
   Label,
@@ -17,6 +17,9 @@ import {
 import Header from "../Common/Header";
 import PageTitle from "../PageTitle";
 import { ReactSession } from "react-client-session";
+import { BsPeopleFill } from "react-icons/bs";
+import { GiGasPump } from "react-icons/gi";
+import { MdFeedback } from "react-icons/md";
 
 
 
@@ -33,7 +36,7 @@ function Dashboard() {
   };
  
   const clickCustomerManagement = () => {
-    navigate("");
+    navigate("/customer-profile");
   };
 
   const clickBookingManagement = () => {
@@ -41,22 +44,6 @@ function Dashboard() {
   };
 
 
-//   useEffect(() => {
-//     ReactSession.setStoreType("localStorage");
-//     if (ReactSession.get("user") != null) {
-//       document.body.classList.add("index");
-//       document.getElementById("card1").classList.remove("card");
-//       document.getElementById("card2").classList.remove("card");
-//       document.getElementById("card3").classList.remove("card");
-//       document.getElementById("card4").classList.remove("card");
-
-//       return function cleanup() {
-//         document.body.classList.remove("index");
-//       };
-//     } else {
-//         navigate("");
-//     }
-//   }, []);
 var email;
 useEffect (() =>{
     console.log(sessionStorage.getItem("customer"));
@@ -79,13 +66,15 @@ useEffect (() =>{
             <Row>
               <Col>
                 <Card
-                  className="dashboard-card"
+                  className= "dashboard-card"
                   id="card1"
                   onClick={clickCustomerManagement}
+                  style={{width:"18rem" , height : "30rem"}}
                 >
-                  Customer Management
-                  <label className="dashboard-card-subtitle">
-                    View all the tour itineraries we offer.
+                  <BsPeopleFill style={{ alignSelf : "center" , marginBottom : "2rem"}} size={40} />
+                  <label style={{fontSize:"2rem"}}>CUSTOMER MANAGEMENT</label>
+                  <label className="dashboard-card-subtitle" style={{marginTop : "1rem" , fontSize:"0.8rem" , fontWeight : "normal"}}>
+                    Manage Customer information
                   </label>
                 </Card>
               </Col>
@@ -94,10 +83,12 @@ useEffect (() =>{
                   className="dashboard-card"
                   id="card1"
                   onClick={clickBookingManagement}
+                  style={{width:"18rem" , height : "30rem"}}
                 >
-                  Fuel Booking Management
-                  <label className="dashboard-card-subtitle">
-                    place bookings and view your bookings.
+                  <GiGasPump style={{ alignSelf : "center" , marginBottom : "2rem"}} size={40} />
+                   BOOKING MANAGEMENT
+                  <label className="dashboard-card-subtitle" style={{marginTop : "1rem" , fontSize:"0.8rem" , fontWeight : "normal"}}>
+                    Place and view your bookings.
                   </label>
                 </Card>
               </Col>
@@ -106,9 +97,11 @@ useEffect (() =>{
                   className="dashboard-card"
                   id="card2"
                   onClick={clickMyCompalints}
+                  style={{width:"18rem" , height : "30rem"}}
                 >
-                  Manage Complaints
-                  <label className="dashboard-card-subtitle">
+                  < MdFeedback style={{ alignSelf : "center" , marginBottom : "2rem"}} size={40}  />
+                  COMPLAINTS MANAGEMENT
+                  <label className="dashboard-card-subtitle" style={{marginTop : "1rem" , fontSize:"0.8rem" , fontWeight : "normal"}}>
                      Raise complaints, provide feedback.
                   </label>
                 </Card>
