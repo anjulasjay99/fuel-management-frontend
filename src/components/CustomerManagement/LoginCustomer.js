@@ -38,7 +38,6 @@ function LoginCustomer(){
     }
     return(
         <>
-            <Header/>
             <PageTitle pageTitle="Sign In" />
             <div className = {styles.loginWrap}>
                 <div className = {styles.loginForm}>
