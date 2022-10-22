@@ -19,7 +19,7 @@ import AdminHeader from "../Common/AdminHeader";
 import { useNavigate } from "react-router-dom";
 function ViewFuelStations() {
   const navigate = useNavigate();
-  const [data, setdata] = useState([]);
+  const [data, setdata] = useState();
   const [modal, setModal] = useState(false);
   const [selecteStaion, setselecteStaion] = useState({});
   const [search, setsearch] = useState("");
@@ -95,7 +95,7 @@ function ViewFuelStations() {
     }
   }, []);
 
-  if (data.length === 0) {
+  if (data === undefined) {
     return (
       <div>
         <AdminHeader />

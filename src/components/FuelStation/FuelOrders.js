@@ -11,7 +11,7 @@ import axios from "axios";
 
 function FuelOrders() {
   const navigate = useNavigate();
-  const [orders, setorders] = useState([]);
+  const [orders, setorders] = useState();
   const [user, setuser] = useState({});
   const [refNo, setrefNo] = useState(true);
   const [type, settype] = useState(false);
@@ -84,7 +84,7 @@ function FuelOrders() {
     }
   }, []);
 
-  if (orders.length === 0) {
+  if (orders === undefined) {
     return (
       <div>
         <StationHeader />

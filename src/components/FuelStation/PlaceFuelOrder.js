@@ -151,17 +151,17 @@ function PlaceFuelOrder() {
             <div className={styles.infoSection}>
               <Label className={styles.name}>Location</Label>
               <Label className={styles.value}>
-                Alliance Enterprises, 43 Old Negombo Rd, Kanuwana, Ja - Ela,
-                Western Province, 11350
+                {`${user.address}, ${user.city}, ${user.province}, ${user.zipCode}`}
+              
               </Label>
             </div>
             <div className={styles.infoSection}>
               <Label className={styles.name}>Contact No.</Label>
-              <Label className={styles.value}>01122727229</Label>
+              <Label className={styles.value}>{user.contactNo}</Label>
             </div>
             <div className={styles.infoSection}>
               <Label className={styles.name}>Email</Label>
-              <Label className={styles.value}>balal@gmail.com</Label>
+              <Label className={styles.value}>{user.email}</Label>
             </div>
             <br />
             <Label>
