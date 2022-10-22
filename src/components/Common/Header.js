@@ -25,7 +25,7 @@ function Header(){
                        <Nav.Link href="/FuelBookings" >
                             Bookings
                         </Nav.Link>
-                        <Nav.Link href="#" >
+                        <Nav.Link href="/customer-report" >
                             Report
                         </Nav.Link>
                         <Nav.Link href="/addcomplaint" >
